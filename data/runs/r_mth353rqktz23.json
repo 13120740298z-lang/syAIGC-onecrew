@@ -1,0 +1,49 @@
+{
+  "run_id": "r_mth353rqktz23",
+  "agent_id": "adhoc:content-calendar",
+  "session_id": null,
+  "user_id": "local",
+  "status": "done",
+  "current_step": null,
+  "mode": "mock",
+  "params": {
+    "product": "����ˮ��"
+  },
+  "steps": [
+    {
+      "step_id": "x1",
+      "name": "内容日历",
+      "type": "skill",
+      "skill": "content-calendar",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「7天内容日历」（演示模式） · 4ms",
+      "started_at": 1788171499867,
+      "ended_at": 1788171499871,
+      "artifacts": [
+        "a_mth353rwgpa1i"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mth353rwgpa1i",
+      "name": "7天内容日历",
+      "type": "csv",
+      "path": "exports/1788171499868_7天内容日历.csv"
+    }
+  ],
+  "result": {
+    "summary": "完成 1 个步骤，产出 1 个工件",
+    "artifacts": [
+      {
+        "artifact_id": "a_mth353rwgpa1i",
+        "name": "7天内容日历",
+        "type": "csv",
+        "path": "exports/1788171499868_7天内容日历.csv"
+      }
+    ]
+  },
+  "error": null,
+  "created_at": 1788171499862
+}

@@ -1,0 +1,17 @@
+{
+  "brand": "SmartCup",
+  "positioning": "Smart hydration companion for Japan's on-the-go professionals.",
+  "persona": "Discerning yet understated friend.",
+  "tone": ["calm", "precise", "helpful", "modern"],
+  "vocabulary": {
+    "use": ["temperature", "precision", "hydration", "smart", "seamless", "sustainable", "mindful", "reliable"],
+    "avoid": ["revolutionary", "perfect", "best", "unbeatable", "hate", "stupid", "cheap", "fake", "scam"]
+  },
+  "slogans": [
+    "Smart temperature, perfect sip.",
+    "Your drink, your moment.",
+    "Precision warmth, every time."
+  ],
+  "do_say_example": "Keep your coffee at the ideal temperature for hours, with smart control at your fingertips.",
+  "dont_say_example": "This is the best cup ever, guaranteed to change your life! — Reason: Overly boastful, contradicts the understated and precise brand voice suitable for Japan."
+}

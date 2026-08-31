@@ -1,0 +1,97 @@
+{
+  "run_id": "r_mth415wor39at",
+  "agent_id": "onecrew",
+  "session_id": "s_mth415wkvm7cx",
+  "user_id": "local",
+  "status": "canceled",
+  "current_step": null,
+  "mode": "real",
+  "params": {
+    "product": "宠物智能喂食器",
+    "market": "德国",
+    "language": "en"
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "name": "市场快研",
+      "type": "skill",
+      "skill": "market-scan",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「市场快研报告」 · 28001ms",
+      "started_at": 1788172995630,
+      "ended_at": 1788173023631,
+      "artifacts": [
+        "a_mth41rijlig8z"
+      ]
+    },
+    {
+      "step_id": "s2",
+      "name": "市场选择确认（人工）",
+      "type": "confirm",
+      "config": {
+        "question": "市场快研已完成。请确认目标市场与语言方案，确认后内容小队将按此方向产出全部内容；驳回则终止本次执行。"
+      },
+      "status": "canceled",
+      "detail": "市场快研已完成。请确认目标市场与语言方案，确认后内容小队将按此方向产出全部内容；驳回则终止本次执行。（用户取消）",
+      "started_at": 1788173023890
+    },
+    {
+      "step_id": "s3",
+      "name": "品牌声音定位",
+      "type": "skill",
+      "skill": "brand-voice",
+      "config": {},
+      "status": "pending",
+      "detail": ""
+    },
+    {
+      "step_id": "s4",
+      "name": "五平台文案",
+      "type": "skill",
+      "skill": "copy-studio",
+      "config": {},
+      "status": "pending",
+      "detail": ""
+    },
+    {
+      "step_id": "s5",
+      "name": "图像提示词",
+      "type": "skill",
+      "skill": "visual-prompt",
+      "config": {},
+      "status": "pending",
+      "detail": ""
+    },
+    {
+      "step_id": "s6",
+      "name": "7天内容日历",
+      "type": "skill",
+      "skill": "content-calendar",
+      "config": {},
+      "status": "pending",
+      "detail": ""
+    },
+    {
+      "step_id": "s7",
+      "name": "合规体检",
+      "type": "skill",
+      "skill": "local-check",
+      "config": {},
+      "status": "pending",
+      "detail": ""
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mth41rijlig8z",
+      "name": "市场快研报告",
+      "type": "markdown",
+      "path": "exports/1788173023627_市场快研报告.md"
+    }
+  ],
+  "result": null,
+  "error": "用户取消",
+  "created_at": 1788172995624
+}

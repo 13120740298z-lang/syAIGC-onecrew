@@ -1,0 +1,22 @@
+{
+  "session_id": "s_mth44omhuqh3b",
+  "title": "我的产品是手冲咖啡器具套装，想卖",
+  "messages": [
+    {
+      "id": "m_mth44omj2gd48",
+      "role": "user",
+      "content": "我的产品是手冲咖啡器具套装，想卖北美，帮我出全套出海内容",
+      "created_at": 1788173159851
+    },
+    {
+      "id": "m_mth44omnbqmmb",
+      "role": "assistant",
+      "content": "收到！已启动**出海内容包工作流**，参数：产品「手冲咖啡器具套装」 · 市场「北美」。右侧工作台可查看步骤进度与产物。",
+      "run_id": "r_mth44omkk14pr",
+      "artifacts": [],
+      "created_at": 1788173159855
+    }
+  ],
+  "created_at": 1788173159849,
+  "updated_at": 1788173159855
+}

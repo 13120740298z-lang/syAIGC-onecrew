@@ -1,0 +1,17 @@
+{
+  "brand": "TrailGlow",
+  "positioning": "Lightweight ambient lantern that turns any campsite into a cozy, well-lit retreat.",
+  "persona": "A seasoned outdoor friend who values quiet comfort and practical design.",
+  "tone": ["calm", "warm", "down-to-earth", "playful"],
+  "vocabulary": {
+    "use": ["warm glow", "campfire-ready", "lightweight", "rechargeable", "durable", "quiet comfort", "dusk", "ambiance"],
+    "avoid": ["perfect", "best", "miracle", "revolutionary", "cheap", "100%", "unbreakable", "luxury"]
+  },
+  "slogans": [
+    "Warm light, wherever you land.",
+    "Carry light. Camp bright.",
+    "Set the mood, anywhere."
+  ],
+  "do_say_example": "Tuck the lantern beside your tent door and let the warm glow turn a cold night into familiar comfort.",
+  "dont_say_example": "This lantern is the best ever and totally unbreakable — buy it now! Reason: it overpromises with superlatives and ignores our honest, practical tone."
+}

@@ -1,0 +1,17 @@
+{
+  "brand": "CampGlow",
+  "positioning": "The soft, dependable glow that makes every campsite feel like home",
+  "persona": "A knowledgeable, minimalistic friend who knows the value of a warm light after dusk",
+  "tone": ["calm", "approachable", "authentic", "minimalist"],
+  "vocabulary": {
+    "use": ["ambient", "warm", "glow", "campfire", "compact", "dusk", "cozy", "rechargeable"],
+    "avoid": ["disruptive", "revolutionary", "cheap", "best", "perfect", "strong", "bright like day", "lifetime"]
+  },
+  "slogans": [
+    "Your Campfire's New Best Friend",
+    "Light Up the Night, Softly",
+    "Simple Glow, Wild Nights"
+  ],
+  "do_say_example": "A soft glow that turns your campsite into a cozy corner of the wild.",
+  "dont_say_example": "Our light is the brightest on the market, perfect for any adventure! — Reason: exaggerates brightness and claims perfection, violating the authentic and minimalist tone."
+}

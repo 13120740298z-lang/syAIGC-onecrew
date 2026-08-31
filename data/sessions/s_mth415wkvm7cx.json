@@ -1,0 +1,22 @@
+{
+  "session_id": "s_mth415wkvm7cx",
+  "title": "我的产品是宠物智能喂食器，想卖德",
+  "messages": [
+    {
+      "id": "m_mth415wlfdywj",
+      "role": "user",
+      "content": "我的产品是宠物智能喂食器，想卖德国，帮我出全套出海内容",
+      "created_at": 1788172995621
+    },
+    {
+      "id": "m_mth415wqlagpt",
+      "role": "assistant",
+      "content": "收到！已启动**出海内容包工作流**，参数：产品「宠物智能喂食器」 · 市场「德国」。右侧工作台可查看步骤进度与产物。",
+      "run_id": "r_mth415wor39at",
+      "artifacts": [],
+      "created_at": 1788172995626
+    }
+  ],
+  "created_at": 1788172995620,
+  "updated_at": 1788172995626
+}

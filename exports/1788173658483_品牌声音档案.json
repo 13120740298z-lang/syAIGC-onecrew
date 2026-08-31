@@ -1,0 +1,17 @@
+{
+  "brand": "BrewCraft",
+  "positioning": "Precision pour-over kits for the solo creator who values craft over speed.",
+  "persona": "A knowledgeable, understated friend who shares the ritual without hype.",
+  "tone": ["knowledgeable", "minimal", "encouraging", "honest"],
+  "vocabulary": {
+    "use": ["precision", "ritual", "pour-over", "clarity", "single-origin", "craft", "mindful", "aerate"],
+    "avoid": ["best", "perfect", "revolutionary", "cheap", "easy", "instant", "fake", "artificial"]
+  },
+  "slogans": [
+    "Craft your morning ritual.",
+    "Precision in every pour.",
+    "Slow down, taste better."
+  ],
+  "do_say_example": "Dial in your grind size and pour rate to unlock the natural sweetness of your single-origin beans.",
+  "dont_say_example": "This is the best pour-over set ever made and will make you a coffee genius instantly. (Reason: Uses 'best' and 'instantly' — exaggerated, inauthentic, and contradicts the brand's honest, understated voice.)"
+}

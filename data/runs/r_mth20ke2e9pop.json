@@ -1,0 +1,193 @@
+{
+  "run_id": "r_mth20ke2e9pop",
+  "agent_id": "onecrew",
+  "session_id": "s_mth20kdzdr1qd",
+  "user_id": "local",
+  "status": "done",
+  "current_step": null,
+  "mode": "real",
+  "params": {
+    "product": "智能保温杯",
+    "market": "日本",
+    "language": "ja"
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "name": "市场快研",
+      "type": "skill",
+      "skill": "market-scan",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「市场快研报告」 · 87535ms",
+      "started_at": 1788169608513,
+      "ended_at": 1788169696048,
+      "artifacts": [
+        "a_mth22fxoqgj5a"
+      ]
+    },
+    {
+      "step_id": "s2",
+      "name": "市场选择确认（人工）",
+      "type": "confirm",
+      "config": {
+        "question": "市场快研已完成。请确认目标市场与语言方案，确认后内容小队将按此方向产出全部内容；驳回则终止本次执行。"
+      },
+      "status": "done",
+      "detail": "用户已确认，继续执行",
+      "started_at": 1788169696304,
+      "ended_at": 1788169852586
+    },
+    {
+      "step_id": "s3",
+      "name": "品牌声音定位",
+      "type": "skill",
+      "skill": "brand-voice",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「品牌声音档案」 · 10842ms",
+      "started_at": 1788169852589,
+      "ended_at": 1788169863431,
+      "artifacts": [
+        "a_mth26137tfwco"
+      ]
+    },
+    {
+      "step_id": "s4",
+      "name": "五平台文案",
+      "type": "skill",
+      "skill": "copy-studio",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「五平台文案包」 · 29103ms",
+      "started_at": 1788169863693,
+      "ended_at": 1788169892796,
+      "artifacts": [
+        "a_mth26nqwa24zz"
+      ]
+    },
+    {
+      "step_id": "s5",
+      "name": "图像提示词",
+      "type": "skill",
+      "skill": "visual-prompt",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「图像提示词包」 · 83202ms",
+      "started_at": 1788169893053,
+      "ended_at": 1788169976255,
+      "artifacts": [
+        "a_mth28g58982wk"
+      ]
+    },
+    {
+      "step_id": "s6",
+      "name": "7天内容日历",
+      "type": "skill",
+      "skill": "content-calendar",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「7天内容日历」 · 7342ms",
+      "started_at": 1788169976511,
+      "ended_at": 1788169983853,
+      "artifacts": [
+        "a_mth28m07fwh7w"
+      ]
+    },
+    {
+      "step_id": "s7",
+      "name": "合规体检",
+      "type": "skill",
+      "skill": "local-check",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「合规体检清单」 · 36327ms",
+      "started_at": 1788169984113,
+      "ended_at": 1788170020440,
+      "artifacts": [
+        "a_mth29e8ltj9ze"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mth22fxoqgj5a",
+      "name": "市场快研报告",
+      "type": "markdown",
+      "path": "exports/1788169696044_市场快研报告.md"
+    },
+    {
+      "artifact_id": "a_mth26137tfwco",
+      "name": "品牌声音档案",
+      "type": "json",
+      "path": "exports/1788169863427_品牌声音档案.json"
+    },
+    {
+      "artifact_id": "a_mth26nqwa24zz",
+      "name": "五平台文案包",
+      "type": "markdown",
+      "path": "exports/1788169892793_五平台文案包.md"
+    },
+    {
+      "artifact_id": "a_mth28g58982wk",
+      "name": "图像提示词包",
+      "type": "markdown",
+      "path": "exports/1788169976252_图像提示词包.md"
+    },
+    {
+      "artifact_id": "a_mth28m07fwh7w",
+      "name": "7天内容日历",
+      "type": "csv",
+      "path": "exports/1788169983847_7天内容日历.csv"
+    },
+    {
+      "artifact_id": "a_mth29e8ltj9ze",
+      "name": "合规体检清单",
+      "type": "markdown",
+      "path": "exports/1788170020437_合规体检清单.md"
+    }
+  ],
+  "result": {
+    "summary": "完成 7 个步骤，产出 6 个工件",
+    "artifacts": [
+      {
+        "artifact_id": "a_mth22fxoqgj5a",
+        "name": "市场快研报告",
+        "type": "markdown",
+        "path": "exports/1788169696044_市场快研报告.md"
+      },
+      {
+        "artifact_id": "a_mth26137tfwco",
+        "name": "品牌声音档案",
+        "type": "json",
+        "path": "exports/1788169863427_品牌声音档案.json"
+      },
+      {
+        "artifact_id": "a_mth26nqwa24zz",
+        "name": "五平台文案包",
+        "type": "markdown",
+        "path": "exports/1788169892793_五平台文案包.md"
+      },
+      {
+        "artifact_id": "a_mth28g58982wk",
+        "name": "图像提示词包",
+        "type": "markdown",
+        "path": "exports/1788169976252_图像提示词包.md"
+      },
+      {
+        "artifact_id": "a_mth28m07fwh7w",
+        "name": "7天内容日历",
+        "type": "csv",
+        "path": "exports/1788169983847_7天内容日历.csv"
+      },
+      {
+        "artifact_id": "a_mth29e8ltj9ze",
+        "name": "合规体检清单",
+        "type": "markdown",
+        "path": "exports/1788170020437_合规体检清单.md"
+      }
+    ]
+  },
+  "error": null,
+  "created_at": 1788169608506
+}

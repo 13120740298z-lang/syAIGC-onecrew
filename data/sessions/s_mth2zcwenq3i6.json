@@ -1,0 +1,22 @@
+{
+  "session_id": "s_mth2zcwenq3i6",
+  "title": "我的产品是露营氛围灯，想卖北美，",
+  "messages": [
+    {
+      "id": "m_mth2zcwfeit73",
+      "role": "user",
+      "content": "我的产品是露营氛围灯，想卖北美，帮我出全套出海内容",
+      "created_at": 1788171231759
+    },
+    {
+      "id": "m_mth2zcwmuu7dh",
+      "role": "assistant",
+      "content": "收到！已启动**出海内容包工作流**，参数：产品「露营氛围灯」 · 市场「北美」。右侧工作台可查看步骤进度与产物。",
+      "run_id": "r_mth2zcwjw0dnw",
+      "artifacts": [],
+      "created_at": 1788171231766
+    }
+  ],
+  "created_at": 1788171231758,
+  "updated_at": 1788171231766
+}

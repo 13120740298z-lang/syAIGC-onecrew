@@ -1,0 +1,22 @@
+{
+  "session_id": "s_mth20kdzdr1qd",
+  "title": "我的产品是智能保温杯，316不锈",
+  "messages": [
+    {
+      "id": "m_mth20ke00ik96",
+      "role": "user",
+      "content": "我的产品是智能保温杯，316不锈钢12小时保温，想卖日本，帮我出全套出海内容",
+      "created_at": 1788169608504
+    },
+    {
+      "id": "m_mth20ke4emjg2",
+      "role": "assistant",
+      "content": "收到！已启动**出海内容包工作流**，参数：产品「智能保温杯」 · 市场「日本」。右侧工作台可查看步骤进度与产物。",
+      "run_id": "r_mth20ke2e9pop",
+      "artifacts": [],
+      "created_at": 1788169608508
+    }
+  ],
+  "created_at": 1788169608503,
+  "updated_at": 1788169608508
+}
