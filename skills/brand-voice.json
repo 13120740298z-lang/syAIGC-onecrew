@@ -1,0 +1,21 @@
+{
+  "skill_id": "brand-voice",
+  "name": "品牌声音官",
+  "icon": "🎙️",
+  "description": "为产品定义可复用的品牌声音档案：人设、语气、用词红绿灯与口号候选，全平台口吻一致。",
+  "input_schema": {
+    "product": "产品描述"
+  },
+  "output_type": "json",
+  "artifact_name": "品牌声音档案",
+  "output_format": "JSON 对象：brand, positioning, persona, tone[], vocabulary{use[],avoid[]}, slogans[], do_say_example, dont_say_example",
+  "prompt_template": "为以下产品建立品牌声音档案（Brand Voice Profile），输出严格 JSON（不要 markdown 代码块包裹）：\n\n产品：{{product}}\n\n字段要求：\n- brand: 品牌简称（英文，≤2 词）\n- positioning: 一句话定位\n- persona: 品牌人设（用一句话描述，如'懂行又克制的朋友'）\n- tone: 3-4 个语气关键词（英文）\n- vocabulary: use（推荐用词 5-8 个，英文）/ avoid（禁用词 5-8 个，含夸大词与敏感词）\n- slogans: 3 个英文口号候选（≤6 词）\n- do_say_example: 一句符合该声音的英文示例文案\n- dont_say_example: 一句违反该声音的反例并附一句原因\n\n只输出 JSON。",
+  "triggers": [
+    "品牌",
+    "声音",
+    "口吻",
+    "slogan",
+    "口号",
+    "定位"
+  ]
+}

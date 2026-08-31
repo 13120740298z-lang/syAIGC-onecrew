@@ -1,0 +1,23 @@
+{
+  "skill_id": "copy-studio",
+  "name": "文案流水线",
+  "icon": "✍️",
+  "description": "一次产出 X/Instagram/TikTok 脚本/LinkedIn/Product Hunt 五平台原生格式的多语言文案包。",
+  "input_schema": {
+    "product": "产品描述",
+    "market": "目标市场",
+    "language": "输出语言代码（en/es/ja/de/fr…），默认 en"
+  },
+  "output_type": "markdown",
+  "artifact_name": "五平台文案包",
+  "output_format": "Markdown，按平台分节，每节含可直接复制的正文与标签，平台原生格式（字符数/hashtag/话题规范）",
+  "prompt_template": "为以下产品生成五平台原生文案包：\n\n产品：{{product}}\n目标市场：{{market}}\n输出语言：{{language}}\n\n各平台要求（海外平台正文一律用指定语言，平台名与说明保留中文便于阅读）：\n1. X/Twitter：≤280 字符，1 条主推文 + 2 条跟发，含 1-2 个 hashtag\n2. Instagram：caption（首行 hook ≤125 字符）+ 5-8 个 hashtag + 图片文案建议\n3. TikTok：15 秒短视频脚本，秒级分镜（hook/展示/CTA），口播+画面双栏\n4. LinkedIn：品牌故事帖 150-250 词，B2B 口吻\n5. Product Hunt：tagline（≤60 字符）+ 首条评论模板（创始人视角）\n\n每个平台一节，正文代码块包裹方便复制。",
+  "triggers": [
+    "文案",
+    "写帖",
+    "发帖",
+    "广告语",
+    "推文",
+    "caption"
+  ]
+}

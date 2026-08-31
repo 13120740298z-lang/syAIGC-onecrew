@@ -1,0 +1,22 @@
+{
+  "skill_id": "visual-prompt",
+  "name": "提示词工坊",
+  "icon": "🎨",
+  "description": "产出 Midjourney / 即梦 / Stable Diffusion 三套图像提示词（含负向词与参数），供任意绘图工具二次生成。",
+  "input_schema": {
+    "product": "产品描述",
+    "scene": "使用场景（如：都市通勤/露营/居家办公），可省略"
+  },
+  "output_type": "markdown",
+  "artifact_name": "图像提示词包",
+  "output_format": "Markdown，三节各含代码块提示词 + 负向提示词 + 参数说明 + 使用建议",
+  "prompt_template": "为以下产品生成三套文生图提示词（本项目只产提示词，不生成图片，提示词供 Midjourney/即梦/SD 使用）：\n\n产品：{{product}}\n场景：{{scene}}\n\n要求：\n1. Midjourney v7：英文，含主体/场景/光线/风格/构图，尾缀 --ar（信息流 4:5，横幅 16:9 各一条）与 --v 参数\n2. 即梦（中文）：中文自然语言描述，适配国内模型习惯\n3. Stable Diffusion：英文 tag 风格 + Negative prompt 单独一行\n4. 每套附一句'适用内容'建议（主图/场景图/氛围图）\n\n提示词一律代码块包裹。",
+  "triggers": [
+    "提示词",
+    "绘图",
+    "midjourney",
+    "海报图",
+    "生图",
+    "配图"
+  ]
+}

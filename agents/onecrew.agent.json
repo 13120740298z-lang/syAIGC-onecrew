@@ -1,0 +1,16 @@
+{
+  "agent_id": "onecrew",
+  "name": "OneCrew 出海内容官",
+  "description": "一人公司的六人内容小队：市场快研 → 人工确认市场 → 品牌声音 → 五平台文案 → 图像提示词 → 7天内容日历 → 合规体检，产出一整套出海内容包。",
+  "status": 1,
+  "created_at": 1756600000000,
+  "steps": [
+    { "step_id": "s1", "name": "市场快研", "type": "skill", "skill": "market-scan", "config": {} },
+    { "step_id": "s2", "name": "市场选择确认（人工）", "type": "confirm", "config": { "question": "市场快研已完成。请确认目标市场与语言方案，确认后内容小队将按此方向产出全部内容；驳回则终止本次执行。" } },
+    { "step_id": "s3", "name": "品牌声音定位", "type": "skill", "skill": "brand-voice", "config": {} },
+    { "step_id": "s4", "name": "五平台文案", "type": "skill", "skill": "copy-studio", "config": {} },
+    { "step_id": "s5", "name": "图像提示词", "type": "skill", "skill": "visual-prompt", "config": {} },
+    { "step_id": "s6", "name": "7天内容日历", "type": "skill", "skill": "content-calendar", "config": {} },
+    { "step_id": "s7", "name": "合规体检", "type": "skill", "skill": "local-check", "config": {} }
+  ]
+}

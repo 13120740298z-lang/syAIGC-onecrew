@@ -1,0 +1,7 @@
+node_modules/
+web/node_modules/
+server/.env
+data/
+exports/
+*.log
+.playwright-mcp/

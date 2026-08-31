@@ -1,0 +1,20 @@
+{
+  "skill_id": "content-calendar",
+  "name": "内容日历",
+  "icon": "📅",
+  "description": "产出 7 天海外发布计划（日期/平台/主题/钩子/标签），CSV 格式可直接导入表格或排期工具。",
+  "input_schema": {
+    "product": "产品描述",
+    "market": "目标市场"
+  },
+  "output_type": "csv",
+  "artifact_name": "7天内容日历",
+  "output_format": "CSV，表头固定：date,platform,theme,hook,tags（UTF-8，Excel 直接打开不乱码）",
+  "prompt_template": "为以下产品制定 7 天海外内容发布日历：\n\n产品：{{product}}\n目标市场：{{market}}\n\n要求：\n1. 只输出 CSV，无任何解释文字，无代码块包裹\n2. 表头固定为：date,platform,theme,hook,tags\n3. date 用 Day 1 ~ Day 7\n4. platform 从 Instagram/TikTok/X/Twitter/LinkedIn/Product Hunt/Email 中选择，节奏要有平台组合策略（如种草→互动→转化）\n5. hook 为该帖首句钩子（英文），theme 为中文主题名\n6. tags 用 # 开头的英文标签，2-3 个，逗号分隔（若含逗号则该字段用双引号包裹）\n7. Day 7 必须是 Product Hunt 发布日",
+  "triggers": [
+    "日历",
+    "排期",
+    "发布计划",
+    "日程"
+  ]
+}
