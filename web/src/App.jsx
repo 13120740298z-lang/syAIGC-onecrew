@@ -129,6 +129,7 @@ export default function App() {
   const [artifacts, setArtifacts] = useState([]);
   const [previewId, setPreviewId] = useState(null);
   const [tab, setTab] = useState('runs');
+  const [stats, setStats] = useState(null);
   const chatEndRef = useRef(null);
   const streamBufRef = useRef('');
   const msgIdRef = useRef(null);
@@ -150,6 +151,7 @@ export default function App() {
   useEffect(() => {
     fetch('/api/health').then((r) => r.json()).then(setHealth);
     fetch('/api/skills').then((r) => r.json()).then(setSkills);
+    fetch('/api/stats').then((r) => r.json()).then(setStats).catch(() => {});
     loadSessions();
   }, []);
 
@@ -378,6 +380,7 @@ export default function App() {
         <div className="wb-tabs">
           <button className={'wb-tab' + (tab === 'runs' ? ' on' : '')} onClick={() => setTab('runs')}>运行</button>
           <button className={'wb-tab' + (tab === 'artifacts' ? ' on' : '')} onClick={() => setTab('artifacts')}>工件 ({artifactsList.length})</button>
+          <button className={'wb-tab' + (tab === 'cost' ? ' on' : '')} onClick={() => setTab('cost')}>成本</button>
         </div>
         <div className="wb-body">
           {tab === 'runs' && (
@@ -388,6 +391,25 @@ export default function App() {
           {tab === 'artifacts' && (
             artifactsList.length ? artifactsList.map((a) => <ArtifactRow key={a.artifact_id} a={a} onPreview={setPreviewId} />)
               : <div className="muted pad8">暂无工件。运行完成后产物会落在这里，可预览、可下载（图片/视频/CSV/MD/JSON）。</div>
+          )}
+          {tab === 'cost' && stats && (
+            <div className="cost-panel">
+              <div className="cost-hero">
+                <div className="cost-big">¥{stats.totals.cost_cny}</div>
+                <div className="muted">历史 {stats.totals.done_runs} 次真实运行总成本（LLM{stats.totals.media_real ? ' + 生图' : ''}，实测记账）</div>
+                <div className="muted cost-sub">单次全流程 ≈ ¥{stats.unit_economics.per_pipeline_cny} · 外包 UGC $45-212/条 · 代运营 ¥5k-30k/月</div>
+              </div>
+              <div className="cost-rows">
+                {stats.runs.slice(0, 8).map((r) => (
+                  <div key={r.run_id} className="cost-row">
+                    <span className="cost-product">{(r.product || '—').slice(0, 18)}{r.market ? ` · ${r.market}` : ''}</span>
+                    <span className="muted">{r.steps} 步 · {Math.round(r.wall_ms / 1000)}s · {r.artifacts} 工件</span>
+                    <span className="cost-num">¥{r.cost_cny}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="muted cost-note">{stats.unit_economics.note}</div>
+            </div>
           )}
         </div>
       </aside>

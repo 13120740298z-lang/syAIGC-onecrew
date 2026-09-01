@@ -36,6 +36,39 @@ app.get('/api/runs/:id', (req, res) => {
   const r = store.getRun(req.params.id);
   r ? res.json(r) : res.status(404).json({ error: { code: 'NOT_FOUND', message: '运行记录不存在' } });
 });
+
+/* ---------- 成本仪表盘：从 data/runs 真实记账（docs/07 实测单价） ---------- */
+const COST = { llmPerStep: 0.03, imageRealPerImg: 0.2, imageLocal: 0, ttsEdge: 0 };
+app.get('/api/stats', (_, res) => {
+  const runs = fs.readdirSync(store.DIRS.runs).filter((f) => f.endsWith('.json'))
+    .map((f) => { try { return JSON.parse(fs.readFileSync(path.join(store.DIRS.runs, f), 'utf8')); } catch (_) { return null; } })
+    .filter(Boolean);
+  const byRun = runs.filter((r) => r.status === 'done').map((r) => {
+    const steps = (r.steps || []).filter((s) => s.status === 'done' && s.type !== 'confirm');
+    const wallMs = steps.reduce((s, x) => s + ((x.ended_at && x.started_at) ? x.ended_at - x.started_at : 0), 0);
+    const events = r.events || [];
+    const realImages = events.some((e) => /生成第 \d+/.test(e.detail || '')) && !events.some((e) => /构图小样|LOCAL_FALLBACK/.test(e.detail || ''));
+    const hasVideo = (r.artifacts || []).some((a) => a.type === 'video');
+    const imgCount = (r.artifacts || []).filter((a) => a.type === 'image').length;
+    const cost = steps.length * COST.llmPerStep + (realImages ? imgCount * COST.imageRealPerImg : 0);
+    return {
+      run_id: r.run_id, agent_id: r.agent_id, mode: r.mode, created_at: r.created_at,
+      product: r.params && r.params.product, market: r.params && r.params.market,
+      steps: steps.length, wall_ms: wallMs, artifacts: (r.artifacts || []).length,
+      media: { real_images: realImages, video: hasVideo, image_count: imgCount },
+      cost_cny: +cost.toFixed(3),
+    };
+  }).sort((a, b) => b.created_at - a.created_at);
+  const totals = byRun.reduce((a, r) => ({ ms: a.ms + r.wall_ms, cost: a.cost + r.cost_cny, art: a.art + r.artifacts, steps: a.steps + r.steps }), { ms: 0, cost: 0, art: 0, steps: 0 });
+  res.json({
+    runs: byRun,
+    totals: { done_runs: byRun.length, steps: totals.steps, wall_ms: totals.ms, artifacts: totals.art, cost_cny: +totals.cost.toFixed(2) },
+    unit_economics: {
+      per_pipeline_cny: +(8 * COST.llmPerStep + 4 * COST.imageRealPerImg).toFixed(2),
+      note: 'LLM 8 步 ≈ 0.24 元 + 真图 4 张 ≈ 0.8 元（不配 Key 走本地小样 0 元）+ TTS Edge 免费 ≈ 全流程 1 元级；对照：UGC 外包 $45-212/条、代代理月费 ¥5k-30k',
+    },
+  });
+});
 app.post('/api/runs/:id/cancel', (req, res) => {
   const r = store.cancelRun(req.params.id);
   r ? res.json({ ok: true, status: r.status }) : res.status(404).json({ error: { code: 'NOT_FOUND', message: '运行不存在' } });
