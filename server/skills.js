@@ -177,9 +177,10 @@ async function runVideoSkill(skill, params, onStep, llm, upstreamImages) {
   });
 
   // 5) 分镜脚本 Markdown（可复核工件）
+  const LANG_LABEL = { en: 'EN 英语', zh: '中文', ja: '日语', ko: '韩语' };
   const lines = [
     `# ${skill.artifact_name || skill.name} · 分镜脚本`, '',
-    `**标题**：${board.title || product} · **旁白语言**：${language === 'en' ? 'EN' : '中文'} · **配音**：${ttsModeUsed || '静音'}`, '',
+    `**标题**：${board.title || product} · **旁白语言**：${LANG_LABEL[language] || language} · **配音**：${ttsModeUsed || '静音'}`, '',
     `## 旁白全文`, '', `${board.narration}`, '', `## 分镜`,
   ];
   (board.scenes || []).forEach((s, i) => lines.push(`${i + 1}. 第${(s.image ?? i) + 1}图 —— ${s.desc || ''}`));
