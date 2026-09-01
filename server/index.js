@@ -7,12 +7,14 @@ const provider = require('./provider');
 const skillsMod = require('./skills');
 const runner = require('./runner');
 const { routeSmart, extractParams } = require('./router');
+const media = require('./media');
+const mediaInfo = () => ({ images: media.mediaMode(), tts: media.ttsMode() });
 
 const app = express();
 app.use(express.json({ limit: '1mb' }));
 
 /* ---------- 健康与元信息 ---------- */
-app.get('/api/health', (_, res) => res.json({ ok: true, mode: provider.mode, model: provider.model, agent: 'onecrew v1' }));
+app.get('/api/health', (_, res) => res.json({ ok: true, mode: provider.mode, model: provider.model, agent: 'onecrew v2', media: mediaInfo() }));
 app.get('/api/agents', (_, res) => {
   const def = require('../agents/onecrew.agent.json');
   res.json([{ agent_id: def.agent_id, name: def.name, description: def.description, steps: def.steps }]);
@@ -77,18 +79,51 @@ app.get('/api/artifacts', (req, res) => {
   if (req.query.session_id) list = list.filter((a) => a.session_id === req.query.session_id);
   res.json(list.slice(-100).reverse());
 });
-app.get('/api/artifacts/:id', (req, res) => {
-  const a = store.getArtifact(req.params.id);
-  if (!a) return res.status(404).json({ error: { code: 'NOT_FOUND', message: '工件不存在' } });
-  try { res.json({ ...a, content: fs.readFileSync(path.join(store.ROOT, a.path), 'utf8') }); }
-  catch (_) { res.json({ ...a, content: a.content || '' }); }
-});
 app.get('/api/artifacts/:id/download', (req, res) => {
   const a = store.getArtifact(req.params.id);
   if (!a || !a.path) return res.status(404).end();
   const f = path.join(store.ROOT, a.path);
   if (!fs.existsSync(f)) return res.status(404).end();
   res.download(f, path.basename(f));
+});
+/* 媒体工件直读：图片 inline / 视频流式（支持 Range，前端 <video> 拖动进度条必需） */
+app.get('/api/artifacts/:id/raw', (req, res) => {
+  const a = store.getArtifact(req.params.id);
+  if (!a || !a.path) return res.status(404).end();
+  const f = path.join(store.ROOT, a.path);
+  if (!fs.existsSync(f)) return res.status(404).end();
+  const ext = path.extname(f).toLowerCase();
+  const MIME = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.mp4': 'video/mp4', '.webm': 'video/webm', '.gif': 'image/gif' };
+  const mime = MIME[ext];
+  if (!mime) return res.download(f, path.basename(f));
+  const stat = fs.statSync(f);
+  const range = req.headers.range;
+  if (range) {
+    const m = range.match(/bytes=(\d*)-(\d*)/);
+    let start = m && m[1] ? parseInt(m[1], 10) : 0;
+    let end = m && m[2] ? parseInt(m[2], 10) : stat.size - 1;
+    end = Math.min(end, stat.size - 1);
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${stat.size}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': end - start + 1,
+      'Content-Type': mime,
+    });
+    fs.createReadStream(f, { start, end }).pipe(res);
+  } else {
+    res.writeHead(200, { 'Content-Length': stat.size, 'Content-Type': mime, 'Accept-Ranges': 'bytes' });
+    fs.createReadStream(f).pipe(res);
+  }
+});
+/* 工件内容为二进制（image/video）时返回 null，前端据 type 分流渲染 */
+app.get('/api/artifacts/:id', (req, res) => {
+  const a = store.getArtifact(req.params.id);
+  if (!a) return res.status(404).json({ error: { code: 'NOT_FOUND', message: '工件不存在' } });
+  if (a.type === 'image' || a.type === 'video' || a.type === 'media') {
+    return res.json({ ...a, content: a.content || null });
+  }
+  try { res.json({ ...a, content: fs.readFileSync(path.join(store.ROOT, a.path), 'utf8') }); }
+  catch (_) { res.json({ ...a, content: a.content || '' }); }
 });
 
 /* ---------- SSE 头 ---------- */
@@ -173,7 +208,7 @@ async function freeChat(session, text, emit) {
     try {
       const history = session.messages.slice(-10).map((m) => ({ role: m.role, content: m.content }));
       const sys = '你是 OneCrew，一人公司出海内容官智能体。回答简洁、可操作。你可以使用以下技能（用户说"帮我出文案"等即可触发）：' + skillsMod.SKILL_LIST.map((s) => s.name).join('、') + '，以及一键「出海内容包工作流」。';
-      full = await streamChat(sys, history, (delta) => emit('token', { message_id: msgId, delta }));
+      full = await provider.streamChat(sys, history, (delta) => emit('token', { message_id: msgId, delta }));
     } catch (e) {
       full = await provider.chatMock('chat', { product: text });
     }
@@ -188,42 +223,7 @@ async function freeChat(session, text, emit) {
   emit('done', { message_id: msgId, session_id: session.session_id });
 }
 
-/* OpenAI 兼容流式 */
-async function streamChat(system, messages, onDelta) {
-  const BASE = process.env.LLM_BASE_URL.replace(/\/$/, '');
-  const KEY = process.env.LLM_API_KEY;
-  const MODEL = process.env.LLM_MODEL || 'deepseek-v4-flash';
-  const res = await fetch(BASE + '/chat/completions', {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model: MODEL, messages: [{ role: 'system', content: system }, ...messages], stream: true, max_tokens: 2000, temperature: 0.7 }),
-    signal: AbortSignal.timeout(120000),
-  });
-  if (!res.ok || !res.body) throw new Error('stream http ' + res.status);
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder();
-  let buf = '', out = '';
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buf += decoder.decode(value, { stream: true });
-    const lines = buf.split('\n');
-    buf = lines.pop();
-    for (const line of lines) {
-      const t = line.trim();
-      if (!t.startsWith('data:')) continue;
-      const payload = t.slice(5).trim();
-      if (payload === '[DONE]') continue;
-      try {
-        const j = JSON.parse(payload);
-        const delta = j.choices?.[0]?.delta?.content || '';
-        if (delta) { out += delta; onDelta(delta); }
-      } catch (_) { /* 忽略分段不完整 */ }
-    }
-  }
-  if (!out.trim()) throw new Error('stream empty');
-  return out;
-}
+/* OpenAI 兼容流式已收敛到 provider.streamChat（index.js 不再自带实现） */
 
 /* ---------- 静态托管前端构建产物 ---------- */
 const WEB_DIST = path.join(__dirname, '..', 'web', 'dist');

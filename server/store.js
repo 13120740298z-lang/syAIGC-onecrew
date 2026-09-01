@@ -99,21 +99,28 @@ function cancelRun(id) {
 }
 
 /* ---------- Artifacts ---------- */
+// type: markdown | json | csv | image | video\uff08image/video \u7684 content \u4e3a\u7a7a\uff0c\u5b9e\u9645\u6587\u4ef6\u5728 path\uff0c\u7ecf /raw \u7aef\u70b9\u76f4\u8bfb\uff09
 function saveArtifact(sessionId, runId, name, type, content, extraPath) {
   const a = {
     artifact_id: rid('a'),
     session_id: sessionId || null,
     run_id: runId || null,
     name,
-    type, // markdown | json | csv
+    type, // markdown | json | csv | image | video
     path: null,
     content,
     created_at: Date.now(),
   };
-  const ext = type === 'csv' ? 'csv' : type === 'json' ? 'json' : 'md';
+  const extMap = { csv: 'csv', json: 'json', image: 'png', video: 'mp4' };
+  const ext = extMap[type] || 'md';
   const fname = `${Date.now()}_${name.replace(/[\\/:*?"<>| ]+/g, '_')}.${ext}`;
   const fpath = path.join(DIRS.exports, fname);
-  fs.writeFileSync(fpath, type === 'csv' ? '\ufeff' + content : content, 'utf8');
+  if (type === 'image' || type === 'video') {
+    // \u4e8c\u8fdb\u5236\u5de5\u4ef6\uff1acontent \u4f20\u7684\u662f\u5df2\u843d\u76d8\u7684\u6e90\u6587\u4ef6\u8def\u5f84\uff0c\u505a\u4e00\u6b21\u79fb\u52a8\u5f52\u4f4d\uff08\u540c\u76d8 rename\uff0c\u96f6\u62f7\u8d1d\uff09
+    try { fs.renameSync(content, fpath); } catch (_) { fs.copyFileSync(content, fpath); }
+  } else {
+    fs.writeFileSync(fpath, type === 'csv' ? '\ufeff' + content : content, 'utf8');
+  }
   a.path = 'exports/' + fname;
   if (extraPath) a.extra_path = extraPath;
   const idx = path.join(DATA, 'artifacts.json');

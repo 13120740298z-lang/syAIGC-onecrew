@@ -46,9 +46,65 @@ function mockText(skillKey, params) {
     'content-calendar': ['date,platform,theme,hook,tags', `Day 1,Instagram,产品亮相,"Meet ${p} — your everyday sidekick.",#${p} #launch`, `Day 2,TikTok,痛点场景,"POV: your bag is a black hole 🕳️",#fyp #edc`, `Day 3,X/Twitter,品牌故事,"Why we built ${p} — a thread 🧵",#buildinpublic`, `Day 4,Instagram,UGC征集,"Show us your carry. Win a gift 🎁",#giveaway`, `Day 5,TikTok,对比测评,"${p} vs the usual — 15s challenge",#review`, `Day 6,LinkedIn,创始人叙事,"The one-person company behind ${p}",#startup`, `Day 7,Product Hunt,正式发布,"${p} is LIVE on PH — support us!",#producthunt`].join('\n'),
     'local-check': `# 合规与文化体检清单（演示模式）\n\n**目标市场**：${m}\n\n## 广告合规\n- [ ] 避免 absolute claims（best / No.1 / cure）— 多数市场违反广告法\n- [ ] 价格标注含税与否需明示（欧盟/日本）\n- [ ] 促销折扣需标注原价与周期（欧盟 Omnibus 指令）\n\n## 文化禁忌（抽查）\n- 日本：避免"4"相关定价暗示；包装避免白色花意象\n- 中东：避免暴露模特；周五内容避开祷告时段\n- 欧美：圣诞季（Nov-Dec）是关键节点但避开宗教符号滥用\n\n## 节日营销日历\n| 节日 | 市场 | 日期 | 动作建议 |\n|---|---|---|---|\n| Boxing Day | 英联邦 | 12-26 | 清仓促销 |\n| Golden Week | 日本 | 04-29~05-05 | 出行场景内容 |\n\n> 清单由演示模式生成，v2 将接真实法规库检索。`,
   };
+  T['visual-studio'] = JSON.stringify([
+    { slot: '主图', prompt: `professional e-commerce product photography of ${p}, centered composition on a clean gradient studio background, soft key light with subtle rim light, ultra high detail, commercial advertising style`, ratio: '1:1' },
+    { slot: '场景图', prompt: `${p} naturally placed in ${params.scene || 'urban commute'} lifestyle scene, morning sunlight, shallow depth of field, candid editorial photography`, ratio: '4:5' },
+    { slot: '细节图', prompt: `extreme macro close-up of ${p} surface material and craftsmanship, dramatic side lighting, dark moody background, texture emphasis`, ratio: '1:1' },
+    { slot: '氛围图', prompt: `cinematic wide shot of ${p} in an aspirational ${params.scene || 'outdoor camping'} atmosphere, golden hour glow, moody color grading, premium brand feeling`, ratio: '4:5' },
+  ], null, 2);
+  T['video-director'] = JSON.stringify({
+    title: `${p} · 15秒带货成片`,
+    narration: `还在为${params.scene || '日常使用'}发愁吗？${p}，一次到位。现在点击下方链接，把它带回家。`,
+    subtitles: [
+      { text: '还在犹豫吗？', start: 0, end: 3 },
+      { text: `${p}，一次到位`, start: 3, end: 7 },
+      { text: '细节与品质看得见', start: 7, end: 11 },
+      { text: '点击下方链接，立即带走', start: 11, end: 14.5 },
+    ],
+    scenes: [
+      { image: 0, desc: '主图开场，镜头缓慢推近' },
+      { image: 1, desc: '场景图横移，展现真实使用' },
+      { image: 2, desc: '细节图微缩放，质感特写' },
+      { image: 3, desc: '氛围图拉远收尾，落版 CTA' },
+    ],
+  }, null, 2);
   return T[skillKey] || `（演示模式）${skillKey} 已执行，输入：${JSON.stringify(params).slice(0, 120)}`;
 }
 
 async function chatMock(skillKey, params) { return mockText(skillKey, params); }
 
-module.exports = { mode, chatReal, chatMock, model: MODEL, provider: () => (mode === 'real' ? 'real' : 'mock') };
+/* OpenAI 兼容流式输出（index.js 自由聊天用；非流式走 chatReal） */
+async function streamChat(system, messages, onDelta, { maxTokens = 2000, temperature = 0.7 } = {}) {
+  const res = await fetch(BASE.replace(/\/$/, '') + '/chat/completions', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: MODEL, messages: [{ role: 'system', content: system }, ...messages], stream: true, max_tokens: maxTokens, temperature }),
+    signal: AbortSignal.timeout(120000),
+  });
+  if (!res.ok || !res.body) throw new Error('stream http ' + res.status);
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buf = '', out = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += decoder.decode(value, { stream: true });
+    const lines = buf.split('\n');
+    buf = lines.pop();
+    for (const line of lines) {
+      const t = line.trim();
+      if (!t.startsWith('data:')) continue;
+      const payload = t.slice(5).trim();
+      if (payload === '[DONE]') continue;
+      try {
+        const j = JSON.parse(payload);
+        const delta = j.choices?.[0]?.delta?.content || '';
+        if (delta) { out += delta; onDelta(delta); }
+      } catch (_) { /* 忽略分段不完整 */ }
+    }
+  }
+  if (!out.trim()) throw new Error('stream empty');
+  return out;
+}
+
+module.exports = { mode, chatReal, chatMock, streamChat, model: MODEL, provider: () => (mode === 'real' ? 'real' : 'mock') };

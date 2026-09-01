@@ -56,7 +56,7 @@ function RunCard({ run, onConfirm, onCancel, onRetry }) {
 }
 
 function ArtifactRow({ a, onPreview }) {
-  const icon = a.type === 'csv' ? '📊' : a.type === 'json' ? '🧩' : '📄';
+  const icon = a.type === 'csv' ? '📊' : a.type === 'json' ? '🧩' : a.type === 'image' ? '🖼️' : a.type === 'video' ? '🎬' : '📄';
   return (
     <div className="artifact-row" onClick={() => onPreview(a.artifact_id)}>
       <span>{icon}</span>
@@ -73,6 +73,9 @@ function PreviewModal({ artifactId, onClose }) {
     fetch(`/api/artifacts/${artifactId}`).then((r) => r.json()).then(setData).catch(() => setData({ name: '加载失败', content: '' }));
   }, [artifactId]);
   if (!data) return null;
+  const isImage = data.type === 'image';
+  const isVideo = data.type === 'video';
+  const rawUrl = `/api/artifacts/${data.artifact_id}/raw`;
   return (
     <div className="modal-mask" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -83,7 +86,11 @@ function PreviewModal({ artifactId, onClose }) {
           <button className="btn btn-ghost btn-sm" onClick={onClose}>关闭</button>
         </div>
         <div className="modal-body">
-          {data.type === 'markdown' ? <Markdown remarkPlugins={[remarkGfm]}>{data.content}</Markdown> : <pre className="codeblock">{data.content}</pre>}
+          {isImage && <img className="media-view" src={rawUrl} alt={data.name} />}
+          {isVideo && <video className="media-view" src={rawUrl} controls autoPlay loop playsInline />}
+          {!isImage && !isVideo && (data.type === 'markdown'
+            ? <Markdown remarkPlugins={[remarkGfm]}>{data.content}</Markdown>
+            : <pre className="codeblock">{data.content}</pre>)}
         </div>
       </div>
     </div>
@@ -261,7 +268,7 @@ export default function App() {
     setBusy(false);
   };
 
-  const runsForSession = Object.values(runsMap).filter((r) => !sessionId || r.session_id === sessionId || true)
+  const runsForSession = Object.values(runsMap).filter((r) => !sessionId || r.session_id === sessionId)
     .sort((a, b) => (b.created_at || 0) - (a.created_at || 0)).slice(0, 20);
   const artifactsList = artifacts.filter((a) => !sessionId || a.session_id === sessionId);
 
@@ -315,7 +322,7 @@ export default function App() {
             <div className="welcome">
               <div className="welcome-logo">🌊</div>
               <h1>一个人，一支内容小队</h1>
-              <p>把产品讲给我听，六位 AI 队友接力完成：市场快研 → 品牌声音 → 五平台文案 → 图像提示词 → 内容日历 → 合规体检。全程步骤可视、可停、可复核。</p>
+              <p>把产品讲给我听，八位 AI 队友接力完成：市场快研 → 人工确认 → 品牌声音 → 五平台文案 → 图像提示词 → <b>视觉工坊（AI 真出图 ×4）</b> → <b>短片导演（15 秒带货成片）</b> → 内容日历 → 合规体检。上游成果自动接力下游，全程步骤可视、可停、可复核。</p>
               <div className="examples">
                 {EXAMPLES.map((e, i) => (
                   <div key={i} className="example-card" onClick={() => send(e.text)}>
@@ -361,7 +368,7 @@ export default function App() {
           )}
           {tab === 'artifacts' && (
             artifactsList.length ? artifactsList.map((a) => <ArtifactRow key={a.artifact_id} a={a} onPreview={setPreviewId} />)
-              : <div className="muted pad8">暂无工件。运行完成后产物会落在这里，可预览、可下载（CSV/MD/JSON）。</div>
+              : <div className="muted pad8">暂无工件。运行完成后产物会落在这里，可预览、可下载（图片/视频/CSV/MD/JSON）。</div>
           )}
         </div>
       </aside>

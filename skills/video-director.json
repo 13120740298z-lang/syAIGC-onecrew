@@ -1,0 +1,23 @@
+{
+  "skill_id": "video-director",
+  "name": "短片导演",
+  "icon": "🎬",
+  "description": "生成 15 秒竖屏带货短视频成片：AI 写分镜旁白 → TTS 配音 → 本地 ffmpeg 合成（Ken Burns 动效 + 转场 + ASS 字幕 + BGM 混音），输出 1080x1920 MP4。",
+  "input_schema": {
+    "product": "产品描述",
+    "market": "目标市场",
+    "language": "旁白语言（zh/en，默认跟随市场）"
+  },
+  "output_type": "video",
+  "artifact_name": "15秒带货短视频",
+  "output_format": "MP4 视频文件 + 分镜脚本（Markdown）",
+  "prompt_template": "你是带货短视频导演。基于上游产品图（已就位）与文案钩子，为以下产品写一条 15 秒竖屏带货视频的分镜旁白脚本：\n\n产品：{{product}}\n市场：{{market}}\n上游文案（hook/卖点/CTA 必须呼应）：{{context}}\n\n重要：直接输出一个合法 JSON 对象，从第一个字符 { 开始到最后一个字符 } 结束，禁止输出任何解释、思考过程、确认或追问（不要写「我们可以」「不行，需要」等对话文字）。\nJSON 格式：\n{\"title\":\"视频标题\",\"narration\":\"完整旁白文本（40-60字，口播节奏，含开头 hook 与结尾 CTA，{{lang}}语言）\",\"subtitles\":[{\"text\":\"字幕句1（≤12字）\",\"start\":0.0,\"end\":3.0},{\"text\":\"字幕句2\",\"start\":3.0,\"end\":6.0},{\"text\":\"字幕句3\",\"start\":6.0,\"end\":10.0},{\"text\":\"字幕句4\",\"start\":10.0,\"end\":14.5}],\"scenes\":[{\"image\":0,\"desc\":\"用第1张图（主图），镜头缓慢推近\"},{\"image\":1,\"desc\":\"用第2张图（场景图），横移\"},{\"image\":2,\"desc\":\"用第3张图（细节图），微缩放\"},{\"image\":3,\"desc\":\"用第4张图（氛围图），拉远收尾\"}]}\n\n要求：字幕句与旁白切分一致；总时长约 15 秒；CTA 收尾。",
+  "triggers": [
+    "视频",
+    "短片",
+    "带货视频",
+    "成片",
+    "短视频",
+    "导演"
+  ]
+}

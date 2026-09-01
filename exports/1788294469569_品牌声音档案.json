@@ -1,0 +1,17 @@
+{
+  "brand": "ThermoDot",
+  "positioning": "为日常通勤和办公提供智能温控体验的保温杯",
+  "persona": "贴心且可靠的科技伙伴",
+  "tone": ["Friendly", "Precise", "Minimalist", "Trustworthy"],
+  "vocabulary": {
+    "use": ["smart", "precise", "long-lasting", "reliable", "minimalist", "temperature", "LED", "compact"],
+    "avoid": ["best", "amazing", "perfect", "revolutionary", "magic", "cheap", "super", "ultra"]
+  },
+  "slogans": [
+    "Stay Hydrated, Stay Informed",
+    "Know Your Temp, Enjoy Your Drink",
+    "Smart Sip, All Day"
+  ],
+  "do_say_example": "Keep your coffee at the perfect temperature all morning with the ThermoDot smart mug.",
+  "dont_say_example": "This ThermoDot is the best mug ever made! It will change your life! Reason: Overly exaggerated and unrealistic, violates Japanese modesty."
+}
