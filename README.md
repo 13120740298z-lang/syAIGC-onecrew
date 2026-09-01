@@ -88,3 +88,7 @@ npm start         # 启动 → 浏览器打开 http://localhost:8787
 | [docs/03-使用示例与复现步骤.md](docs/03-使用示例与复现步骤.md) | 使用示例 · 复现步骤 · 验收清单 |
 | [docs/04-提交说明-Wave3.md](docs/04-提交说明-Wave3.md) | 提交主文档：入口/能力/IO/调用方式/Wave3 更新说明/评分自查 |
 | [docs/07-v2开发总纲.md](docs/07-v2开发总纲.md) | v2 升级总纲：竞品调研 · 技术实测 · 架构 · 交付顺序 |
+
+## 🚀 在线部署
+
+评委/用户公网访问的部署步骤见 **[docs/09-部署手册.md](docs/09-部署手册.md)**（首选香港轻量服务器直装：Ubuntu 24.04 + Node 22 + fonts-noto-cjk + systemd 常驻；nginx 反代须 `proxy_buffering off` 保 SSE 实时性）。密钥只在服务器 `server/.env`，不进仓库。
