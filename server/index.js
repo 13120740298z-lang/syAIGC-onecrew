@@ -59,10 +59,10 @@ app.get('/api/stats', (_, res) => {
       cost_cny: +cost.toFixed(3),
     };
   }).sort((a, b) => b.created_at - a.created_at);
-  const totals = byRun.reduce((a, r) => ({ ms: a.ms + r.wall_ms, cost: a.cost + r.cost_cny, art: a.art + r.artifacts, steps: a.steps + r.steps }), { ms: 0, cost: 0, art: 0, steps: 0 });
+  const totals = byRun.reduce((a, r) => ({ ms: a.ms + r.wall_ms, cost: a.cost + r.cost_cny, art: a.art + r.artifacts, steps: a.steps + r.steps, real: a.real || r.media.real_images }), { ms: 0, cost: 0, art: 0, steps: 0, real: false });
   res.json({
     runs: byRun,
-    totals: { done_runs: byRun.length, steps: totals.steps, wall_ms: totals.ms, artifacts: totals.art, cost_cny: +totals.cost.toFixed(2) },
+    totals: { done_runs: byRun.length, steps: totals.steps, wall_ms: totals.ms, artifacts: totals.art, cost_cny: +totals.cost.toFixed(2), media_real: totals.real },
     unit_economics: {
       per_pipeline_cny: +(8 * COST.llmPerStep + 4 * COST.imageRealPerImg).toFixed(2),
       note: 'LLM 8 步 ≈ 0.24 元 + 真图 4 张 ≈ 0.8 元（不配 Key 走本地小样 0 元）+ TTS Edge 免费 ≈ 全流程 1 元级；对照：UGC 外包 $45-212/条、代代理月费 ¥5k-30k',
