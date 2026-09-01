@@ -162,14 +162,15 @@ async function runVideoSkill(skill, params, onStep, llm, upstreamImages) {
     subtitles = parts.map((t, i) => ({ text: t.slice(0, 16), start: +(i * per).toFixed(2), end: +((i + 1) * per).toFixed(2) }));
   }
 
-  // 4) ffmpeg 合成 1080x1920 MP4
+  // 4) ffmpeg 合成 1080x1920 MP4（内置 BGM 资产 + 旁白 ducking；BGM 缺失自动跳过）
   const outFile = path.join(tmpDir, 'video.mp4');
+  const bgmAsset = path.join(__dirname, '..', 'assets', 'bgm_calm_loop.m4a');
   onStep && onStep('running', `ffmpeg 合成 ${images.length} 镜 · ${subtitles.length} 条字幕…`);
   await ffmpegLayer.synthesizeVideo({
     images,
     narration: narrationFile,
     subtitles,
-    bgm: null,
+    bgm: fs.existsSync(bgmAsset) ? bgmAsset : null,
     out: outFile,
     durationSec: narrationDur ? Math.max(narrationDur + 0.8, images.length * 3) : null,
     onProgress: (pct, note) => onStep && onStep('running', note ? `${note}` : `合成 ${Math.round(pct)}%`),

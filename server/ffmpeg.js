@@ -87,10 +87,12 @@ async function synthesizeVideo({ images, narration, subtitles, bgm, out, duratio
   // 音频：旁白优先，BGM ducking
   let aout = null;
   if (narIdx !== null && bgmIdx !== null) {
-    f.push(`[${narIdx}:a]aresample=44100[nar]`);
-    f.push(`[${bgmIdx}:a]volume=0.18,afade=t=in:st=0:d=1,atrim=0:${total.toFixed(2)},aresample=44100[mus]`);
-    f.push(`[mus][nar]sidechaincompress=threshold=0.03:ratio=8:attack=120:release=700[duck]`);
-    f.push(`[duck][nar]amix=inputs=2:duration=first:normalize=0[aout]`);
+    // asplit：旁白一路当 sidechain 触发、一路进混音（滤镜标签只能被消费一次）
+    // aformat 统一立体声：sidechaincompress 要求两路输入声道布局一致（旁白 mp3 常为单声道、BGM 为立体声）
+    f.push(`[${narIdx}:a]aresample=44100,aformat=channel_layouts=stereo,asplit=2[nar1][nar2]`);
+    f.push(`[${bgmIdx}:a]volume=0.18,afade=t=in:st=0:d=1,atrim=0:${total.toFixed(2)},aresample=44100,aformat=channel_layouts=stereo[mus]`);
+    f.push(`[mus][nar1]sidechaincompress=threshold=0.03:ratio=8:attack=120:release=700[duck]`);
+    f.push(`[duck][nar2]amix=inputs=2:duration=first:normalize=0[aout]`);
     aout = 'aout';
   } else if (narIdx !== null) {
     f.push(`[${narIdx}:a]aresample=44100[aout]`); aout = 'aout';
