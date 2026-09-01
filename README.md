@@ -91,6 +91,8 @@ npm start         # 启动 → 浏览器打开 http://localhost:8787
 | [docs/04-提交说明-Wave3.md](docs/04-提交说明-Wave3.md) | 提交主文档：入口/能力/IO/调用方式/Wave3 更新说明/评分自查 |
 | [docs/07-v2开发总纲.md](docs/07-v2开发总纲.md) | v2 升级总纲：竞品调研 · 技术实测 · 架构 · 交付顺序 |
 | [docs/08-v2路演讲稿.md](docs/08-v2路演讲稿.md) | 决赛路演讲稿：三金句 · 演示脚本 · 评委对比表 · Q&A 预案 |
+| [roadshow/README.md](roadshow/README.md) | **对比视频**（95.7s 1920×1080）：分镜表 · 旁白脚本 · 重建步骤 |
+| [docs/ppt/](docs/ppt/) | **路演 PPT**（9 页，深蓝主题，python-pptx 生成，可再生成） |
 | [docs/09-部署手册.md](docs/09-部署手册.md) | 在线 Demo 部署：香港轻量服务器直装全流程 + 故障排查 |
 
 ## 🚀 在线部署

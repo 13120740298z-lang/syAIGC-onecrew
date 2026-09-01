@@ -3,3 +3,4 @@ web/node_modules/
 server/.env
 *.log
 .playwright-mcp/
+roadshow/work/
