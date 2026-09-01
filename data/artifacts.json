@@ -340,5 +340,122 @@
     "type": "markdown",
     "path": "exports/1788294580809_合规体检清单.md",
     "created_at": 1788294580809
+  },
+  {
+    "artifact_id": "a_mtj63tx9lar39",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788297411645_市场快研报告.md",
+    "created_at": 1788297411645
+  },
+  {
+    "artifact_id": "a_mtj6a06wk0l4x",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "品牌声音档案",
+    "type": "json",
+    "path": "exports/1788297699704_品牌声音档案.json",
+    "created_at": 1788297699704
+  },
+  {
+    "artifact_id": "a_mtj6bomfahwn9",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "五平台文案包",
+    "type": "markdown",
+    "path": "exports/1788297778023_五平台文案包.md",
+    "created_at": 1788297778023
+  },
+  {
+    "artifact_id": "a_mtj6d1x3mxnf5",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "图像提示词包",
+    "type": "markdown",
+    "path": "exports/1788297841911_图像提示词包.md",
+    "created_at": 1788297841911
+  },
+  {
+    "artifact_id": "a_mtj6d8gf91tn7",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "产品图集·1",
+    "type": "image",
+    "path": "exports/1788297850383_产品图集·1.png",
+    "created_at": 1788297850383
+  },
+  {
+    "artifact_id": "a_mtj6d8gjcw88p",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "产品图集·2",
+    "type": "image",
+    "path": "exports/1788297850387_产品图集·2.png",
+    "created_at": 1788297850387
+  },
+  {
+    "artifact_id": "a_mtj6d8gmk2ofv",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "产品图集·3",
+    "type": "image",
+    "path": "exports/1788297850390_产品图集·3.png",
+    "created_at": 1788297850390
+  },
+  {
+    "artifact_id": "a_mtj6d8gsxi1jy",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "产品图集·4",
+    "type": "image",
+    "path": "exports/1788297850396_产品图集·4.png",
+    "created_at": 1788297850396
+  },
+  {
+    "artifact_id": "a_mtj6d8gwq85j2",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "产品图集·清单",
+    "type": "markdown",
+    "path": "exports/1788297850400_产品图集·清单.md",
+    "created_at": 1788297850400
+  },
+  {
+    "artifact_id": "a_mtj6eblsjggcn",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "15秒带货短视频",
+    "type": "video",
+    "path": "exports/1788297901120_15秒带货短视频.mp4",
+    "created_at": 1788297901120
+  },
+  {
+    "artifact_id": "a_mtj6eblxypg63",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "15秒带货短视频·清单",
+    "type": "markdown",
+    "path": "exports/1788297901125_15秒带货短视频·清单.md",
+    "created_at": 1788297901125
+  },
+  {
+    "artifact_id": "a_mtj6eic2aom5g",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "7天内容日历",
+    "type": "csv",
+    "path": "exports/1788297909842_7天内容日历.csv",
+    "created_at": 1788297909842
+  },
+  {
+    "artifact_id": "a_mtj6exgqj5l20",
+    "session_id": "s_mtj62q78fh46f",
+    "run_id": "r_mtj62q7csutgb",
+    "name": "合规体检清单",
+    "type": "markdown",
+    "path": "exports/1788297929450_合规体检清单.md",
+    "created_at": 1788297929450
   }
 ]

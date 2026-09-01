@@ -1,0 +1,17 @@
+{
+  "brand": "ThermoSip",
+  "positioning": "最適な温度を保ち、飲むべき時間をそっと知らせる、スマート保温ボトル。",
+  "persona": "さりげなく温度と水分を気遣ってくれる、頼れるスマートパートナー。",
+  "tone": ["warm", "precise", "understated", "caring"],
+  "vocabulary": {
+    "use": ["precise", "mindful", "hydration", "reminder", "elegant", "durable", "quiet", "refreshed"],
+    "avoid": ["miracle", "cure", "best", "perfect", "instant", "anti-aging", "detox", "revolutionary"]
+  },
+  "slogans": [
+    "Smart warmth, gentle reminders.",
+    "Sip smarter, stay warmer.",
+    "Ideal temperature, always with you."
+  ],
+  "do_say_example": "We keep your drink at the exact warmth you love, and gently remind you when to sip.",
+  "dont_say_example": "This bottle will cure your dehydration forever! — This overclaims health benefits and contradicts our humble, factual tone."
+}
