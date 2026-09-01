@@ -104,11 +104,16 @@ async function synthesizeSpeech(text, outFile, language) {
     fs.writeFileSync(outFile, Buffer.from(await res.arrayBuffer()));
     return { file: outFile, duration: null };
   }
-  // Edge TTS（免费）——失败时抛错，由调用方决定是否静音继续
+  // Edge TTS（免费）——失败时抛错，由调用方决定是否静音继续；按市场语言选声线
   const { EdgeTTS } = require('node-edge-tts');
-  const voice = language === 'en' ? 'en-US-JennyNeural' : 'zh-CN-XiaoxiaoNeural';
+  const VOICES = {
+    en: 'en-US-JennyNeural',
+    zh: 'zh-CN-XiaoxiaoNeural',
+    ja: 'ja-JP-NanamiNeural',
+    ko: 'ko-KR-SunHiNeural',
+  };
   const tts = new EdgeTTS();
-  await tts.ttsPromise(text, outFile, { voice });
+  await tts.ttsPromise(text, outFile, { voice: VOICES[language] || VOICES.en });
   return { file: outFile, duration: null };
 }
 

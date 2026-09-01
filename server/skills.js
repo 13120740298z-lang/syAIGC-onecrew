@@ -140,12 +140,12 @@ async function runVideoSkill(skill, params, onStep, llm, upstreamImages) {
     onStep && onStep('running', `复用上游产品图 ×${images.length}`);
   }
 
-  // 2) TTS 旁白（免费 Edge → 失败静音继续）
+  // 2) TTS 旁白（免费 Edge → 失败静音继续）；语言映射到对应神经声音（ja/ko/en/zh）
   let narrationFile = null, narrationDur = null, ttsModeUsed = null;
   try {
     onStep && onStep('running', `TTS 旁白合成（${media.ttsMode()}）…`);
     const nf = path.join(tmpDir, 'narration.mp3');
-    const r = await media.synthesizeSpeech(board.narration, nf, language === 'en' ? 'en' : 'zh');
+    const r = await media.synthesizeSpeech(board.narration, nf, language);
     narrationFile = r.file;
     narrationDur = media.probeDuration(nf) || r.duration || null;
     ttsModeUsed = media.ttsMode();
