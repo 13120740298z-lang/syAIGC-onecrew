@@ -67,10 +67,20 @@ app.post('/api/runs/:id/confirm', (req, res) => {
   }
   const step = run.steps.find((s) => s.status === 'waiting_confirm');
   if (step) { step.status = 'done'; step.ended_at = Date.now(); step.detail = '用户已确认，继续执行'; }
+  // 确认点可编辑：approve 时可携带修订后的 params（如换市场/改产品名），后续步骤按修订值执行
+  const revision = (req.body && req.body.params) || null;
+  if (revision && typeof revision === 'object') {
+    run.params = { ...run.params, ...revision };
+    run.events = run.events || [];
+    run.events.push({ at: Date.now(), type: 'confirm_revision', detail: '用户在确认点修订参数', params: revision });
+    if (run.events.length > 500) run.events = run.events.slice(-500);
+    emit('step', { run_id: run.run_id, status: 'running', name: '参数修订', detail: '确认点已更新：' + JSON.stringify(revision).slice(0, 120) });
+  }
   run.status = 'running';
   store.saveRun(run);
   emit('step', { run_id: run.run_id, step_id: step && step.step_id, name: (step && step.name) || '人工确认', status: 'done', detail: '用户已确认，继续执行' });
-  runner.execute(run, emit);
+  req_keepalive(res);
+  runner.execute(run, emit).then((r) => { if (r && (r.done || r.failed || r.canceled)) res.end(); });
 });
 
 /* ---------- 工件 ---------- */
@@ -147,6 +157,12 @@ function req_keepalive(res) {
   const t = setInterval(() => { try { res.write(': ping\n\n'); } catch (_) { clearInterval(t); } }, 15000);
   res.on('close', () => clearInterval(t));
 }
+
+/* ---------- 确认点参数抽取：前端确认框的修订文本 → 结构化 params（与对话入口同一套正则） ---------- */
+app.post('/api/params/extract', (req, res) => {
+  const message = String((req.body && req.body.message) || '').slice(0, 2000);
+  res.json({ params: extractParams(message) });
+});
 
 /* ---------- 技能直调 / Agent 工作流 ---------- */
 app.post('/api/agents/:id/run', (req, res) => {

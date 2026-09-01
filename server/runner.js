@@ -237,4 +237,4 @@ function createSkillRun(skillId, params, sessionId, emit) {
   return run;
 }
 
-module.exports = { execute, createAgentRun, createSkillRun, makeEmitter, runBrief, summarizeArtifact, RELAY };
+module.exports = { execute, createAgentRun, createSkillRun, makeEmitter, runBrief, summarizeArtifact, RELAY, logEvent };

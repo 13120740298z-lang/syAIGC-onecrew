@@ -17,6 +17,7 @@ function StatusChip({ status }) {
 }
 
 function RunCard({ run, onConfirm, onCancel, onRetry }) {
+  const [revised, setRevised] = useState('');
   const live = run.status === 'running' || run.status === 'pending';
   return (
     <div className="run-card">
@@ -34,8 +35,18 @@ function RunCard({ run, onConfirm, onCancel, onRetry }) {
             {s.detail && s.status !== 'pending' && <span className="step-detail muted">{s.detail}</span>}
             {s.status === 'waiting_confirm' && run.status === 'waiting_confirm' && (
               <div className="confirm-row">
-                <button className="btn btn-primary btn-sm" onClick={() => onConfirm(run.run_id, true)}>✓ 批准，继续执行</button>
-                <button className="btn btn-ghost btn-sm" onClick={() => onConfirm(run.run_id, false)}>✕ 驳回终止</button>
+                <div className="confirm-edit">
+                  <textarea
+                    value={revised}
+                    placeholder="（可选）在此修订方向后批准：例如「市场改为欧洲，语言英文」"
+                    onChange={(e) => setRevised(e.target.value)}
+                    rows={2}
+                  />
+                  <div className="confirm-btns">
+                    <button className="btn btn-primary btn-sm" onClick={() => onConfirm(run.run_id, true, revised.trim())}>✓ 批准，继续执行</button>
+                    <button className="btn btn-ghost btn-sm" onClick={() => onConfirm(run.run_id, false)}>✕ 驳回终止</button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -252,9 +263,17 @@ export default function App() {
     document.getElementById('chat-input')?.focus();
   };
 
-  const onConfirm = async (runId, approve) => {
+  const onConfirm = async (runId, approve, revisionText) => {
     setBusy(true);
-    try { await ssePost(`/api/runs/${runId}/confirm`, { approve }, makeHandlers()); } catch (e) { console.warn(e); }
+    // 修订文本解析：走服务端统一参数抽取（与对话入口同一套正则），确认点即编辑点
+    let params;
+    if (approve && revisionText) {
+      try {
+        const res = await fetch('/api/params/extract', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: revisionText }) });
+        if (res.ok) { const j = await res.json(); params = Object.keys(j.params || {}).length ? j.params : undefined; }
+      } catch (_) {}
+    }
+    try { await ssePost(`/api/runs/${runId}/confirm`, { approve, params }, makeHandlers()); } catch (e) { console.warn(e); }
     setBusy(false);
   };
   const onCancel = async (runId) => {
