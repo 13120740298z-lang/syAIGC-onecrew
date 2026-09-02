@@ -17,6 +17,7 @@ function StatusChip({ status }) {
 }
 
 function RunCard({ run, onConfirm, onCancel, onRetry }) {
+  const [revised, setRevised] = useState('');
   const live = run.status === 'running' || run.status === 'pending';
   return (
     <div className="run-card">
@@ -33,9 +34,17 @@ function RunCard({ run, onConfirm, onCancel, onRetry }) {
             <span className="step-name">{s.name}</span>
             {s.detail && s.status !== 'pending' && <span className="step-detail muted">{s.detail}</span>}
             {s.status === 'waiting_confirm' && run.status === 'waiting_confirm' && (
-              <div className="confirm-row">
-                <button className="btn btn-primary btn-sm" onClick={() => onConfirm(run.run_id, true)}>✓ 批准，继续执行</button>
-                <button className="btn btn-ghost btn-sm" onClick={() => onConfirm(run.run_id, false)}>✕ 驳回终止</button>
+              <div className="confirm-edit">
+                <textarea
+                  value={revised}
+                  placeholder="（可选）在此修订方向后批准：例如「市场改为欧洲，语言英文」"
+                  onChange={(e) => setRevised(e.target.value)}
+                  rows={2}
+                />
+                <div className="confirm-btns">
+                  <button className="btn btn-primary btn-sm" onClick={() => onConfirm(run.run_id, true, revised.trim())}>✓ 批准，继续执行</button>
+                  <button className="btn btn-ghost btn-sm" onClick={() => onConfirm(run.run_id, false)}>✕ 驳回终止</button>
+                </div>
               </div>
             )}
           </div>
@@ -122,6 +131,7 @@ export default function App() {
   const [artifacts, setArtifacts] = useState([]);
   const [previewId, setPreviewId] = useState(null);
   const [tab, setTab] = useState('runs');
+  const [stats, setStats] = useState(null);
   const chatEndRef = useRef(null);
   const streamBufRef = useRef('');
   const msgIdRef = useRef(null);
@@ -143,6 +153,7 @@ export default function App() {
   useEffect(() => {
     fetch('/api/health').then((r) => r.json()).then(setHealth);
     fetch('/api/skills').then((r) => r.json()).then(setSkills);
+    fetch('/api/stats').then((r) => r.json()).then(setStats).catch(() => {});
     loadSessions();
     loadArtifacts(null); // 初始即加载全量工件（未选会话状态展示全部，选会话后按会话过滤）
   }, []);
@@ -257,9 +268,17 @@ export default function App() {
     document.getElementById('chat-input')?.focus();
   };
 
-  const onConfirm = async (runId, approve) => {
+  const onConfirm = async (runId, approve, revisionText) => {
     setBusy(true);
-    try { await ssePost(`/api/runs/${runId}/confirm`, { approve }, makeHandlers()); } catch (e) { console.warn(e); }
+    // 修订文本解析：走服务端统一参数抽取（与对话入口同一套正则），确认点即编辑点
+    let params;
+    if (approve && revisionText) {
+      try {
+        const res = await fetch('/api/params/extract', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: revisionText }) });
+        if (res.ok) { const j = await res.json(); params = Object.keys(j.params || {}).length ? j.params : undefined; }
+      } catch (_) {}
+    }
+    try { await ssePost(`/api/runs/${runId}/confirm`, { approve, params }, makeHandlers()); } catch (e) { console.warn(e); }
     setBusy(false);
   };
   const onCancel = async (runId) => {
@@ -365,6 +384,7 @@ export default function App() {
         <div className="wb-tabs">
           <button className={'wb-tab' + (tab === 'runs' ? ' on' : '')} onClick={() => setTab('runs')}>运行</button>
           <button className={'wb-tab' + (tab === 'artifacts' ? ' on' : '')} onClick={() => setTab('artifacts')}>工件 ({artifactsList.length})</button>
+          <button className={'wb-tab' + (tab === 'cost' ? ' on' : '')} onClick={() => { setTab('cost'); fetch('/api/stats').then((r) => r.json()).then(setStats).catch(() => {}); }}>成本</button>
         </div>
         <div className="wb-body">
           {tab === 'runs' && (
@@ -374,7 +394,26 @@ export default function App() {
           )}
           {tab === 'artifacts' && (
             artifactsList.length ? artifactsList.map((a) => <ArtifactRow key={a.artifact_id} a={a} onPreview={setPreviewId} />)
-              : <div className="muted pad8">暂无工件。运行完成后产物会落在这里，可预览、可下载（CSV/MD/JSON）。</div>
+              : <div className="muted pad8">暂无工件。运行完成后产物会落在这里，可预览、可下载（视频/图片/CSV/MD/JSON）。</div>
+          )}
+          {tab === 'cost' && stats && (
+            <div className="cost-panel">
+              <div className="cost-hero">
+                <div className="cost-big">¥{stats.totals.cost_cny}</div>
+                <div className="muted">历史 {stats.totals.done_runs} 次真实运行总成本（LLM{stats.totals.media_real ? ' + 生图' : ''}，实测记账）</div>
+                <div className="muted cost-sub">单次全流程 ≈ ¥{stats.unit_economics.per_pipeline_cny} · 外包 UGC $45-212/条 · 代运营 ¥5k-30k/月</div>
+              </div>
+              <div className="cost-rows">
+                {stats.runs.slice(0, 8).map((r) => (
+                  <div key={r.run_id} className="cost-row">
+                    <span className="cost-product">{(r.product || '—').slice(0, 18)}{r.market ? ` · ${r.market}` : ''}</span>
+                    <span className="muted">{r.steps} 步 · {Math.round(r.wall_ms / 1000)}s · {r.artifacts} 工件{r.media.video ? ' · 🎬' : ''}</span>
+                    <span className="cost-num">¥{r.cost_cny}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="muted cost-note">{stats.unit_economics.note}</div>
+            </div>
           )}
         </div>
       </aside>

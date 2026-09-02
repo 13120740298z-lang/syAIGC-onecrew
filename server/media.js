@@ -346,6 +346,10 @@ async function renderAspect(scenes, dir, opts, tag, onStep) {
   const whoosh = await makeWhoosh(dir);
   args.push('-i', whoosh);
   for (const s of scenes) args.push('-i', s.voFile); // VO 音频输入（下标 = timeline.length + 1 + i）
+  // BGM：程序化合成的无版权循环垫乐，缺失自动跳过（静音成片不受影响）
+  let hasBgm = false;
+  const BGM_FILE = process.env.BGM_PATH || path.join(__dirname, '..', 'assets', 'bgm_calm_loop.m4a');
+  if (fs.existsSync(BGM_FILE)) { args.push('-stream_loop', '-1', '-i', BGM_FILE); hasBgm = true; }
 
   const filters = [];
   // 视频链：卡底 drawtext + 分镜运镜
@@ -372,14 +376,27 @@ async function renderAspect(scenes, dir, opts, tag, onStep) {
   filters.push(`[${cur}]subtitles=filename='${srtEsc}':force_style='FontName=Microsoft YaHei,FontSize=${Math.round(outH / 54)},PrimaryColour=&H00FFFFFF,OutlineColour=&H80000000,BorderStyle=1,Outline=1.1,Shadow=0.5,MarginV=${Math.round(outH / 18)}'[vout]`);
 
   // 音频链：每段 VO 精准对位到其画面窗口（adelay）+ whoosh 点缀（同一输入需 asplit）→ amix → 淡出
+  // BGM 总线（khayyam 合并）：循环垫乐 → 旁白侧链压缩 ducking（旁白响时音乐自动让路）
   const vIdx = timeline.length; // whoosh 输入下标
+  const bgmIdx = timeline.length + 1 + scenes.length; // BGM 输入下标（存在时）
   scenes.forEach((s, i) => filters.push(`[${timeline.length + 1 + i}:a]aformat=sample_rates=44100:channel_layouts=mono,adelay=delays=${Math.round(voStarts[i] * 1000)}:all=1[vo${i}]`));
   filters.push(`[${vIdx}:a]asplit=${offsets.length}${offsets.map((_, k) => `[ws${k}]`).join('')}`);
   offsets.forEach((off, k) => {
     const d = Math.max(Math.round(off * 1000) - 250, 0);
     filters.push(`[ws${k}]adelay=delays=${d}:all=1,volume=${k === 0 || k === offsets.length - 1 ? 0.9 : 0.55}[w${k}]`);
   });
-  filters.push(`${scenes.map((_, i) => `[vo${i}]`).join('')}${offsets.map((_, k) => `[w${k}]`).join('')}amix=inputs=${scenes.length + offsets.length}:duration=longest:normalize=0,afade=t=out:st=${Math.max(total - 0.9, 0).toFixed(2)}:d=0.9,apad=whole_dur=${total.toFixed(2)}[aout]`);
+  if (hasBgm) {
+    // 旁白+音效预混总线 → asplit 两路：一路做 ducking 触发，一路进最终混音（滤镜标签只能被消费一次）
+    filters.push(`${scenes.map((_, i) => `[vo${i}]`).join('')}${offsets.map((_, k) => `[w${k}]`).join('')}amix=inputs=${scenes.length + offsets.length}:duration=longest:normalize=0[pre]`);
+    filters.push(`[pre]asplit=2[trig][vmix]`);
+    filters.push(`[trig]aresample=44100,aformat=channel_layouts=stereo[trigS]`);
+    filters.push(`[vmix]aresample=44100,aformat=channel_layouts=stereo,afade=t=out:st=${Math.max(total - 0.9, 0).toFixed(2)}:d=0.9[vmixS]`);
+    filters.push(`[${bgmIdx}:a]volume=0.16,atrim=0:${total.toFixed(2)},aresample=44100,aformat=channel_layouts=stereo[mus]`);
+    filters.push(`[mus][trigS]sidechaincompress=threshold=0.03:ratio=8:attack=120:release=700[duck]`);
+    filters.push(`[duck][vmixS]amix=inputs=2:duration=first:normalize=0,apad=whole_dur=${total.toFixed(2)}[aout]`);
+  } else {
+    filters.push(`${scenes.map((_, i) => `[vo${i}]`).join('')}${offsets.map((_, k) => `[w${k}]`).join('')}amix=inputs=${scenes.length + offsets.length}:duration=longest:normalize=0,afade=t=out:st=${Math.max(total - 0.9, 0).toFixed(2)}:d=0.9,apad=whole_dur=${total.toFixed(2)}[aout]`);
+  }
 
   const outFile = path.join(dir, `ad_${opts.aspect.replace(':', 'x')}_${Date.now()}.mp4`);
   args.push('-filter_complex', filters.join(';'), '-map', '[vout]', '-map', '[aout]', '-t', total.toFixed(2),

@@ -1,0 +1,40 @@
+{
+  "brand": "FoldOne",
+  "positioning": "A one-second magnetic desk stand for calm, compact, and ready workspaces.",
+  "persona": "A calm, detail-minded desk companion who values quiet efficiency.",
+  "tone": [
+    "calm",
+    "precise",
+    "minimal",
+    "helpful"
+  ],
+  "vocabulary": {
+    "use": [
+      "one-second",
+      "magnetic",
+      "foldable",
+      "compact",
+      "desk",
+      "calm",
+      "natural",
+      "ready"
+    ],
+    "avoid": [
+      "best",
+      "revolutionary",
+      "perfect",
+      "guaranteed",
+      "miracle",
+      "#1",
+      "100%",
+      "safety guaranteed"
+    ]
+  },
+  "slogans": [
+    "Open in one second.",
+    "Calm desk, ready fast.",
+    "Fold. Place. Work."
+  ],
+  "do_say_example": "Set your phone in one second and keep your desk calm, compact, and ready for work.",
+  "dont_say_example": "The world's best, revolutionary stand guarantees perfect productivity. Reason: exaggerated claims conflict with the calm, precise voice."
+}

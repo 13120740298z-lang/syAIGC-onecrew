@@ -1,0 +1,95 @@
+# 对比视频 storyboard（roadshow/build_video.js 的唯一事实源）
+# 10 幕，总长 ≈ 83s（10 段旁白 + 2s 尾板），每幕 = 底图 + 动效 + 字幕 + 旁白
+# kind: kb=Ken Burns 缩放 | slide=横移 | stats=三数字依次弹出
+# 底图类型：shot=产品实拍小样(1080x1920) | shot_wide=截图裁 16:9 | shot_tall=截图竖版
+
+- id: 1
+  nar: roadshow/work/nar_00.mp3
+  kind: kb
+  in: 0.3
+  title: OneCrew
+  sub: 一人出海 AIGC 内容官
+  base: exports/1788294529552_产品图集·1.png
+  base_type: shot
+
+- id: 2
+  nar: roadshow/work/nar_01.mp3
+  kind: slide
+  in: 0.2
+  big: 日更 ≥1 条
+  sub: TikTok Shop 官方要求 · 60% 卖家每周 6-10 小时做内容
+  base: screenshots/00-welcome.png
+  base_type: shot_wide
+
+- id: 3
+  nar: roadshow/work/nar_02.mp3
+  kind: slide
+  in: 0.2
+  big: 8 家竞品 · 0 家做合规
+  sub: Predis / Simplified / Canva / InVideo / Fliki / CapCut / HeyGen / KreadoAI
+  base: screenshots/07-market-report-preview.png
+  base_type: shot_wide
+
+- id: 4
+  nar: roadshow/work/nar_03.mp3
+  kind: kb
+  in: 0.2
+  title: 我们的位置
+  sub: 全链路 × 合规体检 · 行业唯一
+  base: screenshots/00-welcome.png
+  base_type: shot_tall
+
+- id: 5
+  nar: roadshow/work/nar_04.mp3
+  kind: kb
+  in: 0.2
+  title: 八位 AI 队友接力
+  sub: 调研 → 品牌 → 文案 → 出图 → 成片 → 日历 → 合规
+  base: screenshots/04-workflow-running-confirm.png
+  base_type: shot_tall
+
+- id: 6
+  nar: roadshow/work/nar_05.mp3
+  kind: stats
+  in: 0.2
+  stats: ["183秒", "13 工件", "9/9 步"]
+  sub: 真实运行留痕 · data/runs 可复核
+  base: screenshots/06-run-timeline-done.png
+  base_type: shot_tall
+
+- id: 7
+  nar: roadshow/work/nar_06.mp3
+  kind: kb
+  in: 0.2
+  title: 真·成片
+  sub: TTS 配音 · Ken Burns 运镜 · ASS 字幕
+  base: exports/1788294544399_15秒带货短视频.mp4
+  base_type: video
+  out: roadshow/work/clip_evidence.mp4
+
+- id: 8
+  nar: roadshow/work/nar_07.mp3
+  kind: kb
+  in: 0.2
+  big: ≈ ¥1.2 / 次
+  sub: LLM+生图+TTS 真实记账 · UGC 外包 $45-212/条
+  base: screenshots/02-artifact-csv-preview.png
+  base_type: shot_tall
+
+- id: 9
+  nar: roadshow/work/nar_08.mp3
+  kind: stats
+  in: 0.2
+  stats: ["78%", "≈40%", "0→1"]
+  sub: 卖家搞不定合规 · 首年被封号 · OneCrew 每单都体检
+  base: screenshots/05-workflow-done-artifacts.png
+  base_type: shot_tall
+
+- id: 10
+  nar: roadshow/work/nar_09.mp3
+  kind: kb
+  in: 0.2
+  title: 一个人 = 一支内容小队
+  sub: SynNovator Wave 3 · OneCrew
+  base: exports/1788297850396_产品图集·4.png
+  base_type: shot

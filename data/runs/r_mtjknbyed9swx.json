@@ -1,0 +1,528 @@
+{
+  "run_id": "r_mtjknbyed9swx",
+  "agent_id": "onecrew",
+  "session_id": null,
+  "user_id": "local",
+  "status": "done",
+  "current_step": null,
+  "mode": "mock-fallback",
+  "params": {
+    "product": "磁吸折叠手机支架，桌面便携一秒展开",
+    "market": "日本",
+    "language": "ja"
+  },
+  "steps": [
+    {
+      "step_id": "s1",
+      "name": "市场快研",
+      "type": "skill",
+      "skill": "market-scan",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「市场快研报告」 · 270851ms",
+      "started_at": 1788321836106,
+      "ended_at": 1788322106957,
+      "artifacts": [
+        "a_mtjkt4y0xdf0w"
+      ]
+    },
+    {
+      "step_id": "s2",
+      "name": "方向确认（人工·可编辑）",
+      "type": "confirm",
+      "config": {
+        "question": "市场快研已完成。可直接批准，或修改下列参数后批准——内容战队将按修改后的方向生产全部内容；驳回则终止。",
+        "editable": [
+          "market",
+          "language"
+        ]
+      },
+      "status": "done",
+      "detail": "用户已确认，继续执行",
+      "started_at": 1788322107224,
+      "ended_at": 1788322175382
+    },
+    {
+      "step_id": "s3",
+      "name": "品牌声音定位",
+      "type": "skill",
+      "skill": "brand-voice",
+      "config": {
+        "context_from": [
+          "market-scan"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「品牌声音档案」 · 131682ms",
+      "started_at": 1788322175386,
+      "ended_at": 1788322307068,
+      "artifacts": [
+        "a_mtjkt4y0xdf0w",
+        "a_mtjkxfco72nq1"
+      ]
+    },
+    {
+      "step_id": "s4",
+      "name": "五平台文案",
+      "type": "skill",
+      "skill": "copy-studio",
+      "config": {
+        "context_from": [
+          "market-scan",
+          "brand-voice"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「五平台文案包」 · 292889ms",
+      "started_at": 1788322307331,
+      "ended_at": 1788322600220,
+      "artifacts": [
+        "a_mtjkt4y0xdf0w",
+        "a_mtjkxfco72nq1",
+        "a_mtjl3pjtiurcm"
+      ]
+    },
+    {
+      "step_id": "s5",
+      "name": "图像提示词",
+      "type": "skill",
+      "skill": "visual-prompt",
+      "config": {
+        "context_from": [
+          "brand-voice"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「图像提示词包」（演示模式） · 621313ms",
+      "started_at": 1788322600477,
+      "ended_at": 1788323221790,
+      "artifacts": [
+        "a_mtjkt4y0xdf0w",
+        "a_mtjkxfco72nq1",
+        "a_mtjl3pjtiurcm",
+        "a_mtjlh15mdj6cv"
+      ]
+    },
+    {
+      "step_id": "s6",
+      "name": "AI 直出配图",
+      "type": "skill",
+      "skill": "image-studio",
+      "config": {
+        "context_from": [
+          "visual-prompt",
+          "brand-voice"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「AI 配图」 + 3 张真实成图 · 193873ms",
+      "started_at": 1788323222049,
+      "ended_at": 1788323415922,
+      "artifacts": [
+        "a_mtjlh15mdj6cv",
+        "a_mtjll6y0u3jes",
+        "a_mtjll6y5oqxdo",
+        "a_mtjll6y8fp8qg"
+      ]
+    },
+    {
+      "step_id": "s7",
+      "name": "英文旁白词",
+      "type": "skill",
+      "skill": "voice-writer",
+      "config": {
+        "context_from": [
+          "brand-voice",
+          "copy-studio"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「英文旁白词包」 · 420585ms",
+      "started_at": 1788323416178,
+      "ended_at": 1788323836763,
+      "artifacts": [
+        "a_mtjll6y0u3jes",
+        "a_mtjll6y5oqxdo",
+        "a_mtjll6y8fp8qg",
+        "a_mtjlu7o5mvvik"
+      ]
+    },
+    {
+      "step_id": "s8",
+      "name": "广告分镜脚本",
+      "type": "skill",
+      "skill": "video-director",
+      "config": {
+        "context_from": [
+          "voice-writer",
+          "brand-voice"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「广告分镜脚本」 · 22209ms",
+      "started_at": 1788323837029,
+      "ended_at": 1788323859238,
+      "artifacts": [
+        "a_mtjll6y5oqxdo",
+        "a_mtjll6y8fp8qg",
+        "a_mtjlu7o5mvvik",
+        "a_mtjlup0hqdmys"
+      ]
+    },
+    {
+      "step_id": "s9",
+      "name": "真·视频成片",
+      "type": "skill",
+      "skill": "video-factory",
+      "config": {
+        "context_from": [
+          "video-director",
+          "voice-writer"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「广告成片」 + 16:9 20s + 9:16 20s · 786826ms",
+      "started_at": 1788323859499,
+      "ended_at": 1788324646325,
+      "artifacts": [
+        "a_mtjluydzytx1o",
+        "a_mtjmbkbuulmzl",
+        "a_mtjmbkbx5graa",
+        "a_mtjmbkc1j3yeh"
+      ]
+    },
+    {
+      "step_id": "s10",
+      "name": "7天内容日历",
+      "type": "skill",
+      "skill": "content-calendar",
+      "config": {
+        "context_from": [
+          "copy-studio",
+          "brand-voice"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「7天内容日历」 · 58705ms",
+      "started_at": 1788324646586,
+      "ended_at": 1788324705291,
+      "artifacts": [
+        "a_mtjmbkbuulmzl",
+        "a_mtjmbkbx5graa",
+        "a_mtjmbkc1j3yeh",
+        "a_mtjmcttyajqtg"
+      ]
+    },
+    {
+      "step_id": "s11",
+      "name": "合规体检",
+      "type": "skill",
+      "skill": "local-check",
+      "config": {
+        "context_from": [
+          "copy-studio",
+          "video-director"
+        ]
+      },
+      "status": "done",
+      "detail": "产出工件「合规体检清单」 · 232662ms",
+      "started_at": 1788324705551,
+      "ended_at": 1788324938213,
+      "artifacts": [
+        "a_mtjmbkbx5graa",
+        "a_mtjmbkc1j3yeh",
+        "a_mtjmcttyajqtg",
+        "a_mtjmhtk1kvvgp"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mtjkt4y0xdf0w",
+      "name": "市场快研报告",
+      "type": "markdown",
+      "path": "exports/1788322106952_市场快研报告.md"
+    },
+    {
+      "artifact_id": "a_mtjkxfco72nq1",
+      "name": "品牌声音档案",
+      "type": "json",
+      "path": "exports/1788322307064_品牌声音档案.json"
+    },
+    {
+      "artifact_id": "a_mtjl3pjtiurcm",
+      "name": "五平台文案包",
+      "type": "markdown",
+      "path": "exports/1788322600217_五平台文案包.md"
+    },
+    {
+      "artifact_id": "a_mtjlh15mdj6cv",
+      "name": "图像提示词包",
+      "type": "markdown",
+      "path": "exports/1788323221786_图像提示词包.md"
+    },
+    {
+      "artifact_id": "a_mtjll6y0u3jes",
+      "name": "横幅主图",
+      "type": "image",
+      "path": "data/runs/r_mtjknbyed9swx/media/img_1788323240006_1.jpg",
+      "meta": {
+        "aspect": "16:9"
+      }
+    },
+    {
+      "artifact_id": "a_mtjll6y5oqxdo",
+      "name": "信息流竖图",
+      "type": "image",
+      "path": "data/runs/r_mtjknbyed9swx/media/img_1788323245469_2.jpg.retry.jpg",
+      "meta": {
+        "aspect": "4:5"
+      }
+    },
+    {
+      "artifact_id": "a_mtjll6y8fp8qg",
+      "name": "方图氛围",
+      "type": "image",
+      "path": "data/runs/r_mtjknbyed9swx/media/img_1788323336827_3.jpg",
+      "meta": {
+        "aspect": "1:1"
+      }
+    },
+    {
+      "artifact_id": "a_mtjlu7o5mvvik",
+      "name": "英文旁白词包",
+      "type": "markdown",
+      "path": "exports/1788323836757_英文旁白词包.md"
+    },
+    {
+      "artifact_id": "a_mtjlup0hqdmys",
+      "name": "广告分镜脚本",
+      "type": "json",
+      "path": "exports/1788323859233_广告分镜脚本.json"
+    },
+    {
+      "artifact_id": "a_mtjluydzytx1o",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788323871383_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtjmbkbuulmzl",
+      "name": "广告成片 16:9",
+      "type": "video",
+      "path": "data/runs/r_mtjknbyed9swx/media/ad_16x9_1788324120349.mp4",
+      "meta": {
+        "aspect": "16:9",
+        "duration": 19.56,
+        "images": 4,
+        "ttsChars": 78
+      }
+    },
+    {
+      "artifact_id": "a_mtjmbkbx5graa",
+      "name": "广告成片 9:16",
+      "type": "video",
+      "path": "data/runs/r_mtjknbyed9swx/media/ad_9x16_1788324641718.mp4",
+      "meta": {
+        "aspect": "9:16",
+        "duration": 19.56,
+        "images": 4,
+        "ttsChars": 78
+      }
+    },
+    {
+      "artifact_id": "a_mtjmbkc1j3yeh",
+      "name": "视频封面图",
+      "type": "image",
+      "path": "data/runs/r_mtjknbyed9swx/media/cover_169.jpg"
+    },
+    {
+      "artifact_id": "a_mtjmcttyajqtg",
+      "name": "7天内容日历",
+      "type": "csv",
+      "path": "exports/1788324705286_7天内容日历.csv"
+    },
+    {
+      "artifact_id": "a_mtjmhtk1kvvgp",
+      "name": "合规体检清单",
+      "type": "markdown",
+      "path": "exports/1788324938209_合规体检清单.md"
+    }
+  ],
+  "result": {
+    "summary": "完成 11 个步骤，产出 15 个工件",
+    "artifacts": [
+      {
+        "artifact_id": "a_mtjkt4y0xdf0w",
+        "name": "市场快研报告",
+        "type": "markdown",
+        "path": "exports/1788322106952_市场快研报告.md"
+      },
+      {
+        "artifact_id": "a_mtjkxfco72nq1",
+        "name": "品牌声音档案",
+        "type": "json",
+        "path": "exports/1788322307064_品牌声音档案.json"
+      },
+      {
+        "artifact_id": "a_mtjl3pjtiurcm",
+        "name": "五平台文案包",
+        "type": "markdown",
+        "path": "exports/1788322600217_五平台文案包.md"
+      },
+      {
+        "artifact_id": "a_mtjlh15mdj6cv",
+        "name": "图像提示词包",
+        "type": "markdown",
+        "path": "exports/1788323221786_图像提示词包.md"
+      },
+      {
+        "artifact_id": "a_mtjll6y0u3jes",
+        "name": "横幅主图",
+        "type": "image",
+        "path": "data/runs/r_mtjknbyed9swx/media/img_1788323240006_1.jpg",
+        "meta": {
+          "aspect": "16:9"
+        }
+      },
+      {
+        "artifact_id": "a_mtjll6y5oqxdo",
+        "name": "信息流竖图",
+        "type": "image",
+        "path": "data/runs/r_mtjknbyed9swx/media/img_1788323245469_2.jpg.retry.jpg",
+        "meta": {
+          "aspect": "4:5"
+        }
+      },
+      {
+        "artifact_id": "a_mtjll6y8fp8qg",
+        "name": "方图氛围",
+        "type": "image",
+        "path": "data/runs/r_mtjknbyed9swx/media/img_1788323336827_3.jpg",
+        "meta": {
+          "aspect": "1:1"
+        }
+      },
+      {
+        "artifact_id": "a_mtjlu7o5mvvik",
+        "name": "英文旁白词包",
+        "type": "markdown",
+        "path": "exports/1788323836757_英文旁白词包.md"
+      },
+      {
+        "artifact_id": "a_mtjlup0hqdmys",
+        "name": "广告分镜脚本",
+        "type": "json",
+        "path": "exports/1788323859233_广告分镜脚本.json"
+      },
+      {
+        "artifact_id": "a_mtjluydzytx1o",
+        "name": "广告成片",
+        "type": "markdown",
+        "path": "exports/1788323871383_广告成片.md"
+      },
+      {
+        "artifact_id": "a_mtjmbkbuulmzl",
+        "name": "广告成片 16:9",
+        "type": "video",
+        "path": "data/runs/r_mtjknbyed9swx/media/ad_16x9_1788324120349.mp4",
+        "meta": {
+          "aspect": "16:9",
+          "duration": 19.56,
+          "images": 4,
+          "ttsChars": 78
+        }
+      },
+      {
+        "artifact_id": "a_mtjmbkbx5graa",
+        "name": "广告成片 9:16",
+        "type": "video",
+        "path": "data/runs/r_mtjknbyed9swx/media/ad_9x16_1788324641718.mp4",
+        "meta": {
+          "aspect": "9:16",
+          "duration": 19.56,
+          "images": 4,
+          "ttsChars": 78
+        }
+      },
+      {
+        "artifact_id": "a_mtjmbkc1j3yeh",
+        "name": "视频封面图",
+        "type": "image",
+        "path": "data/runs/r_mtjknbyed9swx/media/cover_169.jpg"
+      },
+      {
+        "artifact_id": "a_mtjmcttyajqtg",
+        "name": "7天内容日历",
+        "type": "csv",
+        "path": "exports/1788324705286_7天内容日历.csv"
+      },
+      {
+        "artifact_id": "a_mtjmhtk1kvvgp",
+        "name": "合规体检清单",
+        "type": "markdown",
+        "path": "exports/1788324938209_合规体检清单.md"
+      }
+    ]
+  },
+  "error": null,
+  "created_at": 1788321836102,
+  "context": {
+    "market-scan": {
+      "name": "市场快研报告",
+      "content": "# 市場クイックリサーチ：磁気吸着折りたたみスマホスタンド（1秒展開・卓上携帯）\n\n## 1. 市場規模とトレンド（デスクトップ調査による推定値）\n\n| 項目 | 内容 |\n|------|------|\n| 対象市場 | 日本（スマホアクセサリー市場） |\n| 市場規模（2024年推定） | スマホスタンド全体で約150～200億円（うちMagSafe対応は約30～40億円、年率15～20%成長） |\n| 主なトレンド | ①テレワーク・在宅勤務の定着による卓上スタンド需要増 ②MagSafeエコシステムの拡大（iPhone以外にもAndroid向け磁気リング普及） ③「コンパクト＋美観」志向（インテリアに馴染むデザイン） |\n| ターゲットユーザー | 20～40代のテレワークワーカー、動画視聴・リモート会議利用者、ミニマリスト・デスク整理志向 |\n\n※出典：日本電子情報技術産業協会（JEITA）のスマホ出荷数、各種ECプラットフォームの売れ筋データ、Google Trendsの推移を基に推定。\n\n## 2. プラットフォーム優先度表（獲得効率順）\n\n| 優先順位 | プラットフォーム | 理由 | 推奨アプローチ |\n|----------|------------------|------|----------------|\n| 1 | **TikTok** | バイラル性が高く、視覚的な「一秒展開」の動画が拡散しやすい。女性ユーザー（20～35歳）の購買行動に直結。 | ・「#1秒で広がるスタンド」「#デスク整頓」チャレンジ<br>・インフルエンサー（生活・ガジェット系）に実機レビュー依頼 |\n| 2 | **Instagram** | 写真・ストーリーで製品の「美しさ」「インテリア調和」を伝えやすい。ストーリーに購入リンク設置可能。 | ・「#おしゃれなデスク環境」「#MagSafe便利グッズ」ハッシュタグ投稿<br>・リールで開閉動作のスロー動画 |\n| 3 | **X（旧Twitter）** | テキスト中心だが、ガジェット好き・最新技術に敏感な層が多く、口コミが拡散しやすい。ハッシュタグ「#スマホスタンド」で検索需要大。 | ・「これ一つでデスクが変わった」実体験ツイート<br>・フォロワー限定の先行割引コード配布 |\n| 4 | **YouTube** | レビュー・比較動画向け。ただし制作コストが高く、初期リソースが限られる場合優先度は低い。 | ・「10種類のスマホスタンド比較」動画で差別化ポイントを前面に |\n| 5 | **Amazon / 楽天市場** | プラットフォームではなく販売チャネルだが、日本での購入経路として最も重要。独立自社サイトより先にECモール出店推奨。 | ・Amazonにて「新着」「ベストセラー」を狙う。A+コンテンツで視覚訴求 |\n\n## 3. 競合状況と差別化ポイント\n\n### 競合の3次元マップ\n\n| 次元 | 分析 |\n|------|------|\n| **価格帯** | ・低価格帯：1,000～2,000円（中国製OEM、機能最低限、品質ばらつき）<br>・中価格帯：2,500～4,000円（Anker、ESR、MOFTなど、MagSafe対応、折りたたみ）<br>・高価格帯：4,500～8,000円（Belkin、Twelve South、デザイン性重視） |\n| **売りの共通点** | ・「MagSafe磁気吸着」「折りたたみで携帯性」「角度調整可能（複数段階）」<br>・「机の上ですっきり」「テレワークや動画視聴に最適」 |\n| **見落とされがちな角度** | ・**デザインと素材の質感**：多くの製品は黒/白のプラスチックで、和室やナチュラルインテリアに合わない。<br>・**片手での開閉操作性**：競合は両手が必要なものが多く、一瞬で開く点を強調している製品は少ない。<br>・**非MagSafe端末への対応**：iPhone以外のAndroidユーザー（日本では約40%以上）向けに磁気リングを同梱する製品は稀。 |\n\n### 差別化切入角度（具体的なコンテンツテーマ）\n\n1. **「和室にもマッチするデザイン」**  \n   - 内容例：畳や木製デスクの上に置いた写真・動画で、ナチュラルカラー（木目調、ベージュ、グレージュ）をラインナップ。  \n   - ハッシュタグ：「#和モダンガジェット」「#デスクインテリア和風」  \n   - ターゲット：女性の在宅ワーカー、30代～40代のミニマリスト。\n\n2. **「1秒で開く、スマートな作業効率」**  \n   - 内容例：タイムラプス動画で「開く→セット→作業開始」までの時間を計測し、競合比で2倍速いことをアピール。  \n   - シチュエーション：リモート会議の開始前、ランチタイムの動画視聴など。  \n   - ターゲット：男性ビジネスパーソン、ガジェット好き。\n\n## 4. 価格設定の提案と初回発売戦略\n\n### 推奨価格帯\n- **希望小売価格（税込）**：**2,980円**（中価格帯のやや下側、品質と機能に見合う価格）  \n  - 理由：競合のAnkerスタンド（3,000円前後）と同等帯だが、独自の「一秒展開」機能を付加価値として差別化。  \n  - オプション：カラー別（3色）で同価格、磁気リング付きで+300円の3,280円。\n\n### 初回発売戦略\n1. **クラウドファンディング（Makuake / Campfire）**  \n   - 目標金額：50万円（初期テストマーケティング兼バイラル）  \n   - リターン：早割価格2,480円（先着100名）、通常割引2,680円。  \n   - 発売前にコミュニティを形成し、レビューを集める。\n\n2. **TikTok + Instagram キャンペーン**  \n   - 「#1秒で開くスタンドコンテスト」：投稿者の中から抽選で10名に無料提供。  \n   - インフルエンサー（1～5万人規模）に商品を送り、使用感をリアルタイムで拡散。\n\n3. **Amazon 初回限定特典**  \n   - 発売から1週間"
+    },
+    "brand-voice": {
+      "name": "品牌声音档案",
+      "content": "{\n  \"brand\": \"FoldOne\",\n  \"positioning\": \"A one-second magnetic desk stand for calm, compact, and ready workspaces.\",\n  \"persona\": \"A calm, detail-minded desk companion who values quiet efficiency.\",\n  \"tone\": [\n    \"calm\",\n    \"precise\",\n    \"minimal\",\n    \"helpful\"\n  ],\n  \"vocabulary\": {\n    \"use\": [\n      \"one-second\",\n      \"magnetic\",\n      \"foldable\",\n      \"compact\",\n      \"desk\",\n      \"calm\",\n      \"natural\",\n      \"ready\"\n    ],\n    \"avoid\": [\n      \"best\",\n      \"revolutionary\",\n      \"perfect\",\n      \"guaranteed\",\n      \"miracle\",\n      \"#1\",\n      \"100%\",\n      \"safety guaranteed\"\n    ]\n  },\n  \"slogans\": [\n    \"Open in one second.\",\n    \"Calm desk, ready fast.\",\n    \"Fold. Place. Work.\"\n  ],\n  \"do_say_example\": \"Set your phone in one second and keep your desk calm, compact, and ready for work.\",\n  \"dont_say_example\": \"The world's best, revolutionary stand guarantees perfect productivity. Reason: exaggerated claims conflict with the calm, precise voice.\"\n}"
+    },
+    "copy-studio": {
+      "name": "五平台文案包",
+      "content": "# 五平台原生文案包（日本市場・日本語）\n\n## 1. X/Twitter（280文字以内 × 3件）\n\n### メインツイート（269文字）\n机の上、一秒で変わる。FoldOne スマホスタンド。折りたたんでポケットに、開けばすぐに使える。マグネットでぴったり吸着、角度も自由。テレワークも動画も、もっと静かに、もっとスムーズに。#FoldOne #スマホスタンド\n\n### フォローツイート①（155文字）\n見た目もすっきり。和室にも自然に馴染むナチュラルカラー。プラスチックの安っぽさがないから、デスクがちょっと大人になる。詳しくはプロフィールのリンクから。\n\n### フォローツイート②（190文字）\n「両手で開けるの面倒…」から解放されよう。FoldOne は片手でスッと展開。MagSafe非対応のAndroid端末には磁気リング付き。あなたのスマホ、どんな端末でも使えます。#デスク環境改善\n\n---\n\n## 2. Instagram\n\n### キャプション（フック行：118文字）\n机の上、一秒で完成。FoldOne は閉じたままでも飾れる、開けばすぐに使える、静かな仕事道具です。\n\n毎日のリモート会議、ランチの動画視聴、ちょっとした作業。ワンアクションでスマホを立てたい時、FoldOne が待っています。\n\nシンプルな折りたたみ構造だから、しっかり固定。角度も無段階調整であなたの見たい高さに。ミニマルなデスクに、自然に溶け込みます。\n\n#FoldOne #スマホスタンド #デスクインテリア #MagSafe #テレワーク #ミニマリスト #1秒で開く #和モダンガジェット\n\n### 画像文案の提案\n- 1枚目：折りたたんだ状態（コンパクトさを強調）、畳や木目のデスク上で\n- 2枚目：開いた状態とスマホ装着（横画面で動画視聴）\n- 3枚目：片手で開く動作の連写（秒感を体感）\n- 4枚目：カラーバリエーション（ナチュラル、ベージュ、グレージュ）を並べて\n\n---\n\n## 3. TikTok（15秒・秒級分鏡）\n\n| 時間 | 画面 | ナレーション（口調は落ち着いて、ややささやき） |\n|------|------|-----------------------------------|\n| 0-2秒 | クローズアップ：机の上、閉じたスタンドをポケットから取り出す手 | 「デスクに、一秒で仕事スペースを。」 |\n| 2-5秒 | 片手でスタンドをスパッと開く動作（スロー再生） | 「FoldOne。折りたたんで持ち歩き、パッと開く。」 |\n| 5-10秒 | スマホをマグネットで吸着、角度を調整する手 | 「マグネットでしっかり固定。角度も自由自在。動画も会議も、見たい高さに。」 |\n| 10-13秒 | 机の上全景（ノートPCと併置、スタンドにスマホを置いてタイピング） | 「テレワークも、これ一つでスッキリ。和室にも馴染むナチュラルカラー。」 |\n| 13-15秒 | 商品名ロゴと「#1秒で広がるスタンド」のテキスト | 「FoldOne。詳しくはプロフィールのリンクから。」 |\n\n---\n\n## 4. LinkedIn（150～250語、B2B口調）\n\n製品名：FoldOne - 磁気吸着折りたたみスマホスタンド\n\n**企業向けテレワーク環境の“1秒整頓”**\n\nリモートワークが定着した今、机の上の“見た目”と“機能性”の両立は、意外と難しい問題です。ケーブルやガジエットが散らかるデスクは、集中力や仕事効率にも影響します。\n\nFoldOne は、閉じれば手のひらサイズ、開けば1秒で使えるスマホスタンド。強力な磁気吸着で、iPhone はもちろん、Android端末にも同封の磁気リングで対応できます。分厚いケースを付けたままでもOK。\n\n特筆すべきは、そのデザインと素材感。プラスチック製のチープなものとは一線を画し、自然素材のような風合いのカラーバリエーション（ベージュ、グレージュ、ナチュラル）を用意。和室や木目デスクにも違和感なく馴染みます。\n\n角度調整は無段階で、縦置きも横置きも自由。リモート会議中に相手の表情を見やすい高さに、またはランチタイムに動画を見る角度に、手早くセットできます。\n\n「机の上を、もっと静かに、もっと効率的に。」FoldOne は、あなだのデスクに“落ち着き”と“準備”をもたらす、新しい相棒です。\n\n---\n\n## 5. Product Hunt\n\n### タグライン（58文字）\nFoldOne - 1秒で開く、静かなマグネット式デスクスタンド\n\n### 初回コメント（創始者視点、280文字以内を想定）\n\nHi, PH community! We're the team behind FoldOne – a magnetic foldable phone stand designed for calm, compact workspaces.\n\nWhy we built it: We were tired of bulky stands that take two hands to open and don't fit into a natural desk vibe. So we made one that opens in a single, quiet motion.\n\nKey highlights:\n• One-second open and close\n• Strong magnetic grip (MagSafe & Android ring included)\n• Natural colors that blend with any interior (warm wood, beige, greige)\n• Folded size = pocketable\n\nPrice: ¥2,980 (tax incl.)\n\nWe’d love to hear your thoughts – especially from fellow remote workers and minimalists. Any question? Drop them below."
+    },
+    "visual-prompt": {
+      "name": "图像提示词包",
+      "content": "# 图像提示词工坊（演示模式）\n\n**产品**：磁吸折叠手机支架，桌面便携一秒展开 · **场景**：都市通勤使用场景\n\n## Midjourney v7\n```\nproduct photography of 磁吸折叠手机支架，桌面便携一秒展开, 都市通勤使用场景 scene, soft morning light, minimalist props, shallow depth of field, editorial style, 8k --ar 4:5 --v 7\n```\n\n## 即梦（中文直出）\n```\n磁吸折叠手机支架，桌面便携一秒展开产品摄影，都市通勤使用场景场景，清晨柔和光线，极简背景，浅景深，杂志质感\n```\n\n## Stable Diffusion\n```\n(masterpiece, best quality), product photo, 磁吸折叠手机支架，桌面便携一秒展开, clean background, natural light, photorealistic\nNegative: blurry, watermark, text, oversaturated\n```\n\n> 提示词可直接粘贴至对应工具生成成图；要直接拿成图请用「AI 直出配图」（image-studio），要成片用「真·视频成片」（video-factory）。"
+    },
+    "image-studio": {
+      "name": "AI 配图",
+      "content": "{\n  \"items\": [\n    {\n      \"name\": \"横幅主图\",\n      \"aspect\": \"16:9\",\n      \"prompt\": \"A minimalist magnetic foldable phone stand in natural beige, holding a smartphone in landscape orientation, placed on a light oak desk beside a sleek laptop and a small ceramic coffee cup, softly blurred Japanese interior with wooden slat wall and a tiny plant, warm morning sunlight casting gentle shadows, calm and tidy workspace atmosphere, premium commercial product photography, ultra sharp focus on product, shallow depth of field, cinematic composition with product on right third, no text, no watermark\"\n    },\n    {\n      \"name\": \"信息流竖图\",\n      \"aspect\": \"4:5\",\n      \"prompt\": \"Close-up of a hand opening a magnetic foldable phone stand in greige, one-second unfolding motion, a smartphone attaching to the magnet, on a natural wood desk, soft beige background, warm diffused light, minimal styling, shallow depth of field, premium matte finish texture, dynamic yet calm composition, editorial product photography, ultra detailed, no text, no watermark\"\n    },\n    {\n      \"name\": \"方图氛围\",\n      \"aspect\": \"1:1\",\n      \"prompt\": \"Folded magnetic phone stand in compact size lying on an open palm, surrounded by minimal desk items like a notebook and ceramic cup, warm natural light, wooden tatami-like surface, soft shadows, calm Japanese wabi-sabi aesthetic, product photography with soft focus background, emphasizing portable and natural design, square composition, no text, no watermark\"\n    }\n  ]\n}"
+    },
+    "voice-writer": {
+      "name": "英文旁白词包",
+      "content": "# 配音词作家（Voice-Over Script）— 日本市場・日本語\n\n## 温情叙事版\n**定位**：デスクの乱れをなだめる、静かな気づき\n\n**15秒旁白词（≤40語）**  \nデスクが散らかって、**探し物**ばかり。  \nFoldOneは**一秒で開く**。マグネットで吸着、角度も自由。  \n**静かなデスク**、FoldOneと。\n\n**中文对照**：桌子总是乱糟糟，总在找东西。FoldOne一秒展开，磁吸固定，角度自由。安静的桌面，和FoldOne一起。\n\n---\n\n## 热血带货版\n**定位**：行動を促す、スピード感のある販売トーン\n\n**15秒旁白词（≤40語）**  \n**さあ、開け！一秒で！**  \n折りたたみ、**マグネット**、角度自由。  \nデスクが**変わる**。今すぐチェック！\n\n**中文对照**：来吧，一秒展开！折叠、磁吸、角度自由。桌面大变样。现在就查看！\n\n---\n\n## 极简高级版\n**定位**：余白を残す、静かな事実の羅列\n\n**15秒旁白词（≤40語）**  \n一秒で開く。  \nマグネットで吸着。  \n角度自由。  \nFoldOne。\n\n**中文对照**：一秒展开。磁吸固定。角度自由。FoldOne。"
+    },
+    "video-director": {
+      "name": "广告分镜脚本",
+      "content": "{\"scenes\":[{\"id\":1,\"imgPrompt\":\"A slightly messy desk with scattered papers, a laptop, and a smartphone lying flat, a hand reaching into a pocket to pull out a compact folded phone stand, soft morning light, minimal color palette, candid lifestyle photography, shallow depth of field, calm yet slightly chaotic atmosphere, no text, no watermark\",\"vo\":\"机の上が散らかるたび、探し物をしていませんか？\",\"zh\":\"每当桌面杂乱，你总是在找东西吗？\",\"dur\":4},{\"id\":2,\"imgPrompt\":\"Close-up of a hand opening a magnetic foldable phone stand in one second, unfolding motion captured mid-action, on a natural wood desk, warm diffused light, macrophotography, sharp focus on the stand's hinge and fold, clean background, soft beige tones, no text, no watermark\",\"vo\":\"折りたたんで持ち歩き、パッと開く。FoldOne。\",\"zh\":\"折叠携带，一秒展开。FoldOne。\",\"dur\":4},{\"id\":3,\"imgPrompt\":\"A smartphone being attached to the magnetic stand, hand adjusting the angle, on a desk with a small plant and laptop, warm natural light, product detail shot emphasizing magnetic connection and matte finish, shallow depth of field, editorially styled, premium texture, no text, no watermark\",\"vo\":\"マグネットで吸着、角度も自由。\",\"zh\":\"磁吸固定，角度自由。\",\"dur\":4},{\"id\":4,\"imgPrompt\":\"A minimalist desk setup with a laptop and a FoldOne stand holding a smartphone, natural wood desk, soft shadows, calm and tidy workspace, the FoldOne stand in beige color subtly reflecting the brand's design, warm ambient light, commercial product photography, clean composition, no text, no watermark\",\"vo\":\"静かなデスク、FoldOne。\",\"zh\":\"安静的桌面，FoldOne。\",\"dur\":4}]}"
+    },
+    "video-factory": {
+      "name": "广告成片",
+      "content": "{\n  \"scenes\": [\n    {\n      \"id\": 1,\n      \"imgPrompt\": \"A slightly messy desk with scattered papers, a laptop, and a smartphone lying flat, a hand reaching into a pocket to pull out a compact folded phone stand, soft morning light, minimal color palette, candid lifestyle photography, shallow depth of field, calm yet slightly chaotic atmosphere, no text, no watermark\",\n      \"vo\": \"机の上が散らかるたび、探し物をしていませんか？\",\n      \"zh\": \"每当桌面杂乱，你总是在找东西吗？\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 2,\n      \"imgPrompt\": \"Close-up of a hand opening a magnetic foldable phone stand in one second, unfolding motion captured mid-action, on a natural wood desk, warm diffused light, macrophotography, sharp focus on the stand's hinge and fold, clean background, soft beige tones, no text, no watermark\",\n      \"vo\": \"折りたたんで持ち歩き、パッと開く。FoldOne。\",\n      \"zh\": \"折叠携带，一秒展开。FoldOne。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 3,\n      \"imgPrompt\": \"A smartphone being attached to the magnetic stand, hand adjusting the angle, on a desk with a small plant and laptop, warm natural light, product detail shot emphasizing magnetic connection and matte finish, shallow depth of field, editorially styled, premium texture, no text, no watermark\",\n      \"vo\": \"マグネットで吸着、角度も自由。\",\n      \"zh\": \"磁吸固定，角度自由。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 4,\n      \"imgPrompt\": \"A minimalist desk setup with a laptop and a FoldOne stand holding a smartphone, natural wood desk, soft shadows, calm and tidy workspace, the FoldOne stand in beige color subtly reflecting the brand's design, warm ambient light, commercial product photography, clean composition, no text, no watermark\",\n      \"vo\": \"静かなデスク、FoldOne。\",\n      \"zh\": \"安静的桌面，FoldOne。\",\n      \"dur\": 4\n    }\n  ]\n}"
+    },
+    "content-calendar": {
+      "name": "7天内容日历",
+      "content": "date,platform,theme,hook,tags\nDay 1,TikTok,一秒展开视觉冲击,One second. One fold. Your desk is ready.,\"#FoldOne,#OneSecond,#DeskSetup\"\nDay 2,Instagram,和室自然美学,A desk stand that belongs in a Japanese room.,\"#FoldOne,#JapaneseDesign,#DeskAesthetic\"\nDay 3,X/Twitter,多设备兼容,Not just for iPhone. Any phone works with FoldOne.,\"#FoldOne,#PhoneStand,#MagSafe\"\nDay 4,LinkedIn,远程办公场景,Remote work starts with a calm desk.,\"#FoldOne,#RemoteWork,#Productivity\"\nDay 5,Instagram,互动投票,Which angle do you prefer? 45° or 60°?,\"#FoldOne,#Pollar,#AskMe\"\nDay 6,Email,限时优惠转化,Last chance: 20% off your FoldOne.,\"#FoldOne,#SpecialOffer,#Desk\"\nDay 7,Product Hunt,产品发布日,FoldOne is live on Product Hunt. Your desk deserves calm.,\"#FoldOne,#ProductHunt,#Launch\""
+    },
+    "local-check": {
+      "name": "合规体检清单",
+      "content": "**免責事項**  \n本チェックリストは一般的な知識に基づく参考情報です。正式な広告出稿・販売開始前に、弁護士や専門家による法律レビューを受けることを強く推奨します。\n\n---\n\n## 1. 広告コンプライアンス（日本・景品表示法／薬機法／特定商取引法に基づく一般的注意点）\n\n- [x] **絶対的表現の禁止**  \n  「最高」「日本一」「業界No.1」「完全」など、客観的な根拠がない絶対的・優位性を暗示する表現は景品表示法違反となる可能性がある。FoldOneのブランドボイスで避けるべき語彙（best, revolutionary, perfect, #1, 100%等）は日本語でも同様に避ける。  \n  → 例：×「世界最高のスタンド」 → ○「静かにデスクを整えるスタンド」\n\n- [x] **価格表示のルール**  \n  税込価格を明示（「2,980円（税込）」）。「送料無料」と表示する場合は実際に無料であること。「今だけ20%OFF」など割引率を表示する場合、比較対象となる通常価格（直近の販売価格）を併記し、実際の値引き期間を明示する必要がある。  \n  → 参考：経済産業省「価格表示ガイドライン」\n\n- [x] **販売促進の開示（ステルスマーケティング禁止）**  \n  インフルエンサーに依頼するレビュー・投稿は広告であることを明示（「#PR」「#広告」「#プロモーション」等）。消費者庁の「ステルスマーケティング規制」に注意。  \n  → 例：FoldOneのTikTokインフルエンサー投稿には必ず「#PR」を付ける\n\n- [x] **性能・効果の誇大表示禁止**  \n  「1秒で開く」は事実だが、「1秒で仕事が終わる」「集中力が2倍になる」など、製品本来の効能を超える効果を暗示する表現は不可。  \n  → ブランドボイスに沿った「静かな効率」「落ち着いたデスク」のトーンで表現を抑える。\n\n- [x] **比較広告のルール**  \n  競合製品との比較を行う場合、客観的なデータ（自社調査・第三者機関の検証）と出典を示す必要がある。不作成の「競合より速い」は禁止。  \n  → 例：比較するなら「競合A（公表値）の開く時間は約2秒、FoldOneは約1秒（自社測定）」と具体的数値と出典を明記。\n\n---\n\n## 2. 文化的禁忌（日本市場向けチェック）\n\n- [x] **色の禁忌**  \n  - **白**：葬儀・死を連想させる（白い花束、白い封筒）。製品のベージュ・グレージュ・ナチュラルは問題ないが、白を基調にした画像やパッケージは避けるのが無難。  \n  - **黒**：喪服の色だが、ガジェットでは一般的。問題は少ないが、和室の写真では重すぎる印象を与えないように。  \n  - **赤**：縁起の良い色（神社・お祝い）だが、過度な使用は派手すぎる。FoldOneのカラーは赤を含まないため問題なし。\n\n- [x] **数字のタブー**  \n  - **4**（し、死）・**9**（く、苦）は不吉。製品の価格設定（2,980円は4を含まないためOK）、数量表記（在庫数など）に使わない。  \n  - 7日間のキャンペーンなどは問題ない。\n\n- [x] **ジェスチャー・ボディランゲージ**  \n  - 親指を立てる「OK」サイン（日本では「お金」の意味）は、文脈によっては失礼にならないが、製品広告では避ける方が安全。  \n  - 指を指す行為（相手を指さす）は失礼。製品の使い方を示す手の動きは、掌を上に向けて優しく案内するように。\n\n- [x] **宗教的配慮**  \n  - 神道・仏教に関連するシンボル（鳥居、仏像、お経）を製品画像に入れない。  \n  - 和室の写真（畳、障子）は文化的に好ましいが、神社仏閣の境内で撮影したような背景は避ける（宗教利用の誤解を避ける）。\n\n- [x] **ユーモアの尺度**  \n  - 日本では「自虐的」「控えめ」「共感型」のユーモアが好まれる。大声で笑うようなギャグや、他人を貶す冗談はNG。  \n  - FoldOneのトーン（calm, precise, minimal）に合う、軽い気づきや共感を誘う表現がベター（例：「机の乱れが、仕事の乱れ？」）。\n\n- [x] **「チープ」という表現**  \n  - 競合を「安っぽい」と直接表現するのは避ける。代わりに「FoldOneのマットな質感は、プラスチックとは違う落ち着きを」とポジティブに。\n\n- [x] **「磁気」に関する迷信**  \n  - 日本では「磁気ネックレス」など健康グッズのイメージが強いが、スマホスタンドは問題ない。ただし、医療機器としての効能を示唆する表現は禁止。\n\n- [x] **「1秒」の誇張**  \n  - 実際の開く時間を計測し、動画で実証するのが望ましい。誇張して「0.5秒」などとしない。\n\n---\n\n## 3. 今後のマーケティングカレンダー（2026年9月～2027年2月）\n\n| 期間 | イベント・節日 | 推奨アクション（FoldOne向け） |\n|------|---------------|-------------------------------|\n| **2026年9月第3週** | **敬老の日（9月21日）** | 高齢者向けに「両手がふさがらない」「テレビ電話が楽になる」切り口で投稿。割引コード「FOLD50」を家族向けに配布。 |\n| **2026年10月～11月** | **ハロウィン商戦（10月31日）・ブラックフライデー（11月27日）** | 11月初旬から「ブラックフライデー先行セール」として割引開始。TikTokで「#デスクハロウィン」の仮装デスク動画を投稿し、FoldOneを置いた可愛い演出を募集。 |\n| **2026年12月** | **クリスマス・年末商戦** | ギフト需要向けに「ラッピングオプション」をECで設置。Instagramで「#FoldOneクリスマス」プレゼント企画。Xで「今年の自分へのご褒美」キャンペーン。 |\n| **2027年1月** | **お正月・初売り（1月1日～3日）** | 「新年のデスクを整えよう」キ"
+    }
+  },
+  "last_artifact": {
+    "skill": "local-check",
+    "name": "合规体检清单"
+  },
+  "events": [
+    {
+      "at": 1788322175382,
+      "type": "confirm_revision",
+      "detail": "用户在确认点修订参数",
+      "params": {
+        "product": "磁吸折叠手机支架，桌面便携一秒展开",
+        "market": "日本",
+        "language": "ja"
+      }
+    }
+  ]
+}

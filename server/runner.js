@@ -15,11 +15,11 @@ function makeEmitter(res) {
   };
 }
 
-/* ---------- 产物落盘并广播 ---------- */
+/* ---------- 产物落盘并广播（skillKey 不在技能表时健壮降级，防崩溃断流） ---------- */
 function persistArtifact(run, emit, skillKey, text) {
-  const skill = SKILLS[skillKey];
+  const skill = SKILLS[skillKey] || {};
   const type = skill.output_type === 'json' ? 'json' : skill.output_type === 'csv' ? 'csv' : 'markdown';
-  const a = store.saveArtifact(run.session_id, run.run_id, skill.artifact_name, type, text);
+  const a = store.saveArtifact(run.session_id, run.run_id, skill.artifact_name || '分镜脚本', type, text);
   run.artifacts.push({ artifact_id: a.artifact_id, name: a.name, type: a.type, path: a.path });
   emit('artifact', { run_id: run.run_id, artifact_id: a.artifact_id, name: a.name, type: a.type, preview: String(text).slice(0, 600) });
   return a;

@@ -39,6 +39,39 @@ app.get('/api/runs/:id', (req, res) => {
   const r = store.getRun(req.params.id);
   r ? res.json(r) : res.status(404).json({ error: { code: 'NOT_FOUND', message: '运行记录不存在' } });
 });
+/* ---------- 成本仪表盘：从 data/runs 真实记账（路演"低成本"故事的实测数据） ----------
+ * 口径：LLM 文本步 ≈0.03 元/步（api.b.ai 实测）· 生图/TTS/ffmpeg 本地引擎 0 元 · 二进制工件按类型实测 */
+const COST = { llmPerStep: 0.03, imageRealPerImg: 0, ttsEdge: 0, videoRender: 0 };
+app.get('/api/stats', (_, res) => {
+  const runs = fs.readdirSync(store.DIRS.runs).filter((f) => f.endsWith('.json'))
+    .map((f) => { try { return JSON.parse(fs.readFileSync(path.join(store.DIRS.runs, f), 'utf8')); } catch (_) { return null; } })
+    .filter(Boolean);
+  const byRun = runs.filter((r) => r.status === 'done').map((r) => {
+    const steps = (r.steps || []).filter((s) => s.status === 'done' && s.type !== 'confirm');
+    const wallMs = steps.reduce((s, x) => s + ((x.ended_at && x.started_at) ? x.ended_at - x.started_at : 0), 0);
+    const arts = r.artifacts || [];
+    const realImages = arts.filter((a) => a.type === 'image').length;
+    const hasVideo = arts.some((a) => a.type === 'video');
+    const cost = steps.length * COST.llmPerStep; // 媒体引擎全免费（pollinations/edge-tts/ffmpeg 零 Key）
+    return {
+      run_id: r.run_id, agent_id: r.agent_id, mode: r.mode, created_at: r.created_at,
+      product: r.params && r.params.product, market: r.params && r.params.market,
+      steps: steps.length, wall_ms: wallMs, artifacts: arts.length,
+      media: { real_images: realImages > 0, video: hasVideo, image_count: realImages },
+      cost_cny: +cost.toFixed(3),
+    };
+  }).sort((a, b) => b.created_at - a.created_at);
+  const totals = byRun.reduce((a, r) => ({ ms: a.ms + r.wall_ms, cost: a.cost + r.cost_cny, art: a.art + r.artifacts, steps: a.steps + r.steps, real: a.real || r.media.real_images, video: a.video || r.media.video }), { ms: 0, cost: 0, art: 0, steps: 0, real: false, video: false });
+  res.json({
+    runs: byRun,
+    totals: { done_runs: byRun.length, steps: totals.steps, wall_ms: totals.ms, artifacts: totals.art, cost_cny: +totals.cost.toFixed(2), media_real: totals.real, media_video: totals.video },
+    unit_economics: {
+      per_pipeline_cny: (8 * COST.llmPerStep).toFixed(2),
+      note: '生图/配音/成片走免费引擎（Pollinations + edge-tts + ffmpeg，零 Key），LLM 文本步 ≈0.03 元/步 → 单次全流程 3~4 毛人民币级；对照：UGC 外包 $45-212/条、代运营 ¥5k-30k/月',
+    },
+  });
+});
+
 app.post('/api/runs/:id/cancel', (req, res) => {
   const r = store.cancelRun(req.params.id);
   r ? res.json({ ok: true, status: r.status }) : res.status(404).json({ error: { code: 'NOT_FOUND', message: '运行不存在' } });
@@ -70,10 +103,20 @@ app.post('/api/runs/:id/confirm', (req, res) => {
   }
   const step = run.steps.find((s) => s.status === 'waiting_confirm');
   if (step) { step.status = 'done'; step.ended_at = Date.now(); step.detail = '用户已确认，继续执行'; }
+  // 确认点可编辑：approve 时可携带修订后的 params（如换市场/改产品名），后续步骤按修订值执行
+  const revision = (req.body && req.body.params) || null;
+  if (revision && typeof revision === 'object') {
+    run.params = { ...run.params, ...revision };
+    run.events = run.events || [];
+    run.events.push({ at: Date.now(), type: 'confirm_revision', detail: '用户在确认点修订参数', params: revision });
+    if (run.events.length > 500) run.events = run.events.slice(-500);
+    emit('step', { run_id: run.run_id, status: 'running', name: '参数修订', detail: '确认点已更新：' + JSON.stringify(revision).slice(0, 120) });
+  }
   run.status = 'running';
   store.saveRun(run);
   emit('step', { run_id: run.run_id, step_id: step && step.step_id, name: (step && step.name) || '人工确认', status: 'done', detail: '用户已确认，继续执行' });
-  runner.execute(run, emit);
+  req_keepalive(res);
+  runner.execute(run, emit).then((r) => { if (r && (r.done || r.failed || r.canceled)) res.end(); });
 });
 
 /* ---------- 工件 ---------- */
@@ -146,6 +189,12 @@ function req_keepalive(res) {
   const t = setInterval(() => { try { res.write(': ping\n\n'); } catch (_) { clearInterval(t); } }, 15000);
   res.on('close', () => clearInterval(t));
 }
+
+/* 确认点参数抽取：前端确认框的修订文本 → 结构化 params（与对话入口同一套正则） */
+app.post('/api/params/extract', (req, res) => {
+  const message = String((req.body && req.body.message) || '').slice(0, 2000);
+  res.json({ params: extractParams(message) });
+});
 
 /* ---------- 技能直调 / Agent 工作流 ---------- */
 app.post('/api/agents/:id/run', (req, res) => {

@@ -1,0 +1,124 @@
+{
+  "run_id": "r_mtjk8lr92l0sh",
+  "agent_id": "adhoc:video-factory",
+  "session_id": null,
+  "user_id": "local",
+  "status": "done",
+  "current_step": null,
+  "mode": "real",
+  "params": {
+    "product": "便携小风扇，USB充电静音三档风力",
+    "market": "美国",
+    "language": "en"
+  },
+  "steps": [
+    {
+      "step_id": "x1",
+      "name": "成片剪辑师",
+      "type": "skill",
+      "skill": "video-factory",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「广告成片」 + 16:9 15s + 9:16 15s · 801161ms",
+      "started_at": 1788321148971,
+      "ended_at": 1788321950132,
+      "artifacts": [
+        "a_mtjk92o5gpb83",
+        "a_mtjkprxn3y5p9",
+        "a_mtjkprxqjplsk",
+        "a_mtjkprxtvg4wj"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mtjk92o5gpb83",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788321170885_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtjkprxn3y5p9",
+      "name": "广告成片 16:9",
+      "type": "video",
+      "path": "data/runs/r_mtjk8lr92l0sh/media/ad_16x9_1788321533796.mp4",
+      "meta": {
+        "aspect": "16:9",
+        "duration": 15.2,
+        "images": 3,
+        "ttsChars": 171
+      }
+    },
+    {
+      "artifact_id": "a_mtjkprxqjplsk",
+      "name": "广告成片 9:16",
+      "type": "video",
+      "path": "data/runs/r_mtjk8lr92l0sh/media/ad_9x16_1788321945685.mp4",
+      "meta": {
+        "aspect": "9:16",
+        "duration": 15.2,
+        "images": 3,
+        "ttsChars": 171
+      }
+    },
+    {
+      "artifact_id": "a_mtjkprxtvg4wj",
+      "name": "视频封面图",
+      "type": "image",
+      "path": "data/runs/r_mtjk8lr92l0sh/media/cover_169.jpg"
+    }
+  ],
+  "result": {
+    "summary": "完成 1 个步骤，产出 4 个工件",
+    "artifacts": [
+      {
+        "artifact_id": "a_mtjk92o5gpb83",
+        "name": "广告成片",
+        "type": "markdown",
+        "path": "exports/1788321170885_广告成片.md"
+      },
+      {
+        "artifact_id": "a_mtjkprxn3y5p9",
+        "name": "广告成片 16:9",
+        "type": "video",
+        "path": "data/runs/r_mtjk8lr92l0sh/media/ad_16x9_1788321533796.mp4",
+        "meta": {
+          "aspect": "16:9",
+          "duration": 15.2,
+          "images": 3,
+          "ttsChars": 171
+        }
+      },
+      {
+        "artifact_id": "a_mtjkprxqjplsk",
+        "name": "广告成片 9:16",
+        "type": "video",
+        "path": "data/runs/r_mtjk8lr92l0sh/media/ad_9x16_1788321945685.mp4",
+        "meta": {
+          "aspect": "9:16",
+          "duration": 15.2,
+          "images": 3,
+          "ttsChars": 171
+        }
+      },
+      {
+        "artifact_id": "a_mtjkprxtvg4wj",
+        "name": "视频封面图",
+        "type": "image",
+        "path": "data/runs/r_mtjk8lr92l0sh/media/cover_169.jpg"
+      }
+    ]
+  },
+  "error": null,
+  "created_at": 1788321148965,
+  "context": {
+    "video-factory": {
+      "name": "广告成片",
+      "content": "{\n  \"scenes\": [\n    {\n      \"id\": 1,\n      \"imgPrompt\": \"Sweaty young woman in summer heat, grimacing under bright sun, suddenly holding a compact white portable fan to her cheek, feeling cool relief, natural sunlight, sweat details, shallow depth of field, commercial product advertisement photography, high resolution\",\n      \"vo\": \"Summer heat ruining your day? Meet your instant cool fix.\",\n      \"zh\": \"夏日酷热让你崩溃？即刻清爽，就此相见。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 2,\n      \"imgPrompt\": \"Extreme close-up product photography of a sleek portable mini fan on a clean pastel blue studio background, USB-C charging port clearly visible, three tactile speed buttons, fan blades spinning rapidly with slight motion blur, soft edge lighting, crisp reflections, commercial advertising style, ultra detailed\",\n      \"vo\": \"USB rechargeable. Three power levels. Whisper quiet operation.\",\n      \"zh\": \"USB充电，三档强劲风力，运行静谧如耳语。\",\n      \"dur\": 5\n    },\n    {\n      \"id\": 3,\n      \"imgPrompt\": \"Young man walking through a sunlit park, smiling confidently, holding the compact portable fan close to his face, white fan visible in hand, light summer outfit, bokeh background of trees, bright cheerful color grading, lifestyle advertising photography, product in focus\",\n      \"vo\": \"Stay cool wherever life takes you. Grab yours today.\",\n      \"zh\": \"无论身在何处，皆享清凉。今天就把清凉带回家。\",\n      \"dur\": 4\n    }\n  ]\n}"
+    }
+  },
+  "last_artifact": {
+    "skill": "video-factory",
+    "name": "广告成片"
+  }
+}

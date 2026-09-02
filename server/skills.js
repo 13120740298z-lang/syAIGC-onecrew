@@ -47,7 +47,7 @@ function safetyCheck(text) {
   return { ok: true };
 }
 
-/* ---------- 技能执行：真实优先，失败降级 Mock ---------- */
+/* ---------- 技能执行：真实优先，失败降级 Mock；媒体技能要求严格 JSON，模型输出非 JSON 时最多重试 2 次 ---------- */
 const provider = require('./provider');
 async function executeSkill(skillKey, params, onStep, context) {
   const skill = SKILLS[skillKey];
@@ -55,14 +55,28 @@ async function executeSkill(skillKey, params, onStep, context) {
   onStep && onStep('running', `调用技能「${skill.name}」`);
   let text, usedMock = false, usage = null;
   if (provider.mode === 'real') {
-    try {
-      const r = await provider.chatReal(buildMessages(skill, params, context), { maxTokens: 8000 });
-      text = r.text; usage = r.usage;
-    } catch (e) {
-      onStep && onStep('running', `真实模型失败（${String(e.message).slice(0, 80)}），降级演示模式`);
-      text = await provider.chatMock(skillKey, params);
-      usedMock = true;
+    const needsJson = skill.output_type === 'json' || skill.engine;
+    const messages = buildMessages(skill, params, context);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const r = await provider.chatReal(messages, { maxTokens: 8000 });
+        text = r.text; usage = r.usage;
+        // 媒体技能：产出必须是合法 JSON，否则重试（实测 LLM 约 1/3 概率夹带解释文字）
+        if (needsJson && attempt < 2 && !extractJson(text)) {
+          onStep && onStep('running', `输出非 JSON（第 ${attempt + 1} 次），重试…`);
+          continue;
+        }
+        usedMock = false;
+        break;
+      } catch (e) {
+        if (attempt >= 2) {
+          onStep && onStep('running', `真实模型失败（${String(e.message).slice(0, 80)}），降级演示模式`);
+          text = await provider.chatMock(skillKey, params);
+          usedMock = true;
+        }
+      }
     }
+    if (text === undefined) { text = await provider.chatMock(skillKey, params); usedMock = true; }
   } else {
     text = await provider.chatMock(skillKey, params);
     usedMock = true;

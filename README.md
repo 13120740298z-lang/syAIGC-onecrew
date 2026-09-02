@@ -67,3 +67,6 @@ Python + edge-tts（`pip install edge-tts`，配音用）。
 | [docs/03-使用示例与复现步骤.md](docs/03-使用示例与复现步骤.md) | 使用示例 · 复现步骤 · 验收清单 |
 | [docs/04-提交说明-Wave3.md](docs/04-提交说明-Wave3.md) | 提交主文档：入口/能力/IO/调用方式/Wave3 更新说明/评分自查 |
 | [docs/06-赛前极尽分析报告.md](docs/06-赛前极尽分析报告.md) | 交叉评测复盘 · 竞品极致分析 · 总决赛冲刺决策 |
+| [docs/08-总决赛路演讲稿.md](docs/08-总决赛路演讲稿.md) | 路演三金句 · 演示脚本 · 评委对比表 · Q&A 预案 |
+| [docs/09-部署手册.md](docs/09-部署手册.md) | 在线 Demo 部署（腾讯云香港轻量 ¥38-55/月，评委点开即玩） |
+| roadshow/ + docs/ppt/ | 路演对比视频（95.7s）+ 路演 PPT（可 tools/build_ppt.py 再生） |
