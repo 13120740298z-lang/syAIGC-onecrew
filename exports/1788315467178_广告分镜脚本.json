@@ -1,0 +1,32 @@
+{
+  "scenes": [
+    {
+      "id": 1,
+      "imgPrompt": "Close-up shot of a commuter's hand struggling to open a heavy backpack on a crowded Tokyo train, morning light streaming through window, exhausted expression, realistic urban commuting scene, shallow depth of field, warm ambient tones, photorealistic, 8k",
+      "vo": "Tired of carrying heavy water bottles for hot drinks?",
+      "zh": "厌倦了背着沉重的水瓶就为了喝口热水？",
+      "dur": 4
+    },
+    {
+      "id": 2,
+      "imgPrompt": "Medium shot of a young professional pulling a flat FoldKettle from her sleek commuter bag, unfolding it on a clean desk with a portable coffee tumbler nearby, soft natural light, minimalist Japanese office environment, practical and calm mood, compositional dynamic of unfolding action, photorealistic, 8k",
+      "vo": "Meet FoldKettle — the foldable electric kettle that fits right in.",
+      "zh": "认识一下 FoldKettle——这款可折叠电热水壶，刚好装得下。",
+      "dur": 5
+    },
+    {
+      "id": 3,
+      "imgPrompt": "Macro shot of FoldKettle boiling water, steam rising softly, quick heating action shown through a blurred time-lapse effect, matte silicone and brushed metal texture, warm golden light from the water surface, clean white background, product photography style, sharp details, 8k",
+      "vo": "Boil clean water in seconds — for coffee, tea, or soup.",
+      "zh": "几秒钟烧开干净的水——泡咖啡、茶或汤。",
+      "dur": 4
+    },
+    {
+      "id": 4,
+      "imgPrompt": "Final shot of FoldKettle folded flat next to a minimalist business card with brand name 'FoldKettle' and tagline 'Fold flat. Boil clean.' in subtle typography, placed on a neutral stone surface, soft diffused light, wabi-sabi aesthetic, calm and clean composition, professional product photography, 8k",
+      "vo": "Fold flat. Boil clean. Anywhere you go.",
+      "zh": "折平，烧净。无论去往何处。",
+      "dur": 5
+    }
+  ]
+}

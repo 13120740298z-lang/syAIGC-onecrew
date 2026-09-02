@@ -1,0 +1,54 @@
+{
+  "run_id": "r_mtjen67w3mw4j",
+  "agent_id": "adhoc:video-factory",
+  "session_id": null,
+  "user_id": "local",
+  "status": "failed",
+  "current_step": "x1",
+  "mode": "real",
+  "params": {
+    "product": "smart insulated water bottle with 12h heat retention",
+    "market": "�ձ�",
+    "language": "ja"
+  },
+  "steps": [
+    {
+      "step_id": "x1",
+      "name": "成片剪辑师",
+      "type": "skill",
+      "skill": "video-factory",
+      "config": {},
+      "status": "failed",
+      "detail": "pollinations HTTP 429",
+      "started_at": 1788311750979,
+      "ended_at": 1788311795679
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mtjenasowb51e",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788311756904_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtjenasv1pfj6",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788311756911_广告成片.md"
+    }
+  ],
+  "result": null,
+  "error": "步骤「成片剪辑师」失败：pollinations HTTP 429",
+  "created_at": 1788311750972,
+  "context": {
+    "video-factory": {
+      "name": "广告成片",
+      "content": "{\n  \"scenes\": [\n    {\n      \"id\": 1,\n      \"imgPrompt\": \"Close-up shot of a sleek smart water bottle with LED temperature display, condensation on cold surface, subtle steam rising, product photography style, studio lighting, shallow depth of field, highly detailed\",\n      \"vo\": \"Start your day right. Smart bottle keeps drinks hot for 12 hours.\",\n      \"zh\": \"开启美好的一天。智能保温杯，12小时保温。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 2,\n      \"imgPrompt\": \"Woman in modern office setting, pressing button on smart bottle lid, checking temperature on phone app, smiling, natural light, clean composition, professional product shot\",\n      \"vo\": \"Monitor temperature from your phone. Never sip cold coffee again.\",\n      \"zh\": \"手机查看温度，告别冷咖啡。\",\n      \"dur\": 5\n    },\n    {\n      \"id\": 3,\n      \"imgPrompt\": \"Smart bottle next to a laptop on a minimalist desk, sun rays, time-lapse effect showing 12 hours passing, still hot, final shot with golden hour light, product photography\",\n      \"vo\": \"Smart, sleek, stays hot. Your perfect daily companion.\",\n      \"zh\": \"智能、时尚、恒温。你的完美日常伴侣。\",\n      \"dur\": 4\n    }\n  ]\n}"
+    }
+  },
+  "last_artifact": {
+    "skill": "video-factory",
+    "name": "广告成片"
+  }
+}

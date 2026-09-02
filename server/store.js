@@ -99,26 +99,34 @@ function cancelRun(id) {
 }
 
 /* ---------- Artifacts ---------- */
-function saveArtifact(sessionId, runId, name, type, content, extraPath) {
+// type: markdown | json | csv（文本，content 落盘 exports/）| video | image（二进制，path 指向 data/runs/<run_id>/media/，meta 记录时长/尺寸等）
+function saveArtifact(sessionId, runId, name, type, content, extra) {
   const a = {
     artifact_id: rid('a'),
     session_id: sessionId || null,
     run_id: runId || null,
     name,
-    type, // markdown | json | csv
+    type, // markdown | json | csv | video | image
     path: null,
-    content,
+    content: null,
+    meta: null,
     created_at: Date.now(),
   };
-  const ext = type === 'csv' ? 'csv' : type === 'json' ? 'json' : 'md';
-  const fname = `${Date.now()}_${name.replace(/[\\/:*?"<>| ]+/g, '_')}.${ext}`;
-  const fpath = path.join(DIRS.exports, fname);
-  fs.writeFileSync(fpath, type === 'csv' ? '\ufeff' + content : content, 'utf8');
-  a.path = 'exports/' + fname;
-  if (extraPath) a.extra_path = extraPath;
+  if (type === 'video' || type === 'image') {
+    // 二进制工件：文件已由媒体引擎落盘，这里只登记路径与元信息
+    a.path = extra && extra.path;
+    a.meta = (extra && extra.meta) || null;
+  } else {
+    const ext = type === 'csv' ? 'csv' : type === 'json' ? 'json' : 'md';
+    const fname = `${Date.now()}_${name.replace(/[\\/:*?"<>| ]+/g, '_')}.${ext}`;
+    const fpath = path.join(DIRS.exports, fname);
+    fs.writeFileSync(fpath, type === 'csv' ? '\ufeff' + content : content, 'utf8');
+    a.path = 'exports/' + fname;
+    if (extra) a.extra_path = extra;
+  }
   const idx = path.join(DATA, 'artifacts.json');
   const list = fs.existsSync(idx) ? JSON.parse(fs.readFileSync(idx, 'utf8')) : [];
-  const brief = { artifact_id: a.artifact_id, session_id: a.session_id, run_id: a.run_id, name: a.name, type: a.type, path: a.path, created_at: a.created_at };
+  const brief = { artifact_id: a.artifact_id, session_id: a.session_id, run_id: a.run_id, name: a.name, type: a.type, path: a.path, meta: a.meta, created_at: a.created_at };
   list.push(brief);
   atomicWrite(idx, list.slice(-500));
   return a;

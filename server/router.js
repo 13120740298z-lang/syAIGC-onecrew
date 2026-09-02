@@ -35,7 +35,7 @@ async function routeSmart(message) {
       { role: 'system', content: '你是意图路由器。只能输出以下之一：workflow、' + Object.keys(SKILLS).join('、') + '、chat。不要输出其他任何内容。' },
       { role: 'user', content: `可用技能：${skillMenu}\nworkflow=完整出海内容包（串联全部技能）。\n用户消息：「${message.slice(0, 200)}」\n输出最匹配的意图。` },
     ], { maxTokens: 20, temperature: 0 });
-    const t = out.trim().toLowerCase();
+    const t = (out.text || '').trim().toLowerCase();
     if (t === 'workflow') return { type: 'workflow', params: extractParams(message) };
     if (SKILLS[t]) return { type: 'skill', skillId: t, params: extractParams(message) };
   } catch (_) { /* 分类失败就走聊天 */ }

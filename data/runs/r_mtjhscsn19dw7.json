@@ -1,0 +1,136 @@
+{
+  "run_id": "r_mtjhscsn19dw7",
+  "agent_id": "adhoc:video-factory",
+  "session_id": null,
+  "user_id": "local",
+  "status": "done",
+  "current_step": null,
+  "mode": "real",
+  "params": {
+    "product": "便携折叠电热水壶，折叠后仅手掌大，旅行常备",
+    "market": "日本",
+    "language": "ja"
+  },
+  "steps": [
+    {
+      "step_id": "x1",
+      "name": "成片剪辑师",
+      "type": "skill",
+      "skill": "video-factory",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「广告成片」 + 16:9 18s + 9:16 18s · 620519ms",
+      "started_at": 1788317031631,
+      "ended_at": 1788317652150,
+      "artifacts": [
+        "a_mtjhsjkjfetwf",
+        "a_mtji5nl7ebrtf",
+        "a_mtji5nlcon5s6",
+        "a_mtji5nlgomn4b"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mtjhsjkher0ao",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788317040401_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtjhsjkjfetwf",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788317040403_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtji5nl7ebrtf",
+      "name": "广告成片 16:9",
+      "type": "video",
+      "path": "data/runs/r_mtjhscsn19dw7/media/ad_16x9_1788317313412.mp4",
+      "meta": {
+        "aspect": "16:9",
+        "duration": 17.76,
+        "images": 3,
+        "ttsChars": 68
+      }
+    },
+    {
+      "artifact_id": "a_mtji5nlcon5s6",
+      "name": "广告成片 9:16",
+      "type": "video",
+      "path": "data/runs/r_mtjhscsn19dw7/media/ad_9x16_1788317647393.mp4",
+      "meta": {
+        "aspect": "9:16",
+        "duration": 17.76,
+        "images": 3,
+        "ttsChars": 68
+      }
+    },
+    {
+      "artifact_id": "a_mtji5nlgomn4b",
+      "name": "视频封面图",
+      "type": "image",
+      "path": "data/runs/r_mtjhscsn19dw7/media/cover_169.jpg"
+    }
+  ],
+  "result": {
+    "summary": "完成 1 个步骤，产出 5 个工件",
+    "artifacts": [
+      {
+        "artifact_id": "a_mtjhsjkher0ao",
+        "name": "广告成片",
+        "type": "markdown",
+        "path": "exports/1788317040401_广告成片.md"
+      },
+      {
+        "artifact_id": "a_mtjhsjkjfetwf",
+        "name": "广告成片",
+        "type": "markdown",
+        "path": "exports/1788317040403_广告成片.md"
+      },
+      {
+        "artifact_id": "a_mtji5nl7ebrtf",
+        "name": "广告成片 16:9",
+        "type": "video",
+        "path": "data/runs/r_mtjhscsn19dw7/media/ad_16x9_1788317313412.mp4",
+        "meta": {
+          "aspect": "16:9",
+          "duration": 17.76,
+          "images": 3,
+          "ttsChars": 68
+        }
+      },
+      {
+        "artifact_id": "a_mtji5nlcon5s6",
+        "name": "广告成片 9:16",
+        "type": "video",
+        "path": "data/runs/r_mtjhscsn19dw7/media/ad_9x16_1788317647393.mp4",
+        "meta": {
+          "aspect": "9:16",
+          "duration": 17.76,
+          "images": 3,
+          "ttsChars": 68
+        }
+      },
+      {
+        "artifact_id": "a_mtji5nlgomn4b",
+        "name": "视频封面图",
+        "type": "image",
+        "path": "data/runs/r_mtjhscsn19dw7/media/cover_169.jpg"
+      }
+    ]
+  },
+  "error": null,
+  "created_at": 1788317031623,
+  "context": {
+    "video-factory": {
+      "name": "广告成片",
+      "content": "{\n  \"scenes\": [\n    {\n      \"id\": 1,\n      \"imgPrompt\": \"A minimalist product photo of a collapsible electric kettle folded to palm size, placed on a traveler's hand against a clean Japanese hotel room background, soft natural lighting, shallow depth of field, commercial photography style\",\n      \"vo\": \"手のひらサイズの電気ケトル、折りたためばここまで小さく。\",\n      \"zh\": \"手掌大小的电热水壶，折叠后就这么小。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 2,\n      \"imgPrompt\": \"A Japanese traveler in a cozy ryokan unpacking the collapsed kettle, then unfolding it and boiling water, steam rising, tea set beside, warm cinematic lighting, lifestyle product photography\",\n      \"vo\": \"旅先でも、どこでも熱々のお湯をすぐに。\",\n      \"zh\": \"旅途中、随时随地都能立刻喝上热腾腾的水。\",\n      \"dur\": 5\n    },\n    {\n      \"id\": 3,\n      \"imgPrompt\": \"The folded kettle placed neatly in a packed suitcase next to a passport and travel accessories, with Japanese text wrapping in background saying 'コンパクト&軽量', bright clean commercial composition\",\n      \"vo\": \"小さく軽い、旅のお供に。さあ、次はどこへ？\",\n      \"zh\": \"小巧轻便，旅行好搭档。那么，下一站去哪儿？\",\n      \"dur\": 4\n    }\n  ]\n}"
+    }
+  },
+  "last_artifact": {
+    "skill": "video-factory",
+    "name": "广告成片"
+  }
+}

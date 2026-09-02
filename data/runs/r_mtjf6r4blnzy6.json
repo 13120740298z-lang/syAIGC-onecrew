@@ -1,0 +1,136 @@
+{
+  "run_id": "r_mtjf6r4blnzy6",
+  "agent_id": "adhoc:video-factory",
+  "session_id": null,
+  "user_id": "local",
+  "status": "done",
+  "current_step": null,
+  "mode": "mock-fallback",
+  "params": {
+    "product": "smart insulated water bottle",
+    "market": "�ձ�",
+    "language": "ja"
+  },
+  "steps": [
+    {
+      "step_id": "x1",
+      "name": "成片剪辑师",
+      "type": "skill",
+      "skill": "video-factory",
+      "config": {},
+      "status": "done",
+      "detail": "产出工件「广告成片」 + 16:9 18s + 9:16 18s（演示模式） · 461558ms",
+      "started_at": 1788312664529,
+      "ended_at": 1788313126087,
+      "artifacts": [
+        "a_mtjf7h3edvmma",
+        "a_mtjfgn995p3ks",
+        "a_mtjfgn9c51k01",
+        "a_mtjfgn9e36dhe"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "a_mtjf7h393h2o1",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788312698181_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtjf7h3edvmma",
+      "name": "广告成片",
+      "type": "markdown",
+      "path": "exports/1788312698186_广告成片.md"
+    },
+    {
+      "artifact_id": "a_mtjfgn995p3ks",
+      "name": "广告成片 16:9",
+      "type": "video",
+      "path": "data/runs/r_mtjf6r4blnzy6/media/ad_16x9_1788312873602.mp4",
+      "meta": {
+        "aspect": "16:9",
+        "duration": 18.12,
+        "images": 3,
+        "ttsChars": 144
+      }
+    },
+    {
+      "artifact_id": "a_mtjfgn9c51k01",
+      "name": "广告成片 9:16",
+      "type": "video",
+      "path": "data/runs/r_mtjf6r4blnzy6/media/ad_9x16_1788313121013.mp4",
+      "meta": {
+        "aspect": "9:16",
+        "duration": 18.12,
+        "images": 3,
+        "ttsChars": 144
+      }
+    },
+    {
+      "artifact_id": "a_mtjfgn9e36dhe",
+      "name": "视频封面图",
+      "type": "image",
+      "path": "data/runs/r_mtjf6r4blnzy6/media/cover_169.jpg"
+    }
+  ],
+  "result": {
+    "summary": "完成 1 个步骤，产出 5 个工件",
+    "artifacts": [
+      {
+        "artifact_id": "a_mtjf7h393h2o1",
+        "name": "广告成片",
+        "type": "markdown",
+        "path": "exports/1788312698181_广告成片.md"
+      },
+      {
+        "artifact_id": "a_mtjf7h3edvmma",
+        "name": "广告成片",
+        "type": "markdown",
+        "path": "exports/1788312698186_广告成片.md"
+      },
+      {
+        "artifact_id": "a_mtjfgn995p3ks",
+        "name": "广告成片 16:9",
+        "type": "video",
+        "path": "data/runs/r_mtjf6r4blnzy6/media/ad_16x9_1788312873602.mp4",
+        "meta": {
+          "aspect": "16:9",
+          "duration": 18.12,
+          "images": 3,
+          "ttsChars": 144
+        }
+      },
+      {
+        "artifact_id": "a_mtjfgn9c51k01",
+        "name": "广告成片 9:16",
+        "type": "video",
+        "path": "data/runs/r_mtjf6r4blnzy6/media/ad_9x16_1788313121013.mp4",
+        "meta": {
+          "aspect": "9:16",
+          "duration": 18.12,
+          "images": 3,
+          "ttsChars": 144
+        }
+      },
+      {
+        "artifact_id": "a_mtjfgn9e36dhe",
+        "name": "视频封面图",
+        "type": "image",
+        "path": "data/runs/r_mtjf6r4blnzy6/media/cover_169.jpg"
+      }
+    ]
+  },
+  "error": null,
+  "created_at": 1788312664523,
+  "context": {
+    "video-factory": {
+      "name": "广告成片",
+      "content": "{\n  \"scenes\": [\n    {\n      \"id\": 1,\n      \"imgPrompt\": \"morning coffee steam rising, smart insulated water bottle on wooden desk by window, warm sunlight, cozy cinematic product photography\",\n      \"vo\": \"It is six in the morning. smart insulated water bottle is ready.\",\n      \"zh\": \"早上六点，smart insulated water bottle已就绪。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 2,\n      \"imgPrompt\": \"smart insulated water bottle hero shot on stone pedestal, studio lighting, dark background, premium product photography\",\n      \"vo\": \"Built for the journey ahead.\",\n      \"zh\": \"为前路而生。\",\n      \"dur\": 4\n    },\n    {\n      \"id\": 3,\n      \"imgPrompt\": \"person carrying smart insulated water bottle on mountain trail at golden hour, adventure lifestyle photography\",\n      \"vo\": \"smart insulated water bottle. Made to move with you.\",\n      \"zh\": \"smart insulated water bottle，与你同行。\",\n      \"dur\": 5\n    }\n  ]\n}"
+    }
+  },
+  "last_artifact": {
+    "skill": "video-factory",
+    "name": "广告成片"
+  }
+}

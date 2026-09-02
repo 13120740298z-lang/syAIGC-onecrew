@@ -12,7 +12,12 @@ const app = express();
 app.use(express.json({ limit: '1mb' }));
 
 /* ---------- 健康与元信息 ---------- */
-app.get('/api/health', (_, res) => res.json({ ok: true, mode: provider.mode, model: provider.model, agent: 'onecrew v1' }));
+app.get('/api/health', (_, res) => {
+  const fs2 = require('fs');
+  let ffmpeg = false;
+  try { fs2.accessSync('C:/Users/18201/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin/ffmpeg.exe'); ffmpeg = true; } catch (_) {}
+  res.json({ ok: true, mode: provider.mode, model: provider.model, agent: 'onecrew v3 video-studio', ffmpeg });
+});
 app.get('/api/agents', (_, res) => {
   const def = require('../agents/onecrew.agent.json');
   res.json([{ agent_id: def.agent_id, name: def.name, description: def.description, steps: def.steps }]);
@@ -80,6 +85,10 @@ app.get('/api/artifacts', (req, res) => {
 app.get('/api/artifacts/:id', (req, res) => {
   const a = store.getArtifact(req.params.id);
   if (!a) return res.status(404).json({ error: { code: 'NOT_FOUND', message: '工件不存在' } });
+  if (a.type === 'video' || a.type === 'image') {
+    // 二进制工件：返回元数据与播放/下载地址，不读文件内容
+    return res.json({ ...a, content: '', url: `/api/artifacts/${a.artifact_id}/stream`, download: `/api/artifacts/${a.artifact_id}/download` });
+  }
   try { res.json({ ...a, content: fs.readFileSync(path.join(store.ROOT, a.path), 'utf8') }); }
   catch (_) { res.json({ ...a, content: a.content || '' }); }
 });
@@ -89,6 +98,31 @@ app.get('/api/artifacts/:id/download', (req, res) => {
   const f = path.join(store.ROOT, a.path);
   if (!fs.existsSync(f)) return res.status(404).end();
   res.download(f, path.basename(f));
+});
+// 媒体流播放（video 元素需要 Range 支持）
+app.get('/api/artifacts/:id/stream', (req, res) => {
+  const a = store.getArtifact(req.params.id);
+  if (!a || !a.path) return res.status(404).end();
+  const f = path.join(store.ROOT, a.path);
+  if (!fs.existsSync(f)) return res.status(404).end();
+  const stat = fs.statSync(f);
+  const mime = a.type === 'video' ? 'video/mp4' : (f.endsWith('.png') ? 'image/png' : 'image/jpeg');
+  const range = req.headers.range;
+  if (range) {
+    const m = range.match(/bytes=(\d*)-(\d*)/);
+    let start = m && m[1] ? parseInt(m[1], 10) : 0;
+    let end = m && m[2] ? parseInt(m[2], 10) : stat.size - 1;
+    if (start >= stat.size) { res.status(416).set('Content-Range', `bytes */${stat.size}`).end(); return; }
+    end = Math.min(end, stat.size - 1);
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${stat.size}`,
+      'Accept-Ranges': 'bytes', 'Content-Length': end - start + 1, 'Content-Type': mime,
+    });
+    fs.createReadStream(f, { start, end }).pipe(res);
+  } else {
+    res.writeHead(200, { 'Content-Length': stat.size, 'Accept-Ranges': 'bytes', 'Content-Type': mime });
+    fs.createReadStream(f).pipe(res);
+  }
 });
 
 /* ---------- SSE 头 ---------- */
@@ -178,7 +212,7 @@ async function freeChat(session, text, emit) {
       full = await provider.chatMock('chat', { product: text });
     }
   } else {
-    const demo = `（演示模式回复）我已理解你的需求：「${text.slice(0, 60)}」。\n\n我可以直接为你执行：\n1. 🔍 市场快研 2. 🎙️ 品牌声音 3. ✍️ 五平台文案 4. 🎨 提示词工坊 5. 📅 内容日历 6. 🛡️ 合规体检\n或发送「我的产品是XX，想卖XX」一键跑完整出海内容包。\n\n接入真实模型后，这里会是流式生成的个性化回复。`;
+    const demo = `（演示模式回复）我已理解你的需求：「${text.slice(0, 60)}」。\n\n我可以直接为你执行（10 技能 + 真·视频成片引擎）：\n1. 🔍 市场快研 2. 🎙️ 品牌声音 3. ✍️ 五平台文案 4. 🎨 提示词工坊 5. 🖼️ AI 直出配图 6. 📢 英文旁白 7. 🎬 分镜导演 8. 🎥 真·广告成片（MP4）9. 📅 内容日历 10. 🛡️ 合规体检\n或发送「我的产品是XX，想卖XX，帮我出全套出海内容」一键跑完整工作流（含真实 MP4 成片）。`;
     for (const ch of demo) { emit('token', { message_id: msgId, delta: ch }); await new Promise((r) => setTimeout(r, 12)); }
     full = demo;
   }

@@ -1,0 +1,15 @@
+{
+  "skill_id": "voice-writer",
+  "name": "配音词作家",
+  "icon": "📢",
+  "description": "为产品广告撰写英文旁白（Voice-Over）脚本，三种调性各一版（温情叙事 / 热血带货 / 极简高级），每版约 15 秒可直接配音。",
+  "input_schema": {
+    "product": "产品描述",
+    "market": "目标市场（可省略）"
+  },
+  "output_type": "markdown",
+  "artifact_name": "英文旁白词包",
+  "output_format": "Markdown，三节各含一句定位 + 15 秒旁白词（≤40 词）+ 中文对照",
+  "prompt_template": "为以下产品撰写英文广告旁白词（Voice-Over Script），输出三版不同调性：\n\n产品：{{product}}\n市场：{{market}}\n\n要求：\n1. 温情叙事版：场景切入，一句痛点 + 一句化解 + 一句品牌收尾\n2. 热血带货版：强钩子开头 + 三大卖点节奏 + 行动号召\n3. 极简高级版：短句，留白感，不出现形容词堆砌\n4. 每版 ≤40 个英文词（约 15 秒），标注重音词，附中文对照\n5. 旁白词将被 TTS 引擎直接朗读，避免缩写、谐音梗和无法朗读的符号",
+  "triggers": ["配音", "旁白", "口播", "voice over", "广告词"]
+}

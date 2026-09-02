@@ -1,0 +1,40 @@
+{
+  "brand": "FoldKettle",
+  "positioning": "A compact foldable electric kettle for clean hot water on commutes, gym sessions, and camping in Japan.",
+  "persona": "A practical travel companion who keeps things simple, safe, and ready to go.",
+  "tone": [
+    "practical",
+    "calm",
+    "precise",
+    "friendly"
+  ],
+  "vocabulary": {
+    "use": [
+      "foldable",
+      "compact",
+      "commute",
+      "gym",
+      "camping",
+      "clean",
+      "quick",
+      "safe"
+    ],
+    "avoid": [
+      "miracle",
+      "guaranteed",
+      "best",
+      "cheap",
+      "detox",
+      "cure",
+      "revolutionary",
+      "insane"
+    ]
+  },
+  "slogans": [
+    "Fold flat. Boil clean.",
+    "Hot water, anywhere.",
+    "Commute. Gym. Camp. Go."
+  ],
+  "do_say_example": "Fold it flat, plug in, and get clean hot water for your commute, gym bag, or campsite.",
+  "dont_say_example": "This miracle kettle cures stress and is the world's best—buy now! Reason: It uses exaggerated health claims and urgency, breaking the calm, practical voice."
+}

@@ -1,227 +1,579 @@
 [
- {
-  "artifact_id": "a_mth22fxoqgj5a",
-  "session_id": "s_mth20kdzdr1qd",
-  "run_id": "r_mth20ke2e9pop",
-  "name": "市场快研报告",
-  "type": "markdown",
-  "path": "exports/1788169696044_市场快研报告.md",
-  "created_at": 1788169696044
- },
- {
-  "artifact_id": "a_mth26137tfwco",
-  "session_id": "s_mth20kdzdr1qd",
-  "run_id": "r_mth20ke2e9pop",
-  "name": "品牌声音档案",
-  "type": "json",
-  "path": "exports/1788169863427_品牌声音档案.json",
-  "created_at": 1788169863427
- },
- {
-  "artifact_id": "a_mth26nqwa24zz",
-  "session_id": "s_mth20kdzdr1qd",
-  "run_id": "r_mth20ke2e9pop",
-  "name": "五平台文案包",
-  "type": "markdown",
-  "path": "exports/1788169892793_五平台文案包.md",
-  "created_at": 1788169892793
- },
- {
-  "artifact_id": "a_mth28g58982wk",
-  "session_id": "s_mth20kdzdr1qd",
-  "run_id": "r_mth20ke2e9pop",
-  "name": "图像提示词包",
-  "type": "markdown",
-  "path": "exports/1788169976252_图像提示词包.md",
-  "created_at": 1788169976252
- },
- {
-  "artifact_id": "a_mth28m07fwh7w",
-  "session_id": "s_mth20kdzdr1qd",
-  "run_id": "r_mth20ke2e9pop",
-  "name": "7天内容日历",
-  "type": "csv",
-  "path": "exports/1788169983847_7天内容日历.csv",
-  "created_at": 1788169983847
- },
- {
-  "artifact_id": "a_mth29e8ltj9ze",
-  "session_id": "s_mth20kdzdr1qd",
-  "run_id": "r_mth20ke2e9pop",
-  "name": "合规体检清单",
-  "type": "markdown",
-  "path": "exports/1788170020437_合规体检清单.md",
-  "created_at": 1788170020437
- },
- {
-  "artifact_id": "a_mth303fc6hzdm",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth2zcwjw0dnw",
-  "name": "市场快研报告",
-  "type": "markdown",
-  "path": "exports/1788171266136_市场快研报告.md",
-  "created_at": 1788171266136
- },
- {
-  "artifact_id": "a_mth34mssuys0t",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth2zcwjw0dnw",
-  "name": "品牌声音档案",
-  "type": "json",
-  "path": "exports/1788171477868_品牌声音档案.json",
-  "created_at": 1788171477868
- },
- {
-  "artifact_id": "a_mth34phlfw3nu",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth3390pbpnj2",
-  "name": "市场快研报告",
-  "type": "markdown",
-  "path": "exports/1788171481353_市场快研报告.md",
-  "created_at": 1788171481353
- },
- {
-  "artifact_id": "a_mth3549xep0uf",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth2zcwjw0dnw",
-  "name": "五平台文案包",
-  "type": "markdown",
-  "path": "exports/1788171500517_五平台文案包.md",
-  "created_at": 1788171500517
- },
- {
-  "artifact_id": "a_mth35e7u9kiso",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth2zcwjw0dnw",
-  "name": "图像提示词包",
-  "type": "markdown",
-  "path": "exports/1788171513402_图像提示词包.md",
-  "created_at": 1788171513402
- },
- {
-  "artifact_id": "a_mth35l7zfb9lu",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth2zcwjw0dnw",
-  "name": "7天内容日历",
-  "type": "csv",
-  "path": "exports/1788171522479_7天内容日历.csv",
-  "created_at": 1788171522479
- },
- {
-  "artifact_id": "a_mth36etryr7ah",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth2zcwjw0dnw",
-  "name": "合规体检清单",
-  "type": "markdown",
-  "path": "exports/1788171560847_合规体检清单.md",
-  "created_at": 1788171560847
- },
- {
-  "artifact_id": "a_mth3lfljmbmub",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth3390pbpnj2",
-  "name": "品牌声音档案",
-  "type": "json",
-  "path": "exports/1788172261687_品牌声音档案.json",
-  "created_at": 1788172261687
- },
- {
-  "artifact_id": "a_mth3luf403nxk",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth3390pbpnj2",
-  "name": "五平台文案包",
-  "type": "markdown",
-  "path": "exports/1788172280896_五平台文案包.md",
-  "created_at": 1788172280896
- },
- {
-  "artifact_id": "a_mth3mzxc4bbmq",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth3390pbpnj2",
-  "name": "图像提示词包",
-  "type": "markdown",
-  "path": "exports/1788172334688_图像提示词包.md",
-  "created_at": 1788172334688
- },
- {
-  "artifact_id": "a_mth3ndmjge4z3",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth3390pbpnj2",
-  "name": "7天内容日历",
-  "type": "csv",
-  "path": "exports/1788172352443_7天内容日历.csv",
-  "created_at": 1788172352443
- },
- {
-  "artifact_id": "a_mth3of0ve3osi",
-  "session_id": "s_mth2zcwenq3i6",
-  "run_id": "r_mth3390pbpnj2",
-  "name": "合规体检清单",
-  "type": "markdown",
-  "path": "exports/1788172400911_合规体检清单.md",
-  "created_at": 1788172400911
- },
- {
-  "artifact_id": "a_mth41rijlig8z",
-  "session_id": "s_mth415wkvm7cx",
-  "run_id": "r_mth415wor39at",
-  "name": "市场快研报告",
-  "type": "markdown",
-  "path": "exports/1788173023627_市场快研报告.md",
-  "created_at": 1788173023627
- },
- {
-  "artifact_id": "a_mth45j1jj0awx",
-  "session_id": "s_mth44omhuqh3b",
-  "run_id": "r_mth44omkk14pr",
-  "name": "市场快研报告",
-  "type": "markdown",
-  "path": "exports/1788173199271_市场快研报告.md",
-  "created_at": 1788173199271
- },
- {
-  "artifact_id": "a_mth4fddf49vpw",
-  "session_id": "s_mth44omhuqh3b",
-  "run_id": "r_mth44omkk14pr",
-  "name": "品牌声音档案",
-  "type": "json",
-  "path": "exports/1788173658483_品牌声音档案.json",
-  "created_at": 1788173658483
- },
- {
-  "artifact_id": "a_mth4fpgwlq1rj",
-  "session_id": "s_mth44omhuqh3b",
-  "run_id": "r_mth44omkk14pr",
-  "name": "五平台文案包",
-  "type": "markdown",
-  "path": "exports/1788173674160_五平台文案包.md",
-  "created_at": 1788173674160
- },
- {
-  "artifact_id": "a_mth4gjz9x6agm",
-  "session_id": "s_mth44omhuqh3b",
-  "run_id": "r_mth44omkk14pr",
-  "name": "图像提示词包",
-  "type": "markdown",
-  "path": "exports/1788173713701_图像提示词包.md",
-  "created_at": 1788173713701
- },
- {
-  "artifact_id": "a_mth4gu6o2fm3x",
-  "session_id": "s_mth44omhuqh3b",
-  "run_id": "r_mth44omkk14pr",
-  "name": "7天内容日历",
-  "type": "csv",
-  "path": "exports/1788173726928_7天内容日历.csv",
-  "created_at": 1788173726928
- },
- {
-  "artifact_id": "a_mth4h8hiunjyi",
-  "session_id": "s_mth44omhuqh3b",
-  "run_id": "r_mth44omkk14pr",
-  "name": "合规体检清单",
-  "type": "markdown",
-  "path": "exports/1788173745462_合规体检清单.md",
-  "created_at": 1788173745462
- }
+  {
+    "artifact_id": "a_mth22fxoqgj5a",
+    "session_id": "s_mth20kdzdr1qd",
+    "run_id": "r_mth20ke2e9pop",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788169696044_市场快研报告.md",
+    "created_at": 1788169696044
+  },
+  {
+    "artifact_id": "a_mth26137tfwco",
+    "session_id": "s_mth20kdzdr1qd",
+    "run_id": "r_mth20ke2e9pop",
+    "name": "品牌声音档案",
+    "type": "json",
+    "path": "exports/1788169863427_品牌声音档案.json",
+    "created_at": 1788169863427
+  },
+  {
+    "artifact_id": "a_mth26nqwa24zz",
+    "session_id": "s_mth20kdzdr1qd",
+    "run_id": "r_mth20ke2e9pop",
+    "name": "五平台文案包",
+    "type": "markdown",
+    "path": "exports/1788169892793_五平台文案包.md",
+    "created_at": 1788169892793
+  },
+  {
+    "artifact_id": "a_mth28g58982wk",
+    "session_id": "s_mth20kdzdr1qd",
+    "run_id": "r_mth20ke2e9pop",
+    "name": "图像提示词包",
+    "type": "markdown",
+    "path": "exports/1788169976252_图像提示词包.md",
+    "created_at": 1788169976252
+  },
+  {
+    "artifact_id": "a_mth28m07fwh7w",
+    "session_id": "s_mth20kdzdr1qd",
+    "run_id": "r_mth20ke2e9pop",
+    "name": "7天内容日历",
+    "type": "csv",
+    "path": "exports/1788169983847_7天内容日历.csv",
+    "created_at": 1788169983847
+  },
+  {
+    "artifact_id": "a_mth29e8ltj9ze",
+    "session_id": "s_mth20kdzdr1qd",
+    "run_id": "r_mth20ke2e9pop",
+    "name": "合规体检清单",
+    "type": "markdown",
+    "path": "exports/1788170020437_合规体检清单.md",
+    "created_at": 1788170020437
+  },
+  {
+    "artifact_id": "a_mth303fc6hzdm",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth2zcwjw0dnw",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788171266136_市场快研报告.md",
+    "created_at": 1788171266136
+  },
+  {
+    "artifact_id": "a_mth34mssuys0t",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth2zcwjw0dnw",
+    "name": "品牌声音档案",
+    "type": "json",
+    "path": "exports/1788171477868_品牌声音档案.json",
+    "created_at": 1788171477868
+  },
+  {
+    "artifact_id": "a_mth34phlfw3nu",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth3390pbpnj2",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788171481353_市场快研报告.md",
+    "created_at": 1788171481353
+  },
+  {
+    "artifact_id": "a_mth3549xep0uf",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth2zcwjw0dnw",
+    "name": "五平台文案包",
+    "type": "markdown",
+    "path": "exports/1788171500517_五平台文案包.md",
+    "created_at": 1788171500517
+  },
+  {
+    "artifact_id": "a_mth35e7u9kiso",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth2zcwjw0dnw",
+    "name": "图像提示词包",
+    "type": "markdown",
+    "path": "exports/1788171513402_图像提示词包.md",
+    "created_at": 1788171513402
+  },
+  {
+    "artifact_id": "a_mth35l7zfb9lu",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth2zcwjw0dnw",
+    "name": "7天内容日历",
+    "type": "csv",
+    "path": "exports/1788171522479_7天内容日历.csv",
+    "created_at": 1788171522479
+  },
+  {
+    "artifact_id": "a_mth36etryr7ah",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth2zcwjw0dnw",
+    "name": "合规体检清单",
+    "type": "markdown",
+    "path": "exports/1788171560847_合规体检清单.md",
+    "created_at": 1788171560847
+  },
+  {
+    "artifact_id": "a_mth3lfljmbmub",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth3390pbpnj2",
+    "name": "品牌声音档案",
+    "type": "json",
+    "path": "exports/1788172261687_品牌声音档案.json",
+    "created_at": 1788172261687
+  },
+  {
+    "artifact_id": "a_mth3luf403nxk",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth3390pbpnj2",
+    "name": "五平台文案包",
+    "type": "markdown",
+    "path": "exports/1788172280896_五平台文案包.md",
+    "created_at": 1788172280896
+  },
+  {
+    "artifact_id": "a_mth3mzxc4bbmq",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth3390pbpnj2",
+    "name": "图像提示词包",
+    "type": "markdown",
+    "path": "exports/1788172334688_图像提示词包.md",
+    "created_at": 1788172334688
+  },
+  {
+    "artifact_id": "a_mth3ndmjge4z3",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth3390pbpnj2",
+    "name": "7天内容日历",
+    "type": "csv",
+    "path": "exports/1788172352443_7天内容日历.csv",
+    "created_at": 1788172352443
+  },
+  {
+    "artifact_id": "a_mth3of0ve3osi",
+    "session_id": "s_mth2zcwenq3i6",
+    "run_id": "r_mth3390pbpnj2",
+    "name": "合规体检清单",
+    "type": "markdown",
+    "path": "exports/1788172400911_合规体检清单.md",
+    "created_at": 1788172400911
+  },
+  {
+    "artifact_id": "a_mth41rijlig8z",
+    "session_id": "s_mth415wkvm7cx",
+    "run_id": "r_mth415wor39at",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788173023627_市场快研报告.md",
+    "created_at": 1788173023627
+  },
+  {
+    "artifact_id": "a_mth45j1jj0awx",
+    "session_id": "s_mth44omhuqh3b",
+    "run_id": "r_mth44omkk14pr",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788173199271_市场快研报告.md",
+    "created_at": 1788173199271
+  },
+  {
+    "artifact_id": "a_mth4fddf49vpw",
+    "session_id": "s_mth44omhuqh3b",
+    "run_id": "r_mth44omkk14pr",
+    "name": "品牌声音档案",
+    "type": "json",
+    "path": "exports/1788173658483_品牌声音档案.json",
+    "created_at": 1788173658483
+  },
+  {
+    "artifact_id": "a_mth4fpgwlq1rj",
+    "session_id": "s_mth44omhuqh3b",
+    "run_id": "r_mth44omkk14pr",
+    "name": "五平台文案包",
+    "type": "markdown",
+    "path": "exports/1788173674160_五平台文案包.md",
+    "created_at": 1788173674160
+  },
+  {
+    "artifact_id": "a_mth4gjz9x6agm",
+    "session_id": "s_mth44omhuqh3b",
+    "run_id": "r_mth44omkk14pr",
+    "name": "图像提示词包",
+    "type": "markdown",
+    "path": "exports/1788173713701_图像提示词包.md",
+    "created_at": 1788173713701
+  },
+  {
+    "artifact_id": "a_mth4gu6o2fm3x",
+    "session_id": "s_mth44omhuqh3b",
+    "run_id": "r_mth44omkk14pr",
+    "name": "7天内容日历",
+    "type": "csv",
+    "path": "exports/1788173726928_7天内容日历.csv",
+    "created_at": 1788173726928
+  },
+  {
+    "artifact_id": "a_mth4h8hiunjyi",
+    "session_id": "s_mth44omhuqh3b",
+    "run_id": "r_mth44omkk14pr",
+    "name": "合规体检清单",
+    "type": "markdown",
+    "path": "exports/1788173745462_合规体检清单.md",
+    "created_at": 1788173745462
+  },
+  {
+    "artifact_id": "a_mtjenasowb51e",
+    "session_id": null,
+    "run_id": "r_mtjen67w3mw4j",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788311756904_广告成片.md",
+    "meta": null,
+    "created_at": 1788311756904
+  },
+  {
+    "artifact_id": "a_mtjenasv1pfj6",
+    "session_id": null,
+    "run_id": "r_mtjen67w3mw4j",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788311756911_广告成片.md",
+    "meta": null,
+    "created_at": 1788311756911
+  },
+  {
+    "artifact_id": "a_mtjf7h393h2o1",
+    "session_id": null,
+    "run_id": "r_mtjf6r4blnzy6",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788312698181_广告成片.md",
+    "meta": null,
+    "created_at": 1788312698181
+  },
+  {
+    "artifact_id": "a_mtjf7h3edvmma",
+    "session_id": null,
+    "run_id": "r_mtjf6r4blnzy6",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788312698186_广告成片.md",
+    "meta": null,
+    "created_at": 1788312698186
+  },
+  {
+    "artifact_id": "a_mtjfgn995p3ks",
+    "session_id": null,
+    "run_id": "r_mtjf6r4blnzy6",
+    "name": "广告成片 16:9",
+    "type": "video",
+    "path": "data/runs/r_mtjf6r4blnzy6/media/ad_16x9_1788312873602.mp4",
+    "meta": {
+      "aspect": "16:9",
+      "duration": 18.12,
+      "images": 3,
+      "ttsChars": 144
+    },
+    "created_at": 1788313126077
+  },
+  {
+    "artifact_id": "a_mtjfgn9c51k01",
+    "session_id": null,
+    "run_id": "r_mtjf6r4blnzy6",
+    "name": "广告成片 9:16",
+    "type": "video",
+    "path": "data/runs/r_mtjf6r4blnzy6/media/ad_9x16_1788313121013.mp4",
+    "meta": {
+      "aspect": "9:16",
+      "duration": 18.12,
+      "images": 3,
+      "ttsChars": 144
+    },
+    "created_at": 1788313126080
+  },
+  {
+    "artifact_id": "a_mtjfgn9e36dhe",
+    "session_id": null,
+    "run_id": "r_mtjf6r4blnzy6",
+    "name": "视频封面图",
+    "type": "image",
+    "path": "data/runs/r_mtjf6r4blnzy6/media/cover_169.jpg",
+    "meta": {
+      "source": "frame-extract"
+    },
+    "created_at": 1788313126082
+  },
+  {
+    "artifact_id": "a_mtjflmabotf3p",
+    "session_id": null,
+    "run_id": "r_mtjflj49f90v6",
+    "name": "广告分镜脚本",
+    "type": "json",
+    "path": "exports/1788313358099_广告分镜脚本.json",
+    "meta": null,
+    "created_at": 1788313358099
+  },
+  {
+    "artifact_id": "a_mtjg2phk8x2ar",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788314155400_市场快研报告.md",
+    "meta": null,
+    "created_at": 1788314155400
+  },
+  {
+    "artifact_id": "a_mtjgmlj4iyj4n",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "品牌声音档案",
+    "type": "json",
+    "path": "exports/1788315083392_品牌声音档案.json",
+    "meta": null,
+    "created_at": 1788315083392
+  },
+  {
+    "artifact_id": "a_mtjgn7fiu27q9",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "五平台文案包",
+    "type": "markdown",
+    "path": "exports/1788315111774_五平台文案包.md",
+    "meta": null,
+    "created_at": 1788315111774
+  },
+  {
+    "artifact_id": "a_mtjgo2pifxxwz",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "图像提示词包",
+    "type": "markdown",
+    "path": "exports/1788315152310_图像提示词包.md",
+    "meta": null,
+    "created_at": 1788315152310
+  },
+  {
+    "artifact_id": "a_mtjgoh8oh315z",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "AI 配图",
+    "type": "markdown",
+    "path": "exports/1788315171144_AI_配图.md",
+    "meta": null,
+    "created_at": 1788315171144
+  },
+  {
+    "artifact_id": "a_mtjgrd7l8p4g6",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "横幅主图",
+    "type": "image",
+    "path": "data/runs/r_mtjg0obcqeumc/media/img_1788315171156_1.jpg",
+    "meta": {
+      "aspect": "16:9"
+    },
+    "created_at": 1788315305889
+  },
+  {
+    "artifact_id": "a_mtjgrd7pgdlx9",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "信息流竖图",
+    "type": "image",
+    "path": "data/runs/r_mtjg0obcqeumc/media/img_1788315174293_2.jpg",
+    "meta": {
+      "aspect": "4:5"
+    },
+    "created_at": 1788315305893
+  },
+  {
+    "artifact_id": "a_mtjgrd7sr2dte",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "方图氛围",
+    "type": "image",
+    "path": "data/runs/r_mtjg0obcqeumc/media/img_1788315230073_3.jpg",
+    "meta": {
+      "aspect": "1:1"
+    },
+    "created_at": 1788315305896
+  },
+  {
+    "artifact_id": "a_mtjgt45wytllo",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "英文旁白词包",
+    "type": "markdown",
+    "path": "exports/1788315387476_英文旁白词包.md",
+    "meta": null,
+    "created_at": 1788315387476
+  },
+  {
+    "artifact_id": "a_mtjgutnur3dxj",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "广告分镜脚本",
+    "type": "json",
+    "path": "exports/1788315467178_广告分镜脚本.json",
+    "meta": null,
+    "created_at": 1788315467178
+  },
+  {
+    "artifact_id": "a_mtjgvatseqgu9",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788315489424_广告成片.md",
+    "meta": null,
+    "created_at": 1788315489424
+  },
+  {
+    "artifact_id": "a_mtjgvatwx6pfz",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788315489428_广告成片.md",
+    "meta": null,
+    "created_at": 1788315489428
+  },
+  {
+    "artifact_id": "a_mtjh98jo2wjft",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "广告成片 16:9",
+    "type": "video",
+    "path": "data/runs/r_mtjg0obcqeumc/media/ad_16x9_1788315798745.mp4",
+    "meta": {
+      "aspect": "16:9",
+      "duration": 23.58,
+      "images": 4,
+      "ttsChars": 109
+    },
+    "created_at": 1788316139652
+  },
+  {
+    "artifact_id": "a_mtjh98jrxoznv",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "广告成片 9:16",
+    "type": "video",
+    "path": "data/runs/r_mtjg0obcqeumc/media/ad_9x16_1788316134810.mp4",
+    "meta": {
+      "aspect": "9:16",
+      "duration": 23.58,
+      "images": 4,
+      "ttsChars": 109
+    },
+    "created_at": 1788316139655
+  },
+  {
+    "artifact_id": "a_mtjh98juknhi2",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "视频封面图",
+    "type": "image",
+    "path": "data/runs/r_mtjg0obcqeumc/media/cover_169.jpg",
+    "meta": {
+      "source": "frame-extract"
+    },
+    "created_at": 1788316139658
+  },
+  {
+    "artifact_id": "a_mtjhb88sxxtmv",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "7天内容日历",
+    "type": "csv",
+    "path": "exports/1788316232572_7天内容日历.csv",
+    "meta": null,
+    "created_at": 1788316232572
+  },
+  {
+    "artifact_id": "a_mtjhbsk4njxns",
+    "session_id": null,
+    "run_id": "r_mtjg0obcqeumc",
+    "name": "合规体检清单",
+    "type": "markdown",
+    "path": "exports/1788316258900_合规体检清单.md",
+    "meta": null,
+    "created_at": 1788316258900
+  },
+  {
+    "artifact_id": "a_mtjhsjkher0ao",
+    "session_id": null,
+    "run_id": "r_mtjhscsn19dw7",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788317040401_广告成片.md",
+    "meta": null,
+    "created_at": 1788317040401
+  },
+  {
+    "artifact_id": "a_mtjhsjkjfetwf",
+    "session_id": null,
+    "run_id": "r_mtjhscsn19dw7",
+    "name": "广告成片",
+    "type": "markdown",
+    "path": "exports/1788317040403_广告成片.md",
+    "meta": null,
+    "created_at": 1788317040403
+  },
+  {
+    "artifact_id": "a_mtji5nl7ebrtf",
+    "session_id": null,
+    "run_id": "r_mtjhscsn19dw7",
+    "name": "广告成片 16:9",
+    "type": "video",
+    "path": "data/runs/r_mtjhscsn19dw7/media/ad_16x9_1788317313412.mp4",
+    "meta": {
+      "aspect": "16:9",
+      "duration": 17.76,
+      "images": 3,
+      "ttsChars": 68
+    },
+    "created_at": 1788317652139
+  },
+  {
+    "artifact_id": "a_mtji5nlcon5s6",
+    "session_id": null,
+    "run_id": "r_mtjhscsn19dw7",
+    "name": "广告成片 9:16",
+    "type": "video",
+    "path": "data/runs/r_mtjhscsn19dw7/media/ad_9x16_1788317647393.mp4",
+    "meta": {
+      "aspect": "9:16",
+      "duration": 17.76,
+      "images": 3,
+      "ttsChars": 68
+    },
+    "created_at": 1788317652144
+  },
+  {
+    "artifact_id": "a_mtji5nlgomn4b",
+    "session_id": null,
+    "run_id": "r_mtjhscsn19dw7",
+    "name": "视频封面图",
+    "type": "image",
+    "path": "data/runs/r_mtjhscsn19dw7/media/cover_169.jpg",
+    "meta": {
+      "source": "frame-extract"
+    },
+    "created_at": 1788317652148
+  },
+  {
+    "artifact_id": "a_mtjiy4kps4s0t",
+    "session_id": "s_mtjiww1uwy7yy",
+    "run_id": "r_mtjiww1yy0f4e",
+    "name": "市场快研报告",
+    "type": "markdown",
+    "path": "exports/1788318980521_市场快研报告.md",
+    "meta": null,
+    "created_at": 1788318980521
+  }
 ]

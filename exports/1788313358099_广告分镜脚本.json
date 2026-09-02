@@ -1,0 +1,25 @@
+{
+  "scenes": [
+    {
+      "id": 1,
+      "imgPrompt": "morning scene, person reaching for ���ܱ��±� 12Сʱ���� on wooden desk by window, warm sunlight, cozy cinematic product photography",
+      "vo": "Every morning starts with ���ܱ��±� 12Сʱ����.",
+      "zh": "每个清晨，从���ܱ��±� 12Сʱ����开始。",
+      "dur": 4
+    },
+    {
+      "id": 2,
+      "imgPrompt": "���ܱ��±� 12Сʱ���� hero shot on stone pedestal, studio lighting, dark background, premium product photography, water droplets",
+      "vo": "Built to last. Priced to move.",
+      "zh": "为耐用而生，以诚意定价。",
+      "dur": 4
+    },
+    {
+      "id": 3,
+      "imgPrompt": "person carrying ���ܱ��±� 12Сʱ���� on mountain trail at golden hour, adventure lifestyle photography, cinematic composition",
+      "vo": "���ܱ��±� 12Сʱ����. Made to move with you.",
+      "zh": "���ܱ��±� 12Сʱ����，与你同行。",
+      "dur": 5
+    }
+  ]
+}

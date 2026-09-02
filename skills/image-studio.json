@@ -1,0 +1,16 @@
+{
+  "skill_id": "image-studio",
+  "name": "视觉设计师",
+  "icon": "🖼️",
+  "engine": "media-image",
+  "description": "调用 Flux 生图引擎直出真实 AI 配图（信息流 4:5 / 横幅 16:9 / 方图 1:1），产出的不是提示词而是可直接投放的成图。",
+  "input_schema": {
+    "product": "产品描述",
+    "scene": "使用场景（可省略）"
+  },
+  "output_type": "image",
+  "artifact_name": "AI 配图",
+  "output_format": "真实图片文件 ×3（16:9 横幅 / 4:5 信息流 / 1:1 方图）",
+  "prompt_template": "为以下产品设计 3 张可直接投放的 AI 配图生图指令，输出 JSON（不要任何解释文字）：\n\n产品：{{product}}\n场景：{{scene}}\n\nJSON 格式：\n{\"items\":[{\"name\":\"横幅主图\",\"aspect\":\"16:9\",\"prompt\":\"<英文生图提示词>\"},{\"name\":\"信息流竖图\",\"aspect\":\"4:5\",\"prompt\":\"<英文>\"},{\"name\":\"方图氛围\",\"aspect\":\"1:1\",\"prompt\":\"<英文>\"}]}\n\n要求：每条 prompt 为地道英文商业摄影指令（主体+场景+光线+风格+构图），风格统一可辨识，适配品牌调性；禁止出现文字/水印/Logo 类描述。",
+  "triggers": ["生成图片", "真图", "画一张", "配图直出", "出图", "图片生成"]
+}

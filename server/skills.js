@@ -1,4 +1,5 @@
 // 技能加载器：Wave2 沉淀的 skills/*.json 是唯一事实源，引擎运行时真实加载（非摆设）
+// v2：上下文接力 —— buildMessages 注入上游工件（chozzc C1 修复：下游必须真实消费上游产出）
 const fs = require('fs');
 const path = require('path');
 
@@ -14,8 +15,8 @@ function loadSkills() {
 }
 const SKILLS = loadSkills();
 
-/* ---------- 提示词组装：系统提示 + 技能提示模板 + 用户参数 ---------- */
-function buildMessages(skill, params) {
+/* ---------- 提示词组装：系统提示 + 技能提示模板 + 用户参数 + 上游工件接力 ---------- */
+function buildMessages(skill, params, context) {
   const sys = [
     '你是 OneCrew —— 服务一人公司（OPC）出海的 AIGC 内容官智能体。',
     '你的用户通常是一个人身兼产品、市场、文案数职，预算极少、时间极紧。',
@@ -26,9 +27,16 @@ function buildMessages(skill, params) {
   let prompt = (skill.prompt_template || '')
     .replace(/\{\{(\w+)\}\}/g, (_, k) => params[k] || `（未提供${k}）`);
   const kv = Object.entries(params).filter(([, v]) => v).map(([k, v]) => `- ${k}: ${v}`).join('\n');
+  // 上下文接力：上游工件原文注入，明确要求消费（引用/延续/风格一致）
+  let ctxBlock = '';
+  const ctx = Object.entries(context || {});
+  if (ctx.length) {
+    const parts = ctx.map(([k, v]) => `### 上游工件「${v.name}」（来自技能 ${k}）\n${String(v.content || '').slice(0, 2200)}`);
+    ctxBlock = `\n\n## 上游工件（上下文接力）\n上一环节的产出如下。你必须真实消费它们：延续其结论、复用其风格与词汇、与其保持一致；禁止无视上游另起炉灶。若上游与本次任务冲突，以上游为准并说明。\n\n${parts.join('\n\n')}`;
+  }
   return [
     { role: 'system', content: sys },
-    { role: 'user', content: `# 任务：${skill.name}\n\n## 输入参数\n${kv || '- （用户直接发起，请围绕其产品描述执行）'}\n\n## 技能指令\n${prompt}\n\n## 输出格式\n${skill.output_format || '结构化 Markdown'}` },
+    { role: 'user', content: `# 任务：${skill.name}\n\n## 输入参数\n${kv || '- （用户直接发起，请围绕其产品描述执行）'}\n\n## 技能指令\n${prompt}\n\n## 输出格式\n${skill.output_format || '结构化 Markdown'}${ctxBlock}` },
   ];
 }
 
@@ -41,14 +49,15 @@ function safetyCheck(text) {
 
 /* ---------- 技能执行：真实优先，失败降级 Mock ---------- */
 const provider = require('./provider');
-async function executeSkill(skillKey, params, onStep) {
+async function executeSkill(skillKey, params, onStep, context) {
   const skill = SKILLS[skillKey];
   if (!skill) throw new Error('未知技能: ' + skillKey);
   onStep && onStep('running', `调用技能「${skill.name}」`);
-  let text, usedMock = false;
+  let text, usedMock = false, usage = null;
   if (provider.mode === 'real') {
     try {
-      text = await provider.chatReal(buildMessages(skill, params), { maxTokens: 8000 });
+      const r = await provider.chatReal(buildMessages(skill, params, context), { maxTokens: 8000 });
+      text = r.text; usage = r.usage;
     } catch (e) {
       onStep && onStep('running', `真实模型失败（${String(e.message).slice(0, 80)}），降级演示模式`);
       text = await provider.chatMock(skillKey, params);
@@ -60,12 +69,12 @@ async function executeSkill(skillKey, params, onStep) {
   }
   const gate = safetyCheck(text);
   if (!gate.ok) throw new Error('内容触发安全闸：' + gate.word);
-  // JSON 型技能：提取并清洗为合法 JSON（模型偶尔带说明文字/截断时兜底）
-  if (skill.output_type === 'json') {
+  // 结构化技能（json / 媒体引擎的分镜与生图指令）：提取并清洗为合法 JSON
+  if (skill.output_type === 'json' || skill.engine) {
     const j = extractJson(text);
     if (j) text = typeof j === 'string' ? j : JSON.stringify(j, null, 2);
   }
-  return { text, usedMock };
+  return { text, usedMock, usage };
 }
 
 function extractJson(text) {
@@ -76,4 +85,4 @@ function extractJson(text) {
   return null;
 }
 
-module.exports = { SKILLS, SKILL_LIST: Object.values(SKILLS), buildMessages, executeSkill, safetyCheck };
+module.exports = { SKILLS, SKILL_LIST: Object.values(SKILLS), buildMessages, executeSkill, safetyCheck, extractJson };

@@ -1,0 +1,16 @@
+{
+  "skill_id": "video-factory",
+  "name": "成片剪辑师",
+  "icon": "🎥",
+  "description": "真·视频生产引擎：忠实消费上游分镜脚本（不改动旁白语言与文案），逐镜 AI 生图 + AI 配音 + Ken Burns 运镜 + 双语字幕烧录，直接输出可投放的 H.264 MP4 成片。",
+  "input_schema": {
+    "product": "产品描述",
+    "market": "目标市场（可省略）"
+  },
+  "output_type": "video",
+  "artifact_name": "广告成片",
+  "engine": "media-video",
+  "output_format": "MP4 视频（1920x1080 与 720x1280 双画幅，H.264+AAC，双语字幕）",
+  "prompt_template": "你是成片剪辑师。上游「广告分镜脚本」若存在，你必须原样透传它的 scenes JSON（禁止改写旁白语言、禁止翻译、禁止另起炉灶；只允许把每镜 dur 修正到 3-6 秒区间）。\n仅当上游没有分镜脚本时，才为以下产品自己设计 3 个分镜：\n\n产品：{{product}}\n市场：{{market}}\n\n只输出 JSON（严格遵守）：\n{\"scenes\":[{\"id\":1,\"imgPrompt\":\"English image generation prompt, product photography style\",\"vo\":\"<旁白，语言跟随上游或市场：日本→日语/韩国→韩语/其他→英语>\",\"zh\":\"中文字幕\",\"dur\":4}]}\n\n要求：钩子→场景→收尾结构；imgPrompt 英文商业摄影指令；vo 每镜 ≤20 词；zh 与 vo 语义一致；dur 3-6 秒。",
+  "triggers": ["成片", "生成视频", "做个视频", "广告片", "出视频", "视频工厂"]
+}

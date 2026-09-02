@@ -56,12 +56,16 @@ function RunCard({ run, onConfirm, onCancel, onRetry }) {
 }
 
 function ArtifactRow({ a, onPreview }) {
-  const icon = a.type === 'csv' ? '📊' : a.type === 'json' ? '🧩' : '📄';
+  const icon = a.type === 'video' ? '🎬' : a.type === 'image' ? '🖼️' : a.type === 'csv' ? '📊' : a.type === 'json' ? '🧩' : '📄';
+  const meta = a.meta || {};
+  const badge = a.type === 'video' && meta.duration
+    ? `${meta.aspect} · ${Math.round(meta.duration)}s`
+    : meta.aspect ? meta.aspect : a.type.toUpperCase();
   return (
     <div className="artifact-row" onClick={() => onPreview(a.artifact_id)}>
       <span>{icon}</span>
       <span className="artifact-name">{a.name}</span>
-      <span className="muted">{a.type.toUpperCase()}</span>
+      <span className="muted">{badge}</span>
       <a className="dl" href={`/api/artifacts/${a.artifact_id}/download`} onClick={(e) => e.stopPropagation()} title="下载">⬇</a>
     </div>
   );
@@ -70,20 +74,27 @@ function ArtifactRow({ a, onPreview }) {
 function PreviewModal({ artifactId, onClose }) {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch(`/api/artifacts/${artifactId}`).then((r) => r.json()).then(setData).catch(() => setData({ name: '加载失败', content: '' }));
+    fetch(`/api/artifacts/${artifactId}`).then((r) => r.json()).then(setData).catch(() => setData({ name: '加载失败', type: 'markdown', content: '' }));
   }, [artifactId]);
   if (!data) return null;
+  const isVideo = data.type === 'video';
+  const isImage = data.type === 'image';
+  const streamUrl = `/api/artifacts/${data.artifact_id}/stream`;
   return (
     <div className="modal-mask" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div className={'modal' + (isVideo ? ' modal-wide' : '')} onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
           <b>{data.name}</b>
-          <span className="muted">{data.type?.toUpperCase()}</span>
+          <span className="muted">{isVideo ? `视频${data.meta?.aspect ? ' · ' + data.meta.aspect : ''}${data.meta?.duration ? ' · ' + Math.round(data.meta.duration) + 's' : ''}` : isImage ? '图片' : data.type?.toUpperCase()}</span>
           <a className="btn btn-ghost btn-sm" href={`/api/artifacts/${data.artifact_id}/download`}>⬇ 下载</a>
           <button className="btn btn-ghost btn-sm" onClick={onClose}>关闭</button>
         </div>
         <div className="modal-body">
-          {data.type === 'markdown' ? <Markdown remarkPlugins={[remarkGfm]}>{data.content}</Markdown> : <pre className="codeblock">{data.content}</pre>}
+          {isVideo ? (
+            <video src={streamUrl} controls autoPlay className="video-player" />
+          ) : isImage ? (
+            <img src={streamUrl} alt={data.name} className="image-preview" />
+          ) : data.type === 'markdown' ? <Markdown remarkPlugins={[remarkGfm]}>{data.content}</Markdown> : <pre className="codeblock">{data.content}</pre>}
         </div>
       </div>
     </div>
@@ -93,10 +104,10 @@ function PreviewModal({ artifactId, onClose }) {
 /* ---------- 主应用 ---------- */
 
 const EXAMPLES = [
-  { icon: '🚢', text: '我的产品是智能保温杯，316不锈钢12小时保温，想卖日本，帮我出全套出海内容' },
+  { icon: '🎬', text: '我的产品是智能保温杯，316不锈钢12小时保温，想卖日本，帮我出全套出海内容包+广告成片' },
+  { icon: '🎥', text: '给我的露营氛围灯做一个 TikTok 广告视频，要真实成片' },
+  { icon: '🖼️', text: '为手作银饰直出三张可投放的 AI 配图' },
   { icon: '🔍', text: '帮我做一次北美市场的快研，产品是宠物智能喂食器' },
-  { icon: '🎙️', text: '给我的手作银饰品牌定一个声音档案和口号' },
-  { icon: '🎨', text: '为露营氛围灯生成 Midjourney 和即梦的提示词' },
 ];
 
 export default function App() {
@@ -133,6 +144,7 @@ export default function App() {
     fetch('/api/health').then((r) => r.json()).then(setHealth);
     fetch('/api/skills').then((r) => r.json()).then(setSkills);
     loadSessions();
+    loadArtifacts(null); // 初始即加载全量工件（未选会话状态展示全部，选会话后按会话过滤）
   }, []);
 
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
@@ -146,7 +158,7 @@ export default function App() {
     loadRuns(id);
     loadArtifacts(id);
   };
-  const newSession = () => { setSessionId(null); sessionIdRef.current = null; setMessages([]); setRunsMap({}); setArtifacts([]); };
+  const newSession = () => { setSessionId(null); sessionIdRef.current = null; setMessages([]); setRunsMap({}); loadArtifacts(null); };
 
   const deleteSession = async (e, id) => {
     e.stopPropagation();
@@ -261,7 +273,8 @@ export default function App() {
     setBusy(false);
   };
 
-  const runsForSession = Object.values(runsMap).filter((r) => !sessionId || r.session_id === sessionId || true)
+  const runsForSession = Object.values(runsMap)
+    .filter((r) => !sessionId || r.session_id === sessionId)
     .sort((a, b) => (b.created_at || 0) - (a.created_at || 0)).slice(0, 20);
   const artifactsList = artifacts.filter((a) => !sessionId || a.session_id === sessionId);
 
@@ -314,8 +327,8 @@ export default function App() {
           {!messages.length && (
             <div className="welcome">
               <div className="welcome-logo">🌊</div>
-              <h1>一个人，一支内容小队</h1>
-              <p>把产品讲给我听，六位 AI 队友接力完成：市场快研 → 品牌声音 → 五平台文案 → 图像提示词 → 内容日历 → 合规体检。全程步骤可视、可停、可复核。</p>
+              <h1>一个人，一支内容小队，一条成片产线</h1>
+              <p>把产品讲给我听，十位 AI 队友接力完成：市场快研 → 品牌声音 → 五平台文案 → 提示词工坊 → AI 直出配图 → 旁白词 → 分镜导演 → 真·广告成片（MP4）→ 内容日历 → 合规体检。全程步骤可视、可停、可复核，成片直接可投。</p>
               <div className="examples">
                 {EXAMPLES.map((e, i) => (
                   <div key={i} className="example-card" onClick={() => send(e.text)}>

@@ -1,0 +1,15 @@
+{
+  "skill_id": "video-director",
+  "name": "分镜导演",
+  "icon": "🎬",
+  "description": "把产品变成 3-4 个分镜的广告脚本：每个分镜含画面生图指令、本地化旁白、中文字幕、时长——下游成片引擎按此逐帧生产。旁白语言自动跟随目标市场（日本=日语/韩国=韩语/其他=英语），与 TTS 声线一致。",
+  "input_schema": {
+    "product": "产品描述",
+    "market": "目标市场（可省略）"
+  },
+  "output_type": "json",
+  "artifact_name": "广告分镜脚本",
+  "output_format": "JSON：{\"scenes\":[{\"id\":1,\"imgPrompt\":\"英文画面指令\",\"vo\":\"旁白（跟随市场语言）\",\"zh\":\"中文字幕\",\"dur\":4}]}",
+  "prompt_template": "你是广告分镜导演。为以下产品设计一条 3-4 个分镜的短视频广告脚本，只输出 JSON：\n\n产品：{{product}}\n市场：{{market}}\n\n旁白语言规则（重要）：日本市场→vo 用地道日语；韩国市场→vo 用地道韩语；其他市场→vo 用地道英语。vo 会被对应语言的 TTS 声线直接朗读，必须自然可读。\n\nJSON 格式（严格遵守）：\n{\"scenes\":[{\"id\":1,\"imgPrompt\":\"English image generation prompt, product photography style\",\"vo\":\"<按上述规则的旁白>\",\"zh\":\"中文字幕\",\"dur\":4}]}\n\n导演要求：\n1. 结构：钩子（痛点/悬念）→ 产品入镜（使用场景）→ 卖点特写 → 品牌收尾\n2. imgPrompt：地道英文商业摄影指令（光线/构图/风格），禁止出现文字或水印要求\n3. vo：每镜 ≤20 词（日语 ≤40 字），TTS 直读，结尾镜头必须含品牌记忆点\n4. zh：与 vo 语义一致的中文字幕\n5. dur：3-6 秒",
+  "triggers": ["分镜", "视频脚本", "广告脚本", "导演", "storyboard"]
+}
